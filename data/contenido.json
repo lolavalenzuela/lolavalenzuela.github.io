@@ -94,7 +94,6 @@
     "proyecto": {
       "anioLabel": "Año",
       "tipoLabel": "Tipo",
-      "rolLabel": "Rol",
       "herramientasLabel": "Herramientas"
     },
     "proyectos": {
@@ -102,7 +101,6 @@
         "titulo": "[TÍTULO PROYECTO 1]",
         "anio": "[AÑO]",
         "tipo": "[TIPO DE PROYECTO]",
-        "rol": "[ROL]",
         "herramientas": [
           "[HERRAMIENTA 1]",
           "[HERRAMIENTA 2]"
@@ -129,7 +127,6 @@
         "titulo": "[TÍTULO PROYECTO 2]",
         "anio": "[AÑO]",
         "tipo": "[TIPO DE PROYECTO]",
-        "rol": "[ROL]",
         "herramientas": [
           "[HERRAMIENTA 1]",
           "[HERRAMIENTA 2]"
@@ -152,7 +149,6 @@
         "titulo": "[TÍTULO PROYECTO 3]",
         "anio": "[AÑO]",
         "tipo": "[TIPO DE PROYECTO]",
-        "rol": "[ROL]",
         "herramientas": [
           "[HERRAMIENTA 1]",
           "[HERRAMIENTA 2]"
@@ -175,7 +171,6 @@
         "titulo": "[TÍTULO PROYECTO 4]",
         "anio": "[AÑO]",
         "tipo": "[TIPO DE PROYECTO]",
-        "rol": "[ROL]",
         "herramientas": [
           "[HERRAMIENTA 1]",
           "[HERRAMIENTA 2]"
@@ -198,7 +193,6 @@
         "titulo": "[TÍTULO PROYECTO 5]",
         "anio": "[AÑO]",
         "tipo": "[TIPO DE PROYECTO]",
-        "rol": "[ROL]",
         "herramientas": [
           "[HERRAMIENTA 1]",
           "[HERRAMIENTA 2]"
@@ -221,7 +215,6 @@
         "titulo": "[TÍTULO PROYECTO 6]",
         "anio": "[AÑO]",
         "tipo": "[TIPO DE PROYECTO]",
-        "rol": "[ROL]",
         "herramientas": [
           "[HERRAMIENTA 1]",
           "[HERRAMIENTA 2]"
@@ -337,7 +330,6 @@
     "proyecto": {
       "anioLabel": "Year",
       "tipoLabel": "Type",
-      "rolLabel": "Role",
       "herramientasLabel": "Tools"
     },
     "proyectos": {
@@ -345,7 +337,6 @@
         "titulo": "[PROJECT 1 TITLE]",
         "anio": "[YEAR]",
         "tipo": "[PROJECT TYPE]",
-        "rol": "[ROLE]",
         "herramientas": [
           "[TOOL 1]",
           "[TOOL 2]"
@@ -372,7 +363,6 @@
         "titulo": "[PROJECT 2 TITLE]",
         "anio": "[YEAR]",
         "tipo": "[PROJECT TYPE]",
-        "rol": "[ROLE]",
         "herramientas": [
           "[TOOL 1]",
           "[TOOL 2]"
@@ -395,7 +385,6 @@
         "titulo": "[PROJECT 3 TITLE]",
         "anio": "[YEAR]",
         "tipo": "[PROJECT TYPE]",
-        "rol": "[ROLE]",
         "herramientas": [
           "[TOOL 1]",
           "[TOOL 2]"
@@ -418,7 +407,6 @@
         "titulo": "[PROJECT 4 TITLE]",
         "anio": "[YEAR]",
         "tipo": "[PROJECT TYPE]",
-        "rol": "[ROLE]",
         "herramientas": [
           "[TOOL 1]",
           "[TOOL 2]"
@@ -441,7 +429,6 @@
         "titulo": "[PROJECT 5 TITLE]",
         "anio": "[YEAR]",
         "tipo": "[PROJECT TYPE]",
-        "rol": "[ROLE]",
         "herramientas": [
           "[TOOL 1]",
           "[TOOL 2]"
@@ -464,7 +451,6 @@
         "titulo": "[PROJECT 6 TITLE]",
         "anio": "[YEAR]",
         "tipo": "[PROJECT TYPE]",
-        "rol": "[ROLE]",
         "herramientas": [
           "[TOOL 1]",
           "[TOOL 2]"

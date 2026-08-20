@@ -415,13 +415,17 @@ body[data-pagina="about"] main {
   margin-bottom: clamp(1rem, 0.7rem + 1vw, 1.75rem);
 }
 
+/* Ficha del proyecto: Año / Tipo / Herramientas.
+   Mobile-first: una columna, los tres datos apilados. A partir de 640px
+   pasa a 2 y a 3 columnas (ver media queries más abajo). Cada dato es un
+   .proyecto__ficha-item (etiqueta arriba, valor abajo). */
 .proyecto__ficha {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem 2rem;
+  grid-template-columns: 1fr;
+  gap: clamp(1rem, 0.8rem + 0.8vw, 1.5rem) var(--gap-grilla);
   font-size: var(--tam-texto-chico);
-  margin-bottom: clamp(1.5rem, 1rem + 2vw, 2.5rem);
-  padding-bottom: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  margin-bottom: clamp(1.25rem, 0.9rem + 1.5vw, 2rem);
+  padding-bottom: clamp(1.25rem, 0.9rem + 1.5vw, 2rem);
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
@@ -432,6 +436,9 @@ body[data-pagina="about"] main {
 
 .proyecto__ficha dd {
   color: var(--blanco);
+  /* Herramientas puede traer varios items separados por "·": que corten
+     prolijo en varias líneas en vez de desbordar la columna. */
+  overflow-wrap: break-word;
 }
 
 .proyecto__descripcion {
@@ -453,13 +460,21 @@ body[data-pagina="about"] main {
   background: var(--gris-placeholder);
 }
 
+/* Tablet: 2 columnas — Herramientas baja sola a la segunda fila. */
 @media (min-width: 640px) {
   .proyecto__ficha {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .proyecto__galeria {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop: los tres datos en una sola fila, columnas de igual ancho. */
+@media (min-width: 900px) {
+  .proyecto__ficha {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 

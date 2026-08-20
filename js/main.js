@@ -96,12 +96,20 @@ function renderAbout(contenido, idioma) {
   renderListaSimple("[data-lista='herramientas']", about.herramientas);
 }
 
+// Cada dato de la ficha va envuelto en un <div> para que sea una columna
+// entera de la grilla (etiqueta arriba, valor abajo). Un <div> agrupando
+// dt+dd dentro de un <dl> es HTML válido.
 function crearFichaItem(etiqueta, valor) {
+  const grupo = document.createElement("div");
+  grupo.className = "proyecto__ficha-item";
+
   const dt = document.createElement("dt");
   dt.textContent = etiqueta;
   const dd = document.createElement("dd");
   dd.textContent = valor;
-  return [dt, dd];
+
+  grupo.append(dt, dd);
+  return grupo;
 }
 
 function renderProyecto(contenido, idioma) {
@@ -155,15 +163,14 @@ function renderProyecto(contenido, idioma) {
     }
   }
 
-  // Ficha: año / tipo / rol / herramientas
+  // Ficha: año / tipo / herramientas
   const ficha = document.querySelector("[data-proyecto-ficha]");
   if (ficha) {
     ficha.innerHTML = "";
     ficha.append(
-      ...crearFichaItem(etiquetas.anioLabel, datos.anio),
-      ...crearFichaItem(etiquetas.tipoLabel, datos.tipo),
-      ...crearFichaItem(etiquetas.rolLabel, datos.rol),
-      ...crearFichaItem(etiquetas.herramientasLabel, datos.herramientas.join(" · "))
+      crearFichaItem(etiquetas.anioLabel, datos.anio),
+      crearFichaItem(etiquetas.tipoLabel, datos.tipo),
+      crearFichaItem(etiquetas.herramientasLabel, datos.herramientas.join(" · "))
     );
   }
 
