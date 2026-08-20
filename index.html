@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lola Valenzuela — Diseño integral</title>
+  <meta name="description" content="Portfolio de Lola Valenzuela, diseñadora integral especializada en diseño audiovisual, sonoro y gráfico." data-i18n="meta.home.descripcion">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Lola Valenzuela — Diseño integral">
+  <meta property="og:description" content="Portfolio de Lola Valenzuela, diseñadora integral especializada en diseño audiovisual, sonoro y gráfico.">
+  <meta property="og:image" content="assets/img/about-foto.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lola Valenzuela — Diseño integral">
+  <meta name="twitter:description" content="Portfolio de Lola Valenzuela, diseñadora integral especializada en diseño audiovisual, sonoro y gráfico.">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animaciones.css">
+
+  <!-- Anti-flash del fallback FLIP: si hay una transición pendiente
+       guardada por transiciones.js, oculta <main> antes del primer
+       pintado para que no haya parpadeo. No hace nada si no hay soporte
+       de sessionStorage o no hay nada pendiente. -->
+  <script>
+    try {
+      if (sessionStorage.getItem("flip-pendiente")) {
+        document.documentElement.classList.add("js-flip-pendiente");
+      }
+    } catch (e) {}
+  </script>
+</head>
+<body data-pagina="home" data-titulo-i18n="meta.home.titulo">
+  <header class="header">
+    <a href="about.html" class="header__nombre">Lola Valenzuela</a>
+    <nav class="header__nav" aria-label="Navegación principal">
+      <button type="button" class="header__contacto" data-abrir-contacto data-i18n="nav.contacto">contacto</button>
+      <div class="toggle-idioma" role="group" aria-label="Cambiar idioma">
+        <button type="button" class="toggle-idioma__opcion" data-idioma-boton="es" aria-current="true">es</button>
+        <span class="toggle-idioma__separador" aria-hidden="true">/</span>
+        <button type="button" class="toggle-idioma__opcion" data-idioma-boton="en">en</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="js-fade-idioma">
+    <h1 class="solo-lectores">Lola Valenzuela — Portfolio</h1>
+    <div class="grilla-proyectos" data-grilla-proyectos></div>
+  </main>
+
+  <div class="overlay-contacto" data-overlay-contacto hidden>
+    <button type="button" class="overlay-contacto__cerrar" data-cerrar-contacto aria-label="Cerrar" data-i18n-attr="aria-label:nav.cerrar">×</button>
+    <div class="overlay-contacto__panel" role="dialog" aria-modal="true" aria-labelledby="contacto-titulo">
+      <h2 id="contacto-titulo" class="overlay-contacto__titulo" data-i18n="contacto.titulo">contacto</h2>
+      <ul class="overlay-contacto__lista" data-contacto-lista></ul>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

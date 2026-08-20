@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lola Valenzuela — Sobre mí</title>
+  <meta name="description" content="Diseñadora integral formada en Buenos Aires, Argentina. Diseño audiovisual, sonoro y gráfico." data-i18n="meta.about.descripcion">
+
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Lola Valenzuela — Sobre mí">
+  <meta property="og:description" content="Diseñadora integral formada en Buenos Aires, Argentina. Diseño audiovisual, sonoro y gráfico.">
+  <meta property="og:image" content="assets/img/about-foto.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lola Valenzuela — Sobre mí">
+  <meta name="twitter:description" content="Diseñadora integral formada en Buenos Aires, Argentina. Diseño audiovisual, sonoro y gráfico.">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animaciones.css">
+
+  <script>
+    try {
+      if (sessionStorage.getItem("flip-pendiente")) {
+        document.documentElement.classList.add("js-flip-pendiente");
+      }
+    } catch (e) {}
+  </script>
+</head>
+<body data-pagina="about" data-titulo-i18n="meta.about.titulo">
+  <header class="header">
+    <a href="about.html" class="header__nombre" aria-current="page">Lola Valenzuela</a>
+    <nav class="header__nav" aria-label="Navegación principal">
+      <button type="button" class="header__contacto" data-abrir-contacto data-i18n="nav.contacto">contacto</button>
+      <div class="toggle-idioma" role="group" aria-label="Cambiar idioma">
+        <button type="button" class="toggle-idioma__opcion" data-idioma-boton="es" aria-current="true">es</button>
+        <span class="toggle-idioma__separador" aria-hidden="true">/</span>
+        <button type="button" class="toggle-idioma__opcion" data-idioma-boton="en">en</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="js-fade-idioma">
+    <h1 class="solo-lectores" data-i18n="meta.about.titulo">Lola Valenzuela — Sobre mí</h1>
+    <article class="about">
+      <div class="about__contenido">
+        <!-- Columna de texto. El REEMPLAZAR-FOTO va abajo. -->
+        <div>
+          <p class="about__presentacion" data-i18n="about.presentacion">
+            Soy una diseñadora integral formada en Buenos Aires, Argentina. Me especializo en el
+            diseño audiovisual, diseño sonoro y diseño gráfico, explorando cómo las ideas pueden
+            construirse desde lo visual y lo sensorial. Considero que el diseño crece en diálogo
+            con otros, me interesa el trabajo en equipo y nutrirme del cruce entre disciplinas.
+          </p>
+
+          <section class="about__seccion">
+            <span class="about__seccion-titulo subtitulo-subrayado" data-i18n="about.educacionTitulo">Educación:</span>
+            <ul class="about__lista" data-lista="educacion"></ul>
+          </section>
+
+          <section class="about__seccion">
+            <span class="about__seccion-titulo subtitulo-subrayado" data-i18n="about.herramientasTitulo">Herramientas:</span>
+            <ul class="about__lista about__herramientas" data-lista="herramientas"></ul>
+          </section>
+        </div>
+
+        <!-- REEMPLAZAR: cuando tengas la foto final, pisá
+             assets/img/about-foto.jpg (ya está la que mandaste) -->
+        <img class="about__foto" data-about-foto src="assets/img/about-foto.jpg" alt="Retrato de Lola Valenzuela">
+      </div>
+
+      <a class="about__volver" href="index.html">← <span data-i18n="nav.volver">volver al inicio</span></a>
+    </article>
+  </main>
+
+  <div class="overlay-contacto" data-overlay-contacto hidden>
+    <button type="button" class="overlay-contacto__cerrar" data-cerrar-contacto aria-label="Cerrar" data-i18n-attr="aria-label:nav.cerrar">×</button>
+    <div class="overlay-contacto__panel" role="dialog" aria-modal="true" aria-labelledby="contacto-titulo">
+      <h2 id="contacto-titulo" class="overlay-contacto__titulo" data-i18n="contacto.titulo">contacto</h2>
+      <ul class="overlay-contacto__lista" data-contacto-lista></ul>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

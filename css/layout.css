@@ -1,0 +1,508 @@
+/* =========================================================
+   LAYOUT.CSS — header, grilla de home, about, páginas de proyecto
+   ========================================================= */
+
+/* -----------------------------------------------------------
+   HEADER — igual en todas las páginas
+   ----------------------------------------------------------- */
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 0.5rem;
+  padding: clamp(0.75rem, 0.5rem + 1vw, 1.25rem) var(--espacio-borde);
+}
+
+/* El nombre es siempre grande, siempre en el mismo lugar: mismo tamaño y
+   misma posición en home, about y páginas de proyecto (no crece ni se
+   achica al navegar). El contraste de escala contra "contacto" y "es/en"
+   es intencional. Para ajustar el tamaño, tocá --tam-nombre en base.css;
+   para el grosor/distancia del subrayado, tocá text-decoration-thickness
+   y text-underline-offset acá abajo. */
+.header__nombre {
+  font-size: var(--tam-nombre);
+  color: var(--rojo);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration-line: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: clamp(2px, 0.06em, 4px);
+  text-underline-offset: 0.12em;
+  transition: text-decoration-color var(--dur-rapida) ease;
+  view-transition-name: nombre;
+}
+
+/* Hover tenue en home/proyecto: anticipa el subrayado sin gritar. */
+@media (hover: hover) and (pointer: fine) {
+  .header__nombre:hover {
+    text-decoration-color: rgba(255, 0, 0, 0.4);
+  }
+}
+
+/* Estado activo: subrayado firme solo en la propia página about. */
+.header__nombre[aria-current="page"] {
+  text-decoration-color: var(--rojo);
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 0.7rem + 1vw, 2rem);
+  font-size: var(--tam-nav);
+}
+
+.header__contacto {
+  color: var(--rojo);
+}
+
+/* Toggle de idioma: es / en, el activo más opaco */
+.toggle-idioma {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15em;
+  color: var(--rojo);
+}
+
+.toggle-idioma__opcion {
+  opacity: 0.4;
+  transition: opacity var(--dur-rapida, 200ms) ease;
+}
+
+.toggle-idioma__opcion[aria-current="true"] {
+  opacity: 1;
+}
+
+.toggle-idioma__separador {
+  opacity: 0.4;
+}
+
+/* En mobile, el header queda fijo arriba con fondo sólido */
+@media (max-width: 639px) {
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: var(--negro);
+  }
+
+  /* Compensa el alto del header fijo para que el contenido no quede tapado */
+  main {
+    padding-top: var(--alto-header);
+  }
+}
+
+/* -----------------------------------------------------------
+   GRILLA DE PROYECTOS — home
+   ----------------------------------------------------------- */
+/*
+  Nota técnica sobre el ritmo irregular de la grilla:
+  Se probó primero con CSS Grid puro (grid-row/grid-column explícitos).
+  El problema: CSS Grid iguala el alto de fila entre columnas, así que un
+  bloque bajo (aspect-ratio panorámico) en la misma fila que un bloque alto
+  (aspect-ratio vertical) quedaba con un hueco negro debajo — no es masonry
+  real. La solución sin JS es Flexbox: la grilla exterior es "flex-wrap"
+  (encolumna de a 3, 2 o 1 según el ancho disponible, sin media queries) y
+  cada ".grilla-proyectos__columna" es un flex column independiente que
+  apila sus 2 bloques con su propia altura (por aspect-ratio), sin compartir
+  fila con las otras columnas. Así se logra el desfasaje entre columnas de
+  la referencia en cualquier ancho, de forma completamente fluida.
+*/
+.grilla-proyectos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-grilla);
+  padding: 0 var(--espacio-borde) clamp(2rem, 1rem + 3vw, 4rem);
+  max-width: var(--ancho-maximo);
+  margin: 0 auto;
+}
+
+.grilla-proyectos__columna {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 clamp(16rem, 40vw, 24rem);
+  gap: var(--gap-grilla);
+  min-width: 0;
+}
+
+.bloque-proyecto {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: var(--gris-placeholder);
+  width: 100%;
+}
+
+.bloque-proyecto__imagen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Proporciones de cada bloque (ver captura de referencia).
+   Para cambiar el "ritmo" de la grilla, ajustá estos aspect-ratio. */
+.bloque-proyecto[data-bloque="1"] { aspect-ratio: 3 / 2; }
+.bloque-proyecto[data-bloque="2"] { aspect-ratio: 1 / 1; }
+.bloque-proyecto[data-bloque="3"] { aspect-ratio: 4 / 5; }
+.bloque-proyecto[data-bloque="4"] { aspect-ratio: 5 / 4; }
+.bloque-proyecto[data-bloque="5"] { aspect-ratio: 8 / 5; }
+.bloque-proyecto[data-bloque="6"] { aspect-ratio: 3 / 4; }
+
+.bloque-proyecto__titulo {
+  position: absolute;
+  left: clamp(0.75rem, 0.5rem + 1vw, 1.25rem);
+  bottom: clamp(0.75rem, 0.5rem + 1vw, 1.25rem);
+  color: var(--rojo);
+  font-size: var(--tam-nav);
+  font-weight: 500;
+}
+
+/* Desktop: un poco más de aire arriba, como en la referencia */
+@media (min-width: 1024px) {
+  .grilla-proyectos {
+    padding-top: clamp(1rem, 0.5rem + 2vw, 2.5rem);
+  }
+}
+
+/* -----------------------------------------------------------
+   PANEL DE CONTACTO
+   ----------------------------------------------------------- */
+.overlay-contacto {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.92);
+  padding: var(--espacio-borde);
+}
+
+.overlay-contacto[hidden] {
+  display: none;
+}
+
+.overlay-contacto__panel {
+  position: relative;
+  width: min(32rem, 100%);
+  text-align: left;
+}
+
+/* Fija (position: fixed, no absolute) a la esquina superior derecha de la
+   PANTALLA, no del bloque de texto — así no queda pegada al panel cuando
+   éste es angosto y está centrado. */
+.overlay-contacto__cerrar {
+  position: fixed;
+  top: clamp(1rem, 0.75rem + 1vw, 2rem);
+  right: clamp(1rem, 0.75rem + 1vw, 2rem);
+  color: var(--rojo);
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0.5rem;
+}
+
+.overlay-contacto__titulo {
+  color: var(--rojo);
+  font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+  margin-bottom: 1.75rem;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Etiqueta y dato en la misma línea, en dos columnas prolijas.
+   .overlay-contacto__item es "display: contents" para que su <span> y su
+   <a> pasen a ser ítems directos de esta grilla de 2 columnas. */
+.overlay-contacto__lista {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: clamp(1rem, 0.75rem + 1vw, 2rem);
+  row-gap: 0.9rem;
+  align-items: baseline;
+  font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.25rem);
+}
+
+.overlay-contacto__item {
+  display: contents;
+}
+
+.overlay-contacto__etiqueta {
+  color: var(--blanco);
+  font-weight: 600;
+}
+
+.overlay-contacto__dato {
+  display: inline-block;
+  color: var(--blanco);
+  font-weight: 400;
+  transition: color var(--dur-rapida) ease;
+}
+
+.overlay-contacto__dato:hover,
+.overlay-contacto__dato:focus-visible {
+  color: var(--rojo);
+}
+
+/* -----------------------------------------------------------
+   PÁGINA ABOUT — vista fija sin scroll (con excepción por altura/mobile)
+   -----------------------------------------------------------
+   El esqueleto es flex en columna, de arriba a abajo: <body> → header +
+   main; main → .about; .about → .about__contenido (texto + foto) +
+   .about__volver. Cada nivel usa flex:1 + min-height:0, así el bloque de
+   contenido ocupa el espacio disponible entre el header y el link de
+   volver, sin necesidad de calcular alturas a mano.
+
+   Para SUBIR o BAJAR el bloque de contenido (más o menos aire debajo del
+   header), tocá el "gap" / padding-top de .about más abajo. Para el punto
+   de corte a partir del cual se permite scroll, tocá el media query
+   "(min-width: 768px) and (min-height: 700px)" al final de este bloque. */
+body[data-pagina="about"] {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+body[data-pagina="about"] main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.about {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1rem, 0.5rem + 1.5vw, 1.75rem) var(--espacio-borde) clamp(1.25rem, 1rem + 1vw, 2rem);
+  max-width: var(--ancho-maximo);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.about__contenido {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+}
+
+.about__volver {
+  display: inline-block;
+  align-self: flex-start;
+  flex: 0 0 auto;
+  margin-top: clamp(1rem, 0.75rem + 1vw, 1.75rem);
+  color: var(--rojo);
+  font-size: var(--tam-nav);
+}
+
+.about__volver:hover,
+.about__volver:focus-visible {
+  text-decoration: underline;
+}
+
+.about__foto {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  background: var(--gris-placeholder);
+  order: -1;
+}
+
+.about__presentacion {
+  max-width: 42rem;
+  margin-bottom: clamp(1rem, 0.6rem + 1.5vw, 1.75rem);
+}
+
+.about__seccion {
+  margin-bottom: clamp(0.85rem, 0.6rem + 1vw, 1.5rem);
+}
+
+.about__seccion-titulo {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.about__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.about__lista li::before {
+  content: "• ";
+}
+
+/* Herramientas en 2 columnas (no flex: "columns" no funciona sobre un
+   contenedor flex, por eso se pisa el display heredado de .about__lista). */
+.about__herramientas {
+  display: block;
+  columns: 2;
+  column-gap: 2rem;
+}
+
+.about__herramientas li {
+  break-inside: avoid;
+}
+
+.about__herramientas li::before {
+  content: "• ";
+}
+
+/* A partir de acá, "cabe todo en una pantalla": 2 columnas, sin scroll.
+   Por debajo de este ancho o alto, se cae al layout de 1 columna de
+   arriba (mobile-first) y se permite scroll normal — nunca se corta
+   contenido. */
+@media (min-width: 768px) and (min-height: 700px) {
+  body[data-pagina="about"] {
+    overflow: hidden;
+  }
+
+  .about__contenido {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: stretch;
+  }
+
+  .about__foto {
+    order: 0;
+    aspect-ratio: unset;
+    height: 100%;
+    max-height: 70svh;
+  }
+}
+
+/* -----------------------------------------------------------
+   PÁGINAS DE PROYECTO
+   ----------------------------------------------------------- */
+.proyecto {
+  max-width: var(--ancho-maximo);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 1rem + 2vw, 3rem) var(--espacio-borde) clamp(2rem, 1rem + 3vw, 4rem);
+}
+
+.proyecto__imagen-principal {
+  width: 100%;
+  max-height: 85vh;
+  object-fit: cover;
+  background: var(--gris-placeholder);
+  margin-bottom: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+}
+
+.proyecto__video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--gris-placeholder);
+  margin-bottom: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+}
+
+.proyecto__video-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.proyecto__titulo {
+  color: var(--rojo);
+  font-size: var(--tam-titulo-proyecto);
+  font-weight: 600;
+  margin-bottom: clamp(1rem, 0.7rem + 1vw, 1.75rem);
+}
+
+.proyecto__ficha {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 2rem;
+  font-size: var(--tam-texto-chico);
+  margin-bottom: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  padding-bottom: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.proyecto__ficha dt {
+  color: var(--gris-tenue);
+  margin-bottom: 0.25rem;
+}
+
+.proyecto__ficha dd {
+  color: var(--blanco);
+}
+
+.proyecto__descripcion {
+  max-width: 42rem;
+  margin-bottom: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+}
+
+.proyecto__galeria {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-grilla);
+  margin-bottom: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+}
+
+.proyecto__galeria img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--gris-placeholder);
+}
+
+@media (min-width: 640px) {
+  .proyecto__ficha {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .proyecto__galeria {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.proyecto__navegacion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: var(--tam-nav);
+}
+
+.proyecto__navegacion a {
+  color: var(--rojo);
+}
+
+.proyecto__navegacion a:hover,
+.proyecto__navegacion a:focus-visible {
+  text-decoration: underline;
+}
+
+.proyecto__volver {
+  text-align: center;
+  padding-top: 1rem;
+}
+
+.proyecto__volver a {
+  color: var(--gris-texto);
+}
+
+.proyecto__volver a:hover,
+.proyecto__volver a:focus-visible {
+  color: var(--rojo);
+}
+
+/* -----------------------------------------------------------
+   PIE — común a páginas de proyecto y about
+   ----------------------------------------------------------- */
+.footer {
+  padding: 1.5rem var(--espacio-borde) 2.5rem;
+  max-width: var(--ancho-maximo);
+  margin: 0 auto;
+  font-size: var(--tam-texto-chico);
+  color: var(--gris-tenue);
+}

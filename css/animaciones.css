@@ -1,0 +1,228 @@
+/* =========================================================
+   ANIMACIONES.CSS — micro-interacciones de la home y transiciones
+   =========================================================
+
+   CÓMO CALIBRAR LA INTENSIDAD:
+   - Las duraciones y curvas están centralizadas en las variables de acá
+     abajo. Si querés que el hover sea más o menos notorio, tocá
+     --escala-hover-bloque y --escala-hover-imagen (más cerca de 1 = más sutil).
+   - --dur-rapida / --dur-media / --dur-lenta controlan la velocidad de
+     cada tipo de animación.
+   - --ease-suave es la curva usada en todos lados para que se sienta
+     consistente; cambiarla afecta a todo el sitio de una.
+   ========================================================= */
+
+/* Habilita View Transitions entre documentos (navegación completa entre
+   páginas). Los navegadores que no lo soportan ignoran esta regla sin
+   errores y la navegación sigue funcionando normal — ver transiciones.js
+   para el fallback con Web Animations API. */
+@view-transition {
+  navigation: auto;
+}
+
+:root {
+  --dur-rapida: 200ms;
+  --dur-media: 450ms;
+  --dur-lenta: 600ms;
+  /* Cross-fade del contenido entre páginas (View Transitions nativas). */
+  --dur-crossfade: 400ms;
+  --ease-suave: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Intensidad del hover en la grilla de home */
+  --escala-hover-bloque: 1.015;
+  --escala-hover-imagen: 1.04;
+  --desplazamiento-hover: 3px;
+  --opacidad-atenuada: 0.6;
+
+  /* Stagger de entrada */
+  --paso-stagger: 60ms;
+}
+
+/* -----------------------------------------------------------
+   HOVER EN BLOQUES DE LA GRILLA (solo dispositivos con hover real)
+   ----------------------------------------------------------- */
+@media (hover: hover) and (pointer: fine) {
+  .bloque-proyecto {
+    transition: transform var(--dur-media) var(--ease-suave),
+      opacity var(--dur-media) var(--ease-suave);
+  }
+
+  .bloque-proyecto__imagen {
+    transition: transform var(--dur-media) var(--ease-suave);
+  }
+
+  .bloque-proyecto__titulo {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity var(--dur-media) var(--ease-suave),
+      transform var(--dur-media) var(--ease-suave);
+  }
+
+  .grilla-proyectos:has(.bloque-proyecto:hover) .bloque-proyecto {
+    opacity: var(--opacidad-atenuada);
+  }
+
+  .bloque-proyecto:hover {
+    transform: translateY(calc(var(--desplazamiento-hover) * -1))
+      scale(var(--escala-hover-bloque));
+    opacity: 1;
+  }
+
+  .bloque-proyecto:hover .bloque-proyecto__imagen {
+    transform: scale(var(--escala-hover-imagen));
+  }
+
+  .bloque-proyecto:hover .bloque-proyecto__titulo {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .bloque-proyecto:focus-visible .bloque-proyecto__titulo {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* En touch: sin hover, respuesta mínima con :active */
+@media (hover: none), (pointer: coarse) {
+  .bloque-proyecto {
+    transition: opacity var(--dur-rapida) ease;
+  }
+
+  .bloque-proyecto:active {
+    opacity: 0.85;
+  }
+
+  .bloque-proyecto__titulo {
+    opacity: 1;
+  }
+}
+
+/* -----------------------------------------------------------
+   FADE-IN ESCALONADO AL ENTRAR A LA HOME (una sola vez)
+   ----------------------------------------------------------- */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.grilla-proyectos.js-lista-para-animar .bloque-proyecto {
+  animation: aparecer var(--dur-lenta) var(--ease-suave) both;
+}
+
+.grilla-proyectos.js-lista-para-animar .bloque-proyecto:nth-child(1) { animation-delay: calc(var(--paso-stagger) * 0); }
+.grilla-proyectos.js-lista-para-animar .bloque-proyecto:nth-child(2) { animation-delay: calc(var(--paso-stagger) * 1); }
+.grilla-proyectos.js-lista-para-animar .bloque-proyecto:nth-child(3) { animation-delay: calc(var(--paso-stagger) * 2); }
+.grilla-proyectos.js-lista-para-animar .bloque-proyecto:nth-child(4) { animation-delay: calc(var(--paso-stagger) * 3); }
+.grilla-proyectos.js-lista-para-animar .bloque-proyecto:nth-child(5) { animation-delay: calc(var(--paso-stagger) * 4); }
+.grilla-proyectos.js-lista-para-animar .bloque-proyecto:nth-child(6) { animation-delay: calc(var(--paso-stagger) * 5); }
+
+/* -----------------------------------------------------------
+   OVERLAY DE CONTACTO
+   ----------------------------------------------------------- */
+.overlay-contacto {
+  opacity: 0;
+  transition: opacity var(--dur-media) var(--ease-suave);
+}
+
+.overlay-contacto.js-visible {
+  opacity: 1;
+}
+
+.overlay-contacto__panel {
+  transform: translateY(8px);
+  transition: transform var(--dur-media) var(--ease-suave);
+}
+
+.overlay-contacto.js-visible .overlay-contacto__panel {
+  transform: translateY(0);
+}
+
+/* -----------------------------------------------------------
+   FADE AL CAMBIAR DE IDIOMA
+   ----------------------------------------------------------- */
+.js-fade-idioma {
+  transition: opacity calc(var(--dur-rapida) * 0.8) ease;
+}
+
+.js-fade-idioma.js-idioma-cambiando {
+  opacity: 0;
+}
+
+/* -----------------------------------------------------------
+   VIEW TRANSITIONS API — el nombre no se mueve entre páginas (mismo
+   tamaño, misma posición siempre), así que no tiene que animarse: se le
+   saca la animación por defecto (que si no, haría un crossfade fantasma
+   sobre sí mismo) para que quede fijo y sin parpadeo mientras el resto
+   del contenido (root) sí hace cross-fade.
+   ----------------------------------------------------------- */
+::view-transition-old(nombre),
+::view-transition-new(nombre) {
+  animation: none;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--dur-crossfade);
+  animation-timing-function: var(--ease-suave);
+}
+
+/* -----------------------------------------------------------
+   ANTI-FLASH del fallback FLIP: un script inline y bloqueante en el
+   <head> de cada página agrega esta clase a <html> ANTES del primer
+   pintado si detecta una transición pendiente en sessionStorage, para
+   que <main> no aparezca de golpe antes de que transiciones.js pueda
+   animarlo. transiciones.js la saca apenas corre.
+   ----------------------------------------------------------- */
+.js-flip-pendiente main {
+  opacity: 0;
+}
+
+/* -----------------------------------------------------------
+   FALLBACK FLIP (transiciones.js anima con Web Animations API
+   cuando el navegador no soporta View Transitions)
+   ----------------------------------------------------------- */
+.js-flip-saliendo {
+  animation: flip-fade-salida var(--dur-media) var(--ease-suave) both;
+}
+
+.js-flip-entrando {
+  animation: flip-fade-entrada var(--dur-media) var(--ease-suave) both;
+}
+
+@keyframes flip-fade-salida {
+  to { opacity: 0; }
+}
+
+@keyframes flip-fade-entrada {
+  from { opacity: 0; }
+}
+
+/* -----------------------------------------------------------
+   PREFERENCIA DE MOVIMIENTO REDUCIDO
+   Si está activa, todo pasa a fade simple sin transformaciones.
+   Como todas las duraciones y escalas del archivo salen de variables,
+   alcanza con redefinirlas acá abajo (sin !important: al estar declaradas
+   después, ganan por orden de cascada) para que cualquier transición o
+   animación existente se vuelva un fade casi instantáneo y sin movimiento. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-rapida: 1ms;
+    --dur-media: 1ms;
+    --dur-lenta: 1ms;
+    --dur-crossfade: 1ms;
+    --escala-hover-bloque: 1;
+    --escala-hover-imagen: 1;
+    --desplazamiento-hover: 0px;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

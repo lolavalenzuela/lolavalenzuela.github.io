@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>[TÍTULO PROYECTO 3] — Lola Valenzuela</title>
+  <meta name="description" content="[Descripción placeholder del proyecto 3.]">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="[TÍTULO PROYECTO 3] — Lola Valenzuela">
+  <meta property="og:description" content="[Descripción placeholder del proyecto 3.]">
+  <meta property="og:image" content="../assets/img/proyectos/proyecto-3.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="[TÍTULO PROYECTO 3] — Lola Valenzuela">
+  <meta name="twitter:description" content="[Descripción placeholder del proyecto 3.]">
+
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/animaciones.css">
+
+  <script>
+    try {
+      if (sessionStorage.getItem("flip-pendiente")) {
+        document.documentElement.classList.add("js-flip-pendiente");
+      }
+    } catch (e) {}
+  </script>
+</head>
+<body data-pagina="proyecto" data-proyecto-id="proyecto-3">
+  <header class="header">
+    <a href="../about.html" class="header__nombre">Lola Valenzuela</a>
+    <nav class="header__nav" aria-label="Navegación principal">
+      <button type="button" class="header__contacto" data-abrir-contacto data-i18n="nav.contacto">contacto</button>
+      <div class="toggle-idioma" role="group" aria-label="Cambiar idioma">
+        <button type="button" class="toggle-idioma__opcion" data-idioma-boton="es" aria-current="true">es</button>
+        <span class="toggle-idioma__separador" aria-hidden="true">/</span>
+        <button type="button" class="toggle-idioma__opcion" data-idioma-boton="en">en</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="js-fade-idioma">
+    <article class="proyecto">
+      <div data-proyecto-imagen-wrapper>
+        <img class="proyecto__imagen-principal" data-proyecto-imagen-principal src="../assets/img/proyectos/proyecto-3.svg" alt="[Descripción de la imagen principal del proyecto 3]">
+      </div>
+
+      <div class="proyecto__video-wrapper" data-proyecto-video-wrapper hidden>
+        <iframe src="" title="Video del proyecto" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+
+      <div data-proyecto-audio-wrapper hidden style="margin-bottom: clamp(1.5rem, 1rem + 2vw, 2.5rem);">
+        <audio controls style="width: 100%;"></audio>
+      </div>
+
+      <h1 class="proyecto__titulo" data-proyecto-titulo>[TÍTULO PROYECTO 3]</h1>
+
+      <dl class="proyecto__ficha" data-proyecto-ficha></dl>
+
+      <p class="proyecto__descripcion" data-proyecto-descripcion>
+        [Descripción placeholder del proyecto 3. Reemplazar con el texto real cuando esté listo.]
+      </p>
+
+      <div class="proyecto__galeria" data-proyecto-galeria></div>
+
+      <nav class="proyecto__navegacion" aria-label="Navegación entre proyectos">
+        <a href="proyecto-2.html" data-proyecto-anterior>
+          ← <span data-i18n="nav.anterior">proyecto anterior</span>
+        </a>
+        <a href="proyecto-4.html" data-proyecto-siguiente>
+          <span data-i18n="nav.siguiente">proyecto siguiente</span> →
+        </a>
+      </nav>
+
+      <p class="proyecto__volver">
+        <a href="../index.html" data-proyecto-volver data-i18n="nav.volver">volver a inicio</a>
+      </p>
+    </article>
+  </main>
+
+  <div class="overlay-contacto" data-overlay-contacto hidden>
+    <button type="button" class="overlay-contacto__cerrar" data-cerrar-contacto aria-label="Cerrar" data-i18n-attr="aria-label:nav.cerrar">×</button>
+    <div class="overlay-contacto__panel" role="dialog" aria-modal="true" aria-labelledby="contacto-titulo">
+      <h2 id="contacto-titulo" class="overlay-contacto__titulo" data-i18n="contacto.titulo">contacto</h2>
+      <ul class="overlay-contacto__lista" data-contacto-lista></ul>
+    </div>
+  </div>
+
+  <script type="module" src="../js/main.js"></script>
+</body>
+</html>

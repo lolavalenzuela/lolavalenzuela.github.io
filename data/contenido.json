@@ -1,0 +1,488 @@
+{
+  "es": {
+    "nav": {
+      "contacto": "contacto",
+      "cerrar": "cerrar",
+      "volver": "volver al inicio",
+      "anterior": "proyecto anterior",
+      "siguiente": "proyecto siguiente",
+      "cambiarIdioma": "cambiar a inglés"
+    },
+    "meta": {
+      "home": {
+        "titulo": "Lola Valenzuela — Diseño integral",
+        "descripcion": "Portfolio de Lola Valenzuela, diseñadora integral especializada en diseño audiovisual, sonoro y gráfico."
+      },
+      "about": {
+        "titulo": "Lola Valenzuela — Sobre mí",
+        "descripcion": "Diseñadora integral formada en Buenos Aires, Argentina. Diseño audiovisual, sonoro y gráfico."
+      }
+    },
+    "home": {
+      "proyectos": [
+        {
+          "id": "proyecto-1",
+          "titulo": "[TÍTULO PROYECTO 1]",
+          "altImagen": "[Descripción de la imagen de portada del proyecto 1]",
+          "imagen": "assets/img/proyectos/proyecto-1.svg"
+        },
+        {
+          "id": "proyecto-2",
+          "titulo": "[TÍTULO PROYECTO 2]",
+          "altImagen": "[Descripción de la imagen de portada del proyecto 2]",
+          "imagen": "assets/img/proyectos/proyecto-2.svg"
+        },
+        {
+          "id": "proyecto-3",
+          "titulo": "[TÍTULO PROYECTO 3]",
+          "altImagen": "[Descripción de la imagen de portada del proyecto 3]",
+          "imagen": "assets/img/proyectos/proyecto-3.svg"
+        },
+        {
+          "id": "proyecto-4",
+          "titulo": "[TÍTULO PROYECTO 4]",
+          "altImagen": "[Descripción de la imagen de portada del proyecto 4]",
+          "imagen": "assets/img/proyectos/proyecto-4.svg"
+        },
+        {
+          "id": "proyecto-5",
+          "titulo": "[TÍTULO PROYECTO 5]",
+          "altImagen": "[Descripción de la imagen de portada del proyecto 5]",
+          "imagen": "assets/img/proyectos/proyecto-5.svg"
+        },
+        {
+          "id": "proyecto-6",
+          "titulo": "[TÍTULO PROYECTO 6]",
+          "altImagen": "[Descripción de la imagen de portada del proyecto 6]",
+          "imagen": "assets/img/proyectos/proyecto-6.svg"
+        }
+      ]
+    },
+    "about": {
+      "nombre": "Lola Valenzuela",
+      "presentacion": "Soy una diseñadora integral formada en Buenos Aires, Argentina. Me especializo en el diseño audiovisual, diseño sonoro y diseño gráfico, explorando cómo las ideas pueden construirse desde lo visual y lo sensorial. Considero que el diseño crece en diálogo con otros, me interesa el trabajo en equipo y nutrirme del cruce entre disciplinas.",
+      "educacionTitulo": "Educación:",
+      "educacion": [
+        "Licenciatura en Diseño, Universidad Torcuato Di Tella (2022-2026)",
+        "Escuela Superior de Comercio Carlos Pellegrini (2017-2021)"
+      ],
+      "herramientasTitulo": "Herramientas:",
+      "herramientas": [
+        "Illustrator",
+        "Photoshop",
+        "After Effects",
+        "Figma",
+        "Reaper",
+        "Blender",
+        "Pro Tools"
+      ],
+      "foto": "assets/img/about-foto.jpg",
+      "fotoAlt": "Retrato de Lola Valenzuela"
+    },
+    "contacto": {
+      "titulo": "contacto",
+      "mailLabel": "Mail",
+      "mail": "mailto:lolivalenzuela04@gmail.com",
+      "mailTexto": "lolivalenzuela04@gmail.com",
+      "telefonoLabel": "Teléfono",
+      "telefono": "tel:+5491123419855",
+      "telefonoTexto": "+54 9 11 2341-9855",
+      "_ayudaTelefono": "Para que el dato de teléfono abra WhatsApp en vez de marcar, cambiá el valor de 'telefono' de arriba por 'https://wa.me/5491123419855' (sin espacios, sin guiones, sin '+').",
+      "_ayudaRedes": "Instagram / LinkedIn / Behance están desactivados a propósito (el array 'redes' vacío). Para reactivar uno, agregá un objeto acá con esta forma: { \"nombre\": \"Instagram\", \"url\": \"https://instagram.com/tu_usuario\" }. Podés borrar esta clave cuando ya no la necesites.",
+      "redes": []
+    },
+    "proyecto": {
+      "anioLabel": "Año",
+      "tipoLabel": "Tipo",
+      "rolLabel": "Rol",
+      "herramientasLabel": "Herramientas"
+    },
+    "proyectos": {
+      "proyecto-1": {
+        "titulo": "[TÍTULO PROYECTO 1]",
+        "anio": "[AÑO]",
+        "tipo": "[TIPO DE PROYECTO]",
+        "rol": "[ROL]",
+        "herramientas": [
+          "[HERRAMIENTA 1]",
+          "[HERRAMIENTA 2]"
+        ],
+        "descripcion": "[Descripción placeholder del proyecto 1. Reemplazar con el texto real cuando esté listo.]",
+        "imagenPrincipal": "assets/img/proyectos/proyecto-1.svg",
+        "altPrincipal": "[Descripción de la imagen principal del proyecto 1]",
+        "galeria": [
+          {
+            "src": "assets/img/proyectos/proyecto-1-galeria-1.svg",
+            "alt": "[Descripción imagen de galería 1]"
+          },
+          {
+            "src": "assets/img/proyectos/proyecto-1-galeria-2.svg",
+            "alt": "[Descripción imagen de galería 2]"
+          }
+        ],
+        "video": null,
+        "anteriorId": "proyecto-6",
+        "siguienteId": "proyecto-2",
+        "audio": null
+      },
+      "proyecto-2": {
+        "titulo": "[TÍTULO PROYECTO 2]",
+        "anio": "[AÑO]",
+        "tipo": "[TIPO DE PROYECTO]",
+        "rol": "[ROL]",
+        "herramientas": [
+          "[HERRAMIENTA 1]",
+          "[HERRAMIENTA 2]"
+        ],
+        "descripcion": "[Descripción placeholder del proyecto 2. Reemplazar con el texto real cuando esté listo.]",
+        "imagenPrincipal": "assets/img/proyectos/proyecto-2.svg",
+        "altPrincipal": "[Descripción de la imagen principal del proyecto 2]",
+        "galeria": [
+          {
+            "src": "assets/img/proyectos/proyecto-2-galeria-1.svg",
+            "alt": "[Descripción imagen de galería 1]"
+          }
+        ],
+        "video": null,
+        "anteriorId": "proyecto-1",
+        "siguienteId": "proyecto-3",
+        "audio": null
+      },
+      "proyecto-3": {
+        "titulo": "[TÍTULO PROYECTO 3]",
+        "anio": "[AÑO]",
+        "tipo": "[TIPO DE PROYECTO]",
+        "rol": "[ROL]",
+        "herramientas": [
+          "[HERRAMIENTA 1]",
+          "[HERRAMIENTA 2]"
+        ],
+        "descripcion": "[Descripción placeholder del proyecto 3. Reemplazar con el texto real cuando esté listo.]",
+        "imagenPrincipal": "assets/img/proyectos/proyecto-3.svg",
+        "altPrincipal": "[Descripción de la imagen principal del proyecto 3]",
+        "galeria": [
+          {
+            "src": "assets/img/proyectos/proyecto-3-galeria-1.svg",
+            "alt": "[Descripción imagen de galería 1]"
+          }
+        ],
+        "video": null,
+        "anteriorId": "proyecto-2",
+        "siguienteId": "proyecto-4",
+        "audio": null
+      },
+      "proyecto-4": {
+        "titulo": "[TÍTULO PROYECTO 4]",
+        "anio": "[AÑO]",
+        "tipo": "[TIPO DE PROYECTO]",
+        "rol": "[ROL]",
+        "herramientas": [
+          "[HERRAMIENTA 1]",
+          "[HERRAMIENTA 2]"
+        ],
+        "descripcion": "[Descripción placeholder del proyecto 4. Reemplazar con el texto real cuando esté listo.]",
+        "imagenPrincipal": "assets/img/proyectos/proyecto-4.svg",
+        "altPrincipal": "[Descripción de la imagen principal del proyecto 4]",
+        "galeria": [
+          {
+            "src": "assets/img/proyectos/proyecto-4-galeria-1.svg",
+            "alt": "[Descripción imagen de galería 1]"
+          }
+        ],
+        "video": null,
+        "anteriorId": "proyecto-3",
+        "siguienteId": "proyecto-5",
+        "audio": null
+      },
+      "proyecto-5": {
+        "titulo": "[TÍTULO PROYECTO 5]",
+        "anio": "[AÑO]",
+        "tipo": "[TIPO DE PROYECTO]",
+        "rol": "[ROL]",
+        "herramientas": [
+          "[HERRAMIENTA 1]",
+          "[HERRAMIENTA 2]"
+        ],
+        "descripcion": "[Descripción placeholder del proyecto 5. Reemplazar con el texto real cuando esté listo.]",
+        "imagenPrincipal": "assets/img/proyectos/proyecto-5.svg",
+        "altPrincipal": "[Descripción de la imagen principal del proyecto 5]",
+        "galeria": [
+          {
+            "src": "assets/img/proyectos/proyecto-5-galeria-1.svg",
+            "alt": "[Descripción imagen de galería 1]"
+          }
+        ],
+        "video": null,
+        "anteriorId": "proyecto-4",
+        "siguienteId": "proyecto-6",
+        "audio": null
+      },
+      "proyecto-6": {
+        "titulo": "[TÍTULO PROYECTO 6]",
+        "anio": "[AÑO]",
+        "tipo": "[TIPO DE PROYECTO]",
+        "rol": "[ROL]",
+        "herramientas": [
+          "[HERRAMIENTA 1]",
+          "[HERRAMIENTA 2]"
+        ],
+        "descripcion": "[Descripción placeholder del proyecto 6. Reemplazar con el texto real cuando esté listo.]",
+        "imagenPrincipal": "assets/img/proyectos/proyecto-6.svg",
+        "altPrincipal": "[Descripción de la imagen principal del proyecto 6]",
+        "galeria": [
+          {
+            "src": "assets/img/proyectos/proyecto-6-galeria-1.svg",
+            "alt": "[Descripción imagen de galería 1]"
+          }
+        ],
+        "video": null,
+        "anteriorId": "proyecto-5",
+        "siguienteId": "proyecto-1",
+        "audio": null
+      }
+    }
+  },
+  "en": {
+    "nav": {
+      "contacto": "contact",
+      "cerrar": "close",
+      "volver": "back to home",
+      "anterior": "previous project",
+      "siguiente": "next project",
+      "cambiarIdioma": "switch to Spanish"
+    },
+    "meta": {
+      "home": {
+        "titulo": "Lola Valenzuela — Integral design",
+        "descripcion": "Portfolio of Lola Valenzuela, integral designer specialized in audiovisual, sound and graphic design."
+      },
+      "about": {
+        "titulo": "Lola Valenzuela — About",
+        "descripcion": "Integral designer trained in Buenos Aires, Argentina. Audiovisual, sound and graphic design."
+      }
+    },
+    "home": {
+      "proyectos": [
+        {
+          "id": "proyecto-1",
+          "titulo": "[PROJECT 1 TITLE]",
+          "altImagen": "[Description of project 1 cover image]",
+          "imagen": "assets/img/proyectos/proyecto-1.svg"
+        },
+        {
+          "id": "proyecto-2",
+          "titulo": "[PROJECT 2 TITLE]",
+          "altImagen": "[Description of project 2 cover image]",
+          "imagen": "assets/img/proyectos/proyecto-2.svg"
+        },
+        {
+          "id": "proyecto-3",
+          "titulo": "[PROJECT 3 TITLE]",
+          "altImagen": "[Description of project 3 cover image]",
+          "imagen": "assets/img/proyectos/proyecto-3.svg"
+        },
+        {
+          "id": "proyecto-4",
+          "titulo": "[PROJECT 4 TITLE]",
+          "altImagen": "[Description of project 4 cover image]",
+          "imagen": "assets/img/proyectos/proyecto-4.svg"
+        },
+        {
+          "id": "proyecto-5",
+          "titulo": "[PROJECT 5 TITLE]",
+          "altImagen": "[Description of project 5 cover image]",
+          "imagen": "assets/img/proyectos/proyecto-5.svg"
+        },
+        {
+          "id": "proyecto-6",
+          "titulo": "[PROJECT 6 TITLE]",
+          "altImagen": "[Description of project 6 cover image]",
+          "imagen": "assets/img/proyectos/proyecto-6.svg"
+        }
+      ]
+    },
+    "about": {
+      "nombre": "Lola Valenzuela",
+      "presentacion": "I'm an integral designer trained in Buenos Aires, Argentina. I specialize in audiovisual design, sound design and graphic design, exploring how ideas can be built from the visual and the sensorial. I believe design grows in dialogue with others — I'm drawn to teamwork and to feeding off the crossover between disciplines.",
+      "educacionTitulo": "Education:",
+      "educacion": [
+        "BA in Design, Universidad Torcuato Di Tella (2022-2026)",
+        "Escuela Superior de Comercio Carlos Pellegrini (2017-2021)"
+      ],
+      "herramientasTitulo": "Tools:",
+      "herramientas": [
+        "Illustrator",
+        "Photoshop",
+        "After Effects",
+        "Figma",
+        "Reaper",
+        "Blender",
+        "Pro Tools"
+      ],
+      "foto": "assets/img/about-foto.jpg",
+      "fotoAlt": "Portrait of Lola Valenzuela"
+    },
+    "contacto": {
+      "titulo": "contact",
+      "mailLabel": "Mail",
+      "mail": "mailto:lolivalenzuela04@gmail.com",
+      "mailTexto": "lolivalenzuela04@gmail.com",
+      "telefonoLabel": "Phone",
+      "telefono": "tel:+5491123419855",
+      "telefonoTexto": "+54 9 11 2341-9855",
+      "_phoneHelp": "For the phone entry to open WhatsApp instead of dialing, change 'telefono' above to 'https://wa.me/5491123419855' (no spaces, no dashes, no '+').",
+      "_socialsHelp": "Instagram / LinkedIn / Behance are disabled on purpose (empty 'redes' array). To re-enable one, add an object here shaped like: { \"nombre\": \"Instagram\", \"url\": \"https://instagram.com/your_user\" }. You can delete this key once you no longer need it.",
+      "redes": []
+    },
+    "proyecto": {
+      "anioLabel": "Year",
+      "tipoLabel": "Type",
+      "rolLabel": "Role",
+      "herramientasLabel": "Tools"
+    },
+    "proyectos": {
+      "proyecto-1": {
+        "titulo": "[PROJECT 1 TITLE]",
+        "anio": "[YEAR]",
+        "tipo": "[PROJECT TYPE]",
+        "rol": "[ROLE]",
+        "herramientas": [
+          "[TOOL 1]",
+          "[TOOL 2]"
+        ],
+        "descripcion": "[Placeholder description for project 1. Replace with the real text when ready.]",
+        "imagenPrincipal": "assets/img/proyectos/proyecto-1.svg",
+        "altPrincipal": "[Description of project 1 main image]",
+        "galeria": [
+          {
+            "src": "assets/img/proyectos/proyecto-1-galeria-1.svg",
+            "alt": "[Description of gallery image 1]"
+          },
+          {
+            "src": "assets/img/proyectos/proyecto-1-galeria-2.svg",
+            "alt": "[Description of gallery image 2]"
+          }
+        ],
+        "video": null,
+        "anteriorId": "proyecto-6",
+        "siguienteId": "proyecto-2",
+        "audio": null
+      },
+      "proyecto-2": {
+        "titulo": "[PROJECT 2 TITLE]",
+        "anio": "[YEAR]",
+        "tipo": "[PROJECT TYPE]",
+        "rol": "[ROLE]",
+        "herramientas": [
+          "[TOOL 1]",
+          "[TOOL 2]"
+        ],
+        "descripcion": "[Placeholder description for project 2. Replace with the real text when ready.]",
+        "imagenPrincipal": "assets/img/proyectos/proyecto-2.svg",
+        "altPrincipal": "[Description of project 2 main image]",
+        "galeria": [
+          {
+            "src": "assets/img/proyectos/proyecto-2-galeria-1.svg",
+            "alt": "[Description of gallery image 1]"
+          }
+        ],
+        "video": null,
+        "anteriorId": "proyecto-1",
+        "siguienteId": "proyecto-3",
+        "audio": null
+      },
+      "proyecto-3": {
+        "titulo": "[PROJECT 3 TITLE]",
+        "anio": "[YEAR]",
+        "tipo": "[PROJECT TYPE]",
+        "rol": "[ROLE]",
+        "herramientas": [
+          "[TOOL 1]",
+          "[TOOL 2]"
+        ],
+        "descripcion": "[Placeholder description for project 3. Replace with the real text when ready.]",
+        "imagenPrincipal": "assets/img/proyectos/proyecto-3.svg",
+        "altPrincipal": "[Description of project 3 main image]",
+        "galeria": [
+          {
+            "src": "assets/img/proyectos/proyecto-3-galeria-1.svg",
+            "alt": "[Description of gallery image 1]"
+          }
+        ],
+        "video": null,
+        "anteriorId": "proyecto-2",
+        "siguienteId": "proyecto-4",
+        "audio": null
+      },
+      "proyecto-4": {
+        "titulo": "[PROJECT 4 TITLE]",
+        "anio": "[YEAR]",
+        "tipo": "[PROJECT TYPE]",
+        "rol": "[ROLE]",
+        "herramientas": [
+          "[TOOL 1]",
+          "[TOOL 2]"
+        ],
+        "descripcion": "[Placeholder description for project 4. Replace with the real text when ready.]",
+        "imagenPrincipal": "assets/img/proyectos/proyecto-4.svg",
+        "altPrincipal": "[Description of project 4 main image]",
+        "galeria": [
+          {
+            "src": "assets/img/proyectos/proyecto-4-galeria-1.svg",
+            "alt": "[Description of gallery image 1]"
+          }
+        ],
+        "video": null,
+        "anteriorId": "proyecto-3",
+        "siguienteId": "proyecto-5",
+        "audio": null
+      },
+      "proyecto-5": {
+        "titulo": "[PROJECT 5 TITLE]",
+        "anio": "[YEAR]",
+        "tipo": "[PROJECT TYPE]",
+        "rol": "[ROLE]",
+        "herramientas": [
+          "[TOOL 1]",
+          "[TOOL 2]"
+        ],
+        "descripcion": "[Placeholder description for project 5. Replace with the real text when ready.]",
+        "imagenPrincipal": "assets/img/proyectos/proyecto-5.svg",
+        "altPrincipal": "[Description of project 5 main image]",
+        "galeria": [
+          {
+            "src": "assets/img/proyectos/proyecto-5-galeria-1.svg",
+            "alt": "[Description of gallery image 1]"
+          }
+        ],
+        "video": null,
+        "anteriorId": "proyecto-4",
+        "siguienteId": "proyecto-6",
+        "audio": null
+      },
+      "proyecto-6": {
+        "titulo": "[PROJECT 6 TITLE]",
+        "anio": "[YEAR]",
+        "tipo": "[PROJECT TYPE]",
+        "rol": "[ROLE]",
+        "herramientas": [
+          "[TOOL 1]",
+          "[TOOL 2]"
+        ],
+        "descripcion": "[Placeholder description for project 6. Replace with the real text when ready.]",
+        "imagenPrincipal": "assets/img/proyectos/proyecto-6.svg",
+        "altPrincipal": "[Description of project 6 main image]",
+        "galeria": [
+          {
+            "src": "assets/img/proyectos/proyecto-6-galeria-1.svg",
+            "alt": "[Description of gallery image 1]"
+          }
+        ],
+        "video": null,
+        "anteriorId": "proyecto-5",
+        "siguienteId": "proyecto-1",
+        "audio": null
+      }
+    }
+  }
+}

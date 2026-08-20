@@ -1,0 +1,6 @@
+# Foto original sin optimizar (17MB) — la versión que usa el sitio ya
+# está en assets/img/about-foto.jpg, optimizada y liviana.
+foto.png
+
+# Archivos del sistema
+.DS_Store
