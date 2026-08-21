@@ -40,8 +40,8 @@
         },
         {
           "id": "proyecto-4",
-          "titulo": "[TÍTULO PROYECTO 4]",
-          "altImagen": "[Descripción de la imagen de portada del proyecto 4]",
+          "titulo": "Frakto",
+          "altImagen": "Portada del proyecto Frakto",
           "imagen": "assets/img/proyectos/proyecto-4.svg"
         },
         {
@@ -181,31 +181,31 @@
         "_ayudaMedia": "Cuando tengas las imágenes de este proyecto, guardalas en assets/img/proyectos/ y escribí acá la ruta. Portada/principal: \"imagenPrincipal\": \"assets/img/proyectos/proyecto-3.jpg\". Galería: el array \"galeria\" acepta las que quieras — se acomodan solas en la grilla de dos columnas, en filas sucesivas. Cada una es {\"src\": \"assets/img/proyectos/proyecto-3-galeria-1.jpg\", \"alt\": \"Descripción de la imagen\"}. Video: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) — si hay video, reemplaza a la imagen principal. Audio: \"audio\": \"assets/img/proyectos/proyecto-3-audio.mp3\". Ojo: la portada de la home se edita aparte, en home.proyectos (arriba en este mismo archivo)."
       },
       "proyecto-4": {
-        "titulo": "[TÍTULO PROYECTO 4]",
-        "anio": "[AÑO]",
-        "tipo": "[TIPO DE PROYECTO]",
+        "titulo": "Frakto",
+        "anio": "2025",
+        "tipo": "Diseño Audiovisual — VJ",
         "herramientas": [
-          "[HERRAMIENTA 1]",
-          "[HERRAMIENTA 2]"
+          "Resolume Arena"
         ],
-        "descripcion": "[Descripción placeholder del proyecto 4. Reemplazar con el texto real cuando esté listo.]",
+        "descripcion": "Frakto es un set de visuales en vivo desarrollado en Resolume Arena. A partir del análisis sonoro de una pieza con crudeza robótica y ritmo progresivo, construí un sistema de glitches, flashes y líneas diagonales en verde y violeta que responden al pulso de la música. El proceso fue iterativo: de formas geométricas a texturas abstractas, hasta encontrar el lenguaje visual definitivo.",
         "imagenPrincipal": "assets/img/proyectos/proyecto-4.svg",
-        "altPrincipal": "[Descripción de la imagen principal del proyecto 4]",
+        "altPrincipal": "Visual del set en vivo Frakto: glitches y líneas diagonales en verde y violeta",
         "galeria": [
           {
             "src": "assets/img/proyectos/proyecto-4-galeria-1.svg",
-            "alt": "[Descripción de la imagen 1 de la galería del proyecto 4]"
+            "alt": "Captura del set de visuales en vivo Frakto"
           },
           {
             "src": "assets/img/proyectos/proyecto-4-galeria-2.svg",
-            "alt": "[Descripción de la imagen 2 de la galería del proyecto 4]"
+            "alt": "Captura del set de visuales en vivo Frakto"
           }
         ],
         "video": null,
         "anteriorId": "proyecto-3",
         "siguienteId": "proyecto-5",
         "audio": null,
-        "_ayudaMedia": "Cuando tengas las imágenes de este proyecto, guardalas en assets/img/proyectos/ y escribí acá la ruta. Portada/principal: \"imagenPrincipal\": \"assets/img/proyectos/proyecto-4.jpg\". Galería: el array \"galeria\" acepta las que quieras — se acomodan solas en la grilla de dos columnas, en filas sucesivas. Cada una es {\"src\": \"assets/img/proyectos/proyecto-4-galeria-1.jpg\", \"alt\": \"Descripción de la imagen\"}. Video: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) — si hay video, reemplaza a la imagen principal. Audio: \"audio\": \"assets/img/proyectos/proyecto-4-audio.mp3\". Ojo: la portada de la home se edita aparte, en home.proyectos (arriba en este mismo archivo)."
+        "_ayudaMedia": "Cuando tengas las imágenes de este proyecto, guardalas en assets/img/proyectos/ y escribí acá la ruta. Portada/principal: \"imagenPrincipal\": \"assets/img/proyectos/proyecto-4.jpg\". Galería: el array \"galeria\" acepta las que quieras — se acomodan solas en la grilla de dos columnas, en filas sucesivas. Cada una es {\"src\": \"assets/img/proyectos/proyecto-4-galeria-1.jpg\", \"alt\": \"Descripción de la imagen\"}. Video: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) — si hay video, reemplaza a la imagen principal. Audio: \"audio\": \"assets/img/proyectos/proyecto-4-audio.mp3\". Ojo: la portada de la home se edita aparte, en home.proyectos (arriba en este mismo archivo).",
+        "_ayudaVideo": "VIDEO: este proyecto es un set de visuales en vivo, así que probablemente sumes un video. Pegá la URL de embed en la clave \"video\" de acá arriba y aparece solo, en 16:9 responsive, reemplazando a la imagen principal. Vimeo: \"https://player.vimeo.com/video/123456789\". YouTube: \"https://www.youtube.com/embed/ID\". Ojo: tiene que ser la URL de EMBED, no la que ves en la barra del navegador (esa no funciona dentro de un iframe). Mientras siga en null no se renderiza nada y se muestra la imagen principal."
       },
       "proyecto-5": {
         "titulo": "[TÍTULO PROYECTO 5]",
@@ -304,8 +304,8 @@
         },
         {
           "id": "proyecto-4",
-          "titulo": "[PROJECT 4 TITLE]",
-          "altImagen": "[Description of project 4 cover image]",
+          "titulo": "Frakto",
+          "altImagen": "Cover image of the project Frakto",
           "imagen": "assets/img/proyectos/proyecto-4.svg"
         },
         {
@@ -445,24 +445,23 @@
         "_mediaHelp": "Media paths are shared with the Spanish branch — edit them in es.proyectos.proyecto-3 (see the \"_ayudaMedia\" note there). Only text differs between languages."
       },
       "proyecto-4": {
-        "titulo": "[PROJECT 4 TITLE]",
-        "anio": "[YEAR]",
-        "tipo": "[PROJECT TYPE]",
+        "titulo": "Frakto",
+        "anio": "2025",
+        "tipo": "Audiovisual Design — VJ",
         "herramientas": [
-          "[TOOL 1]",
-          "[TOOL 2]"
+          "Resolume Arena"
         ],
-        "descripcion": "[Placeholder description for project 4. Replace with the real text when ready.]",
+        "descripcion": "Frakto is a live visuals set built in Resolume Arena. Working from the sonic analysis of a track with a raw, robotic edge and a progressive rhythm, I built a system of glitches, flashes and diagonal lines in green and violet that respond to the pulse of the music. The process was iterative: from geometric forms to abstract textures, until the final visual language emerged.",
         "imagenPrincipal": "assets/img/proyectos/proyecto-4.svg",
-        "altPrincipal": "[Description of project 4 main image]",
+        "altPrincipal": "Visual from the live set Frakto: glitches and diagonal lines in green and violet",
         "galeria": [
           {
             "src": "assets/img/proyectos/proyecto-4-galeria-1.svg",
-            "alt": "[Description of gallery image 1 for project 4]"
+            "alt": "Still from the live visuals set Frakto"
           },
           {
             "src": "assets/img/proyectos/proyecto-4-galeria-2.svg",
-            "alt": "[Description of gallery image 2 for project 4]"
+            "alt": "Still from the live visuals set Frakto"
           }
         ],
         "video": null,
