@@ -11,7 +11,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   row-gap: 0.5rem;
-  padding: clamp(0.75rem, 0.5rem + 1vw, 1.25rem) var(--espacio-borde);
+  padding: var(--padding-header) var(--espacio-borde);
 }
 
 /* El nombre es siempre grande, siempre en el mismo lugar: mismo tamaño y
@@ -381,15 +381,32 @@ body[data-pagina="about"] main {
 .proyecto {
   max-width: var(--ancho-maximo);
   margin: 0 auto;
-  padding: clamp(1.5rem, 1rem + 2vw, 3rem) var(--espacio-borde) clamp(2rem, 1rem + 3vw, 4rem);
+  padding: var(--padding-superior-proyecto) var(--espacio-borde) clamp(2rem, 1rem + 3vw, 4rem);
 }
 
+/* Primera pantalla: la imagen principal ocupa el alto que sobra del
+   viewport, de modo que header + imagen entren completos sin scrollear y
+   el scroll arranque recién en el título y la metadata.
+   La primera declaración con vh es el fallback para navegadores viejos;
+   la segunda, con dvh, es la que vale en los que lo soportan (en mobile
+   evita que las barras del navegador rompan el cálculo).
+   Ver --respiro-hero y --alto-minimo-hero en base.css para calibrarlo. */
+.proyecto__hero {
+  overflow: hidden;
+  margin-bottom: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  height: calc(100vh - var(--alto-header) - var(--padding-superior-proyecto) - var(--respiro-hero));
+  height: calc(100dvh - var(--alto-header) - var(--padding-superior-proyecto) - var(--respiro-hero));
+  min-height: var(--alto-minimo-hero);
+}
+
+/* Llena el recuadro sin deformarse, sea cual sea la proporción original
+   de la imagen: recorta con cover en vez de hacer saltar el layout. */
 .proyecto__imagen-principal {
   width: 100%;
-  max-height: 85vh;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
   background: var(--gris-placeholder);
-  margin-bottom: clamp(1.5rem, 1rem + 2vw, 2.5rem);
 }
 
 .proyecto__video-wrapper {

@@ -70,11 +70,25 @@ ul {
 
   /* Layout */
   --ancho-maximo: 1600px;
-  /* Alto aproximado del header en mobile (< 640px), donde queda fijo:
-     tiene que cubrir el nombre grande + el padding vertical del header
-     en ese rango de anchos. Si movés --tam-nombre o el padding de
-     .header, puede que haya que reajustar esto un poco. */
-  --alto-header: clamp(4.25rem, 3.5rem + 4vw, 5.5rem);
+
+  /* Padding vertical del header y alto resultante. El alto NO es un número
+     suelto: se deduce del tamaño del nombre (que tiene line-height: 1) más
+     su padding arriba y abajo, así que si movés --tam-nombre o
+     --padding-header, se reajusta solo. Lo usan el header fijo de mobile y
+     el cálculo de la primera pantalla de las páginas de proyecto. */
+  --padding-header: clamp(0.75rem, 0.5rem + 1vw, 1.25rem);
+  --alto-header: calc(var(--tam-nombre) + var(--padding-header) * 2);
+
+  /* -- Primera pantalla de las páginas de proyecto --
+     La imagen principal ocupa el alto que sobra del viewport una vez
+     descontados el header, el aire de arriba del contenido y un respiro
+     negro abajo (para que se intuya que la página sigue).
+     Para que la imagen se vea más alta o más baja, tocá --respiro-hero.
+     --alto-minimo-hero evita que quede como una franja aplastada en
+     pantallas muy bajas; si el cálculo da menos, gana el mínimo. */
+  --padding-superior-proyecto: clamp(1.5rem, 1rem + 2vw, 3rem);
+  --respiro-hero: clamp(1.5rem, 1rem + 2vw, 3rem);
+  --alto-minimo-hero: 18rem;
 }
 
 body {
