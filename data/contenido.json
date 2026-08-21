@@ -52,8 +52,8 @@
         },
         {
           "id": "proyecto-6",
-          "titulo": "[TÍTULO PROYECTO 6]",
-          "altImagen": "[Descripción de la imagen de portada del proyecto 6]",
+          "titulo": "Quomos",
+          "altImagen": "Portada del proyecto Quomos",
           "imagen": "assets/img/proyectos/proyecto-6.svg"
         }
       ]
@@ -235,24 +235,25 @@
         "_ayudaVideo": "VIDEO: este proyecto es un set de visuales en vivo, así que probablemente sumes un video. Pegá la URL de embed en la clave \"video\" de acá arriba y aparece solo, en 16:9 responsive, reemplazando a la imagen principal. Vimeo: \"https://player.vimeo.com/video/123456789\". YouTube: \"https://www.youtube.com/embed/ID\". Ojo: tiene que ser la URL de EMBED, no la que ves en la barra del navegador (esa no funciona dentro de un iframe). Mientras siga en null no se renderiza nada y se muestra la imagen principal."
       },
       "proyecto-6": {
-        "titulo": "[TÍTULO PROYECTO 6]",
-        "anio": "[AÑO]",
-        "tipo": "[TIPO DE PROYECTO]",
+        "titulo": "Quomos",
+        "anio": "2025",
+        "tipo": "Diseño Gráfico",
         "herramientas": [
-          "[HERRAMIENTA 1]",
-          "[HERRAMIENTA 2]"
+          "Illustrator",
+          "Photoshop",
+          "Figma"
         ],
-        "descripcion": "[Descripción placeholder del proyecto 6. Reemplazar con el texto real cuando esté listo.]",
+        "descripcion": "Quomos es un proyecto de identidad y comunicación a partir de una selección de quince objetos de diseño argentino vinculados por un concepto común: la comunidad. Desde un cenicero hasta una revista, cada objeto fue elegido por su capacidad de ser compartido, directa o indirectamente, y de construir pertenencia sin que nadie lo haya decidido del todo. A partir de ahí se desarrolló una marca completa — naming, identidad visual, sistema modular — y un ecosistema de piezas que va desde afiches en el subte y objetos físicos como encendedores o una tarjeta SUBE, hasta una página web, una app y videos para tótems urbanos. Quomos propone que lo que nos une está más cerca de lo que creemos, y que el diseño puede volver visible eso que ya compartimos sin notarlo.",
         "imagenPrincipal": "assets/img/proyectos/proyecto-6.svg",
-        "altPrincipal": "[Descripción de la imagen principal del proyecto 6]",
+        "altPrincipal": "Pieza del sistema de identidad visual de Quomos",
         "galeria": [
           {
             "src": "assets/img/proyectos/proyecto-6-galeria-1.svg",
-            "alt": "[Descripción de la imagen 1 de la galería del proyecto 6]"
+            "alt": "Pieza del ecosistema de comunicación de Quomos"
           },
           {
             "src": "assets/img/proyectos/proyecto-6-galeria-2.svg",
-            "alt": "[Descripción de la imagen 2 de la galería del proyecto 6]"
+            "alt": "Pieza del ecosistema de comunicación de Quomos"
           }
         ],
         "video": null,
@@ -316,8 +317,8 @@
         },
         {
           "id": "proyecto-6",
-          "titulo": "[PROJECT 6 TITLE]",
-          "altImagen": "[Description of project 6 cover image]",
+          "titulo": "Quomos",
+          "altImagen": "Cover image of the project Quomos",
           "imagen": "assets/img/proyectos/proyecto-6.svg"
         }
       ]
@@ -498,24 +499,25 @@
         "_mediaHelp": "Media paths are shared with the Spanish branch — edit them in es.proyectos.proyecto-5 (see the \"_ayudaMedia\" note there). Only text differs between languages."
       },
       "proyecto-6": {
-        "titulo": "[PROJECT 6 TITLE]",
-        "anio": "[YEAR]",
-        "tipo": "[PROJECT TYPE]",
+        "titulo": "Quomos",
+        "anio": "2025",
+        "tipo": "Graphic Design",
         "herramientas": [
-          "[TOOL 1]",
-          "[TOOL 2]"
+          "Illustrator",
+          "Photoshop",
+          "Figma"
         ],
-        "descripcion": "[Placeholder description for project 6. Replace with the real text when ready.]",
+        "descripcion": "Quomos is an identity and communication project built around a selection of fifteen Argentine design objects linked by a common concept: community. From an ashtray to a magazine, each object was chosen for its capacity to be shared, directly or indirectly, and to build a sense of belonging that no one quite decided on. From there we developed a complete brand — naming, visual identity, modular system — along with an ecosystem of pieces ranging from subway posters and physical objects such as lighters or a SUBE card, to a website, an app and videos for urban totems. Quomos suggests that what connects us is closer than we think, and that design can make visible what we already share without noticing.",
         "imagenPrincipal": "assets/img/proyectos/proyecto-6.svg",
-        "altPrincipal": "[Description of project 6 main image]",
+        "altPrincipal": "Piece from the Quomos visual identity system",
         "galeria": [
           {
             "src": "assets/img/proyectos/proyecto-6-galeria-1.svg",
-            "alt": "[Description of gallery image 1 for project 6]"
+            "alt": "Piece from the Quomos communication ecosystem"
           },
           {
             "src": "assets/img/proyectos/proyecto-6-galeria-2.svg",
-            "alt": "[Description of gallery image 2 for project 6]"
+            "alt": "Piece from the Quomos communication ecosystem"
           }
         ],
         "video": null,
