@@ -4,3 +4,8 @@ foto.png
 
 # Archivos del sistema
 .DS_Store
+
+# Fuentes sin optimizar de las portadas: pesan 28MB y el sitio usa las
+# versiones comprimidas de assets/img/. Se conservan en el disco local.
+PORTADAS/
+assets/img/originales/

@@ -23,44 +23,44 @@
         {
           "id": "proyecto-1",
           "titulo": "Moluscos, clase gastrópoda",
-          "altImagen": "Portada del proyecto Moluscos, clase gastrópoda",
-          "imagen": "assets/img/proyectos/proyecto-1.svg",
+          "altImagen": "Portada de Moluscos: el título en tipografía serif blanca sobre un fondo azul muy oscuro, como visto bajo el agua",
+          "imagen": "assets/img/portada-1.jpg",
           "encuadre": "center"
         },
         {
           "id": "proyecto-2",
           "titulo": "Profundidad Metálica",
-          "altImagen": "Portada del proyecto Profundidad Metálica",
-          "imagen": "assets/img/proyectos/proyecto-2.svg",
+          "altImagen": "Entorno industrial en 3D, en blanco y negro: torres de estructura wireframe atravesadas por un haz de luz",
+          "imagen": "assets/img/portada-2.jpg",
           "encuadre": "center"
         },
         {
           "id": "proyecto-3",
           "titulo": "Fuera de Servicio",
-          "altImagen": "Portada del proyecto Fuera de Servicio",
-          "imagen": "assets/img/proyectos/proyecto-3.svg",
-          "encuadre": "center"
+          "altImagen": "El fanzine de Fuera de Servicio abierto en una mano: a la izquierda el manifiesto, a la derecha una grilla de fotos urbanas tramadas",
+          "imagen": "assets/img/portada-3.jpg",
+          "encuadre": "30% center"
         },
         {
           "id": "proyecto-4",
           "titulo": "Conex",
-          "altImagen": "Portada del proyecto Conex",
-          "imagen": "assets/img/proyectos/proyecto-4.svg",
-          "encuadre": "center"
+          "altImagen": "Cartel de Conex Training System en una tienda: dos corredores entrenando entre conos interactivos verdes y azules",
+          "imagen": "assets/img/portada-4.jpg",
+          "encuadre": "center 20%"
         },
         {
           "id": "proyecto-5",
           "titulo": "Frakto",
-          "altImagen": "Portada del proyecto Frakto",
-          "imagen": "assets/img/proyectos/proyecto-5.svg",
+          "altImagen": "Visual del set Frakto: líneas verticales de glitch en verde y violeta sobre fondo negro",
+          "imagen": "assets/img/portada-5.jpg",
           "encuadre": "center"
         },
         {
           "id": "proyecto-6",
           "titulo": "Quomos",
-          "altImagen": "Portada del proyecto Quomos",
-          "imagen": "assets/img/proyectos/proyecto-6.svg",
-          "encuadre": "center"
+          "altImagen": "Afiche de Quomos en un pasillo de subte de azulejos blancos, con la pregunta “¿Cuáles son las cosas que nos unen?” en rojo",
+          "imagen": "assets/img/portada-6.jpg",
+          "encuadre": "55% center"
         }
       ],
       "_ayudaEncuadre": "ENCUADRE de esta portada en la grilla de la home. Como cada foto tiene su propia proporción y el bloque tiene la suya, la imagen se recorta para llenarlo. \"encuadre\" decide qué parte se conserva. Por defecto es \"center\" (el centro). Si a alguna foto le corta algo importante, cambiá este valor por: \"top\" (conserva la parte de arriba), \"bottom\", \"left\", \"right\", o una combinación como \"center top\" o \"left bottom\". También acepta porcentajes, ej: \"50% 30%\" (0% = arriba/izquierda, 100% = abajo/derecha). Solo afecta a la portada de la home, no a la imagen de la página del proyecto."
@@ -295,44 +295,44 @@
         {
           "id": "proyecto-1",
           "titulo": "Moluscos, class Gastropoda",
-          "altImagen": "Cover image of the project Moluscos, class Gastropoda",
-          "imagen": "assets/img/proyectos/proyecto-1.svg",
+          "altImagen": "Moluscos cover: the title set in white serif type over a deep dark blue background, as if seen underwater",
+          "imagen": "assets/img/portada-1.jpg",
           "encuadre": "center"
         },
         {
           "id": "proyecto-2",
           "titulo": "Profundidad Metálica",
-          "altImagen": "Cover image of the project Profundidad Metálica",
-          "imagen": "assets/img/proyectos/proyecto-2.svg",
+          "altImagen": "Black and white 3D industrial environment: wireframe towers cut through by a shaft of light",
+          "imagen": "assets/img/portada-2.jpg",
           "encuadre": "center"
         },
         {
           "id": "proyecto-3",
           "titulo": "Out of Service",
-          "altImagen": "Cover image of the project Out of Service",
-          "imagen": "assets/img/proyectos/proyecto-3.svg",
-          "encuadre": "center"
+          "altImagen": "The Fuera de Servicio fanzine held open in one hand: the manifesto on the left page, a grid of halftoned urban photographs on the right",
+          "imagen": "assets/img/portada-3.jpg",
+          "encuadre": "30% center"
         },
         {
           "id": "proyecto-4",
           "titulo": "Conex",
-          "altImagen": "Cover image of the project Conex",
-          "imagen": "assets/img/proyectos/proyecto-4.svg",
-          "encuadre": "center"
+          "altImagen": "Conex Training System poster in a shop: two runners training among green and blue interactive cones",
+          "imagen": "assets/img/portada-4.jpg",
+          "encuadre": "center 20%"
         },
         {
           "id": "proyecto-5",
           "titulo": "Frakto",
-          "altImagen": "Cover image of the project Frakto",
-          "imagen": "assets/img/proyectos/proyecto-5.svg",
+          "altImagen": "Frakto visual: vertical glitch lines in green and violet over a black background",
+          "imagen": "assets/img/portada-5.jpg",
           "encuadre": "center"
         },
         {
           "id": "proyecto-6",
           "titulo": "Quomos",
-          "altImagen": "Cover image of the project Quomos",
-          "imagen": "assets/img/proyectos/proyecto-6.svg",
-          "encuadre": "center"
+          "altImagen": "Quomos poster in a white-tiled subway corridor, asking “¿Cuáles son las cosas que nos unen?” in red",
+          "imagen": "assets/img/portada-6.jpg",
+          "encuadre": "55% center"
         }
       ]
     },
