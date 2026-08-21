@@ -458,8 +458,13 @@ body[data-pagina="about"] main {
   overflow-wrap: break-word;
 }
 
+/* Medida de línea del texto descriptivo. Está en "ch" (ancho de carácter)
+   y no en rem, porque lo que importa para la lectura es cuántos caracteres
+   entran por línea, no cuántos píxeles mide el bloque: así se mantiene en
+   el rango cómodo (45-75 caracteres) aunque cambie el tamaño de la
+   tipografía. Subir este número alarga la línea; bajarlo la angosta. */
 .proyecto__descripcion {
-  max-width: 42rem;
+  max-width: 60ch;
   margin-bottom: clamp(2rem, 1.5rem + 2vw, 3.5rem);
 }
 
