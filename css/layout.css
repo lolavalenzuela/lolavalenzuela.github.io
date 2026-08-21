@@ -463,6 +463,14 @@ body[data-pagina="about"] main {
   margin-bottom: clamp(2rem, 1.5rem + 2vw, 3.5rem);
 }
 
+/* Galería: una sola clase para las seis páginas de proyecto.
+   Mobile-first una columna; desde 640px, dos columnas de igual ancho (ver
+   media query más abajo). La cantidad de imágenes no está fijada en el CSS:
+   salen del array "galeria" de data/contenido.json y CSS Grid las acomoda
+   solas en filas sucesivas, así que sumar una tercera o cuarta no requiere
+   tocar nada acá. El gap es el mismo que usa la grilla de la home, y el
+   ancho total coincide con el de la imagen principal porque ambas cuelgan
+   del padding lateral de .proyecto. */
 .proyecto__galeria {
   display: grid;
   grid-template-columns: 1fr;
@@ -470,10 +478,14 @@ body[data-pagina="about"] main {
   margin-bottom: clamp(2rem, 1.5rem + 2vw, 3.5rem);
 }
 
+/* aspect-ratio fijo + cover: todos los bloques miden igual y quedan
+   alineados arriba y abajo, sin importar la proporción original de la
+   imagen que cargues después. */
 .proyecto__galeria img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+  object-position: center;
   background: var(--gris-placeholder);
 }
 

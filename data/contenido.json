@@ -124,7 +124,7 @@
         "anteriorId": "proyecto-6",
         "siguienteId": "proyecto-2",
         "audio": null,
-        "_ayudaMedia": "Cuando tengas las imágenes de este proyecto, guardalas en assets/img/proyectos/ y escribí acá la ruta. Portada/principal: \"imagenPrincipal\": \"assets/img/proyectos/proyecto-1.jpg\". Galería: agregá o sacá objetos del array \"galeria\", cada uno {\"src\": \"assets/img/proyectos/proyecto-1-galeria-1.jpg\", \"alt\": \"Descripción de la imagen\"}. Video: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) — si hay video, reemplaza a la imagen principal. Audio: \"audio\": \"assets/img/proyectos/proyecto-1-audio.mp3\". Ojo: la portada de la home se edita aparte, en home.proyectos (arriba en este mismo archivo)."
+        "_ayudaMedia": "Cuando tengas las imágenes de este proyecto, guardalas en assets/img/proyectos/ y escribí acá la ruta. Portada/principal: \"imagenPrincipal\": \"assets/img/proyectos/proyecto-1.jpg\". Galería: el array \"galeria\" acepta las que quieras — se acomodan solas en la grilla de dos columnas, en filas sucesivas. Cada una es {\"src\": \"assets/img/proyectos/proyecto-1-galeria-1.jpg\", \"alt\": \"Descripción de la imagen\"}. Video: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) — si hay video, reemplaza a la imagen principal. Audio: \"audio\": \"assets/img/proyectos/proyecto-1-audio.mp3\". Ojo: la portada de la home se edita aparte, en home.proyectos (arriba en este mismo archivo)."
       },
       "proyecto-2": {
         "titulo": "Profundidad Metálica",
@@ -141,13 +141,17 @@
           {
             "src": "assets/img/proyectos/proyecto-2-galeria-1.svg",
             "alt": "Registro de la experiencia de realidad virtual Profundidad Metálica"
+          },
+          {
+            "src": "assets/img/proyectos/proyecto-2-galeria-2.svg",
+            "alt": "Registro de la experiencia de realidad virtual Profundidad Metálica"
           }
         ],
         "video": null,
         "anteriorId": "proyecto-1",
         "siguienteId": "proyecto-3",
         "audio": null,
-        "_ayudaMedia": "Cuando tengas las imágenes de este proyecto, guardalas en assets/img/proyectos/ y escribí acá la ruta. Portada/principal: \"imagenPrincipal\": \"assets/img/proyectos/proyecto-2.jpg\". Galería: agregá o sacá objetos del array \"galeria\", cada uno {\"src\": \"assets/img/proyectos/proyecto-2-galeria-1.jpg\", \"alt\": \"Descripción de la imagen\"}. Video: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) — si hay video, reemplaza a la imagen principal. Audio: \"audio\": \"assets/img/proyectos/proyecto-2-audio.mp3\". Ojo: la portada de la home se edita aparte, en home.proyectos (arriba en este mismo archivo)."
+        "_ayudaMedia": "Cuando tengas las imágenes de este proyecto, guardalas en assets/img/proyectos/ y escribí acá la ruta. Portada/principal: \"imagenPrincipal\": \"assets/img/proyectos/proyecto-2.jpg\". Galería: el array \"galeria\" acepta las que quieras — se acomodan solas en la grilla de dos columnas, en filas sucesivas. Cada una es {\"src\": \"assets/img/proyectos/proyecto-2-galeria-1.jpg\", \"alt\": \"Descripción de la imagen\"}. Video: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) — si hay video, reemplaza a la imagen principal. Audio: \"audio\": \"assets/img/proyectos/proyecto-2-audio.mp3\". Ojo: la portada de la home se edita aparte, en home.proyectos (arriba en este mismo archivo)."
       },
       "proyecto-3": {
         "titulo": "[TÍTULO PROYECTO 3]",
@@ -163,13 +167,18 @@
         "galeria": [
           {
             "src": "assets/img/proyectos/proyecto-3-galeria-1.svg",
-            "alt": "[Descripción imagen de galería 1]"
+            "alt": "[Descripción de la imagen 1 de la galería del proyecto 3]"
+          },
+          {
+            "src": "assets/img/proyectos/proyecto-3-galeria-2.svg",
+            "alt": "[Descripción de la imagen 2 de la galería del proyecto 3]"
           }
         ],
         "video": null,
         "anteriorId": "proyecto-2",
         "siguienteId": "proyecto-4",
-        "audio": null
+        "audio": null,
+        "_ayudaMedia": "Cuando tengas las imágenes de este proyecto, guardalas en assets/img/proyectos/ y escribí acá la ruta. Portada/principal: \"imagenPrincipal\": \"assets/img/proyectos/proyecto-3.jpg\". Galería: el array \"galeria\" acepta las que quieras — se acomodan solas en la grilla de dos columnas, en filas sucesivas. Cada una es {\"src\": \"assets/img/proyectos/proyecto-3-galeria-1.jpg\", \"alt\": \"Descripción de la imagen\"}. Video: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) — si hay video, reemplaza a la imagen principal. Audio: \"audio\": \"assets/img/proyectos/proyecto-3-audio.mp3\". Ojo: la portada de la home se edita aparte, en home.proyectos (arriba en este mismo archivo)."
       },
       "proyecto-4": {
         "titulo": "[TÍTULO PROYECTO 4]",
@@ -185,13 +194,18 @@
         "galeria": [
           {
             "src": "assets/img/proyectos/proyecto-4-galeria-1.svg",
-            "alt": "[Descripción imagen de galería 1]"
+            "alt": "[Descripción de la imagen 1 de la galería del proyecto 4]"
+          },
+          {
+            "src": "assets/img/proyectos/proyecto-4-galeria-2.svg",
+            "alt": "[Descripción de la imagen 2 de la galería del proyecto 4]"
           }
         ],
         "video": null,
         "anteriorId": "proyecto-3",
         "siguienteId": "proyecto-5",
-        "audio": null
+        "audio": null,
+        "_ayudaMedia": "Cuando tengas las imágenes de este proyecto, guardalas en assets/img/proyectos/ y escribí acá la ruta. Portada/principal: \"imagenPrincipal\": \"assets/img/proyectos/proyecto-4.jpg\". Galería: el array \"galeria\" acepta las que quieras — se acomodan solas en la grilla de dos columnas, en filas sucesivas. Cada una es {\"src\": \"assets/img/proyectos/proyecto-4-galeria-1.jpg\", \"alt\": \"Descripción de la imagen\"}. Video: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) — si hay video, reemplaza a la imagen principal. Audio: \"audio\": \"assets/img/proyectos/proyecto-4-audio.mp3\". Ojo: la portada de la home se edita aparte, en home.proyectos (arriba en este mismo archivo)."
       },
       "proyecto-5": {
         "titulo": "[TÍTULO PROYECTO 5]",
@@ -207,13 +221,18 @@
         "galeria": [
           {
             "src": "assets/img/proyectos/proyecto-5-galeria-1.svg",
-            "alt": "[Descripción imagen de galería 1]"
+            "alt": "[Descripción de la imagen 1 de la galería del proyecto 5]"
+          },
+          {
+            "src": "assets/img/proyectos/proyecto-5-galeria-2.svg",
+            "alt": "[Descripción de la imagen 2 de la galería del proyecto 5]"
           }
         ],
         "video": null,
         "anteriorId": "proyecto-4",
         "siguienteId": "proyecto-6",
-        "audio": null
+        "audio": null,
+        "_ayudaMedia": "Cuando tengas las imágenes de este proyecto, guardalas en assets/img/proyectos/ y escribí acá la ruta. Portada/principal: \"imagenPrincipal\": \"assets/img/proyectos/proyecto-5.jpg\". Galería: el array \"galeria\" acepta las que quieras — se acomodan solas en la grilla de dos columnas, en filas sucesivas. Cada una es {\"src\": \"assets/img/proyectos/proyecto-5-galeria-1.jpg\", \"alt\": \"Descripción de la imagen\"}. Video: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) — si hay video, reemplaza a la imagen principal. Audio: \"audio\": \"assets/img/proyectos/proyecto-5-audio.mp3\". Ojo: la portada de la home se edita aparte, en home.proyectos (arriba en este mismo archivo)."
       },
       "proyecto-6": {
         "titulo": "[TÍTULO PROYECTO 6]",
@@ -229,13 +248,18 @@
         "galeria": [
           {
             "src": "assets/img/proyectos/proyecto-6-galeria-1.svg",
-            "alt": "[Descripción imagen de galería 1]"
+            "alt": "[Descripción de la imagen 1 de la galería del proyecto 6]"
+          },
+          {
+            "src": "assets/img/proyectos/proyecto-6-galeria-2.svg",
+            "alt": "[Descripción de la imagen 2 de la galería del proyecto 6]"
           }
         ],
         "video": null,
         "anteriorId": "proyecto-5",
         "siguienteId": "proyecto-1",
-        "audio": null
+        "audio": null,
+        "_ayudaMedia": "Cuando tengas las imágenes de este proyecto, guardalas en assets/img/proyectos/ y escribí acá la ruta. Portada/principal: \"imagenPrincipal\": \"assets/img/proyectos/proyecto-6.jpg\". Galería: el array \"galeria\" acepta las que quieras — se acomodan solas en la grilla de dos columnas, en filas sucesivas. Cada una es {\"src\": \"assets/img/proyectos/proyecto-6-galeria-1.jpg\", \"alt\": \"Descripción de la imagen\"}. Video: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) — si hay video, reemplaza a la imagen principal. Audio: \"audio\": \"assets/img/proyectos/proyecto-6-audio.mp3\". Ojo: la portada de la home se edita aparte, en home.proyectos (arriba en este mismo archivo)."
       }
     }
   },
@@ -381,6 +405,10 @@
           {
             "src": "assets/img/proyectos/proyecto-2-galeria-1.svg",
             "alt": "Documentation of the virtual reality experience Profundidad Metálica"
+          },
+          {
+            "src": "assets/img/proyectos/proyecto-2-galeria-2.svg",
+            "alt": "Documentation of the virtual reality experience Profundidad Metálica"
           }
         ],
         "video": null,
@@ -403,13 +431,18 @@
         "galeria": [
           {
             "src": "assets/img/proyectos/proyecto-3-galeria-1.svg",
-            "alt": "[Description of gallery image 1]"
+            "alt": "[Description of gallery image 1 for project 3]"
+          },
+          {
+            "src": "assets/img/proyectos/proyecto-3-galeria-2.svg",
+            "alt": "[Description of gallery image 2 for project 3]"
           }
         ],
         "video": null,
         "anteriorId": "proyecto-2",
         "siguienteId": "proyecto-4",
-        "audio": null
+        "audio": null,
+        "_mediaHelp": "Media paths are shared with the Spanish branch — edit them in es.proyectos.proyecto-3 (see the \"_ayudaMedia\" note there). Only text differs between languages."
       },
       "proyecto-4": {
         "titulo": "[PROJECT 4 TITLE]",
@@ -425,13 +458,18 @@
         "galeria": [
           {
             "src": "assets/img/proyectos/proyecto-4-galeria-1.svg",
-            "alt": "[Description of gallery image 1]"
+            "alt": "[Description of gallery image 1 for project 4]"
+          },
+          {
+            "src": "assets/img/proyectos/proyecto-4-galeria-2.svg",
+            "alt": "[Description of gallery image 2 for project 4]"
           }
         ],
         "video": null,
         "anteriorId": "proyecto-3",
         "siguienteId": "proyecto-5",
-        "audio": null
+        "audio": null,
+        "_mediaHelp": "Media paths are shared with the Spanish branch — edit them in es.proyectos.proyecto-4 (see the \"_ayudaMedia\" note there). Only text differs between languages."
       },
       "proyecto-5": {
         "titulo": "[PROJECT 5 TITLE]",
@@ -447,13 +485,18 @@
         "galeria": [
           {
             "src": "assets/img/proyectos/proyecto-5-galeria-1.svg",
-            "alt": "[Description of gallery image 1]"
+            "alt": "[Description of gallery image 1 for project 5]"
+          },
+          {
+            "src": "assets/img/proyectos/proyecto-5-galeria-2.svg",
+            "alt": "[Description of gallery image 2 for project 5]"
           }
         ],
         "video": null,
         "anteriorId": "proyecto-4",
         "siguienteId": "proyecto-6",
-        "audio": null
+        "audio": null,
+        "_mediaHelp": "Media paths are shared with the Spanish branch — edit them in es.proyectos.proyecto-5 (see the \"_ayudaMedia\" note there). Only text differs between languages."
       },
       "proyecto-6": {
         "titulo": "[PROJECT 6 TITLE]",
@@ -469,13 +512,18 @@
         "galeria": [
           {
             "src": "assets/img/proyectos/proyecto-6-galeria-1.svg",
-            "alt": "[Description of gallery image 1]"
+            "alt": "[Description of gallery image 1 for project 6]"
+          },
+          {
+            "src": "assets/img/proyectos/proyecto-6-galeria-2.svg",
+            "alt": "[Description of gallery image 2 for project 6]"
           }
         ],
         "video": null,
         "anteriorId": "proyecto-5",
         "siguienteId": "proyecto-1",
-        "audio": null
+        "audio": null,
+        "_mediaHelp": "Media paths are shared with the Spanish branch — edit them in es.proyectos.proyecto-6 (see the \"_ayudaMedia\" note there). Only text differs between languages."
       }
     }
   }
