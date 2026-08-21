@@ -22,8 +22,8 @@
       "proyectos": [
         {
           "id": "proyecto-1",
-          "titulo": "[TÍTULO PROYECTO 1]",
-          "altImagen": "[Descripción de la imagen de portada del proyecto 1]",
+          "titulo": "Moluscos, clase gastrópoda",
+          "altImagen": "Portada del proyecto Moluscos, clase gastrópoda",
           "imagen": "assets/img/proyectos/proyecto-1.svg"
         },
         {
@@ -98,30 +98,33 @@
     },
     "proyectos": {
       "proyecto-1": {
-        "titulo": "[TÍTULO PROYECTO 1]",
-        "anio": "[AÑO]",
-        "tipo": "[TIPO DE PROYECTO]",
+        "titulo": "Moluscos, clase gastrópoda",
+        "anio": "2025",
+        "tipo": "Diseño de Información Interactivo",
         "herramientas": [
-          "[HERRAMIENTA 1]",
-          "[HERRAMIENTA 2]"
+          "After Effects",
+          "Reaper",
+          "TouchDesigner",
+          "Resolume Arena"
         ],
-        "descripcion": "[Descripción placeholder del proyecto 1. Reemplazar con el texto real cuando esté listo.]",
+        "descripcion": "Moluscos es una instalación inmersiva e interactiva desarrollada en grupo a partir de una investigación sobre gastrópodos realizada en el Museo de Ciencias Naturales de Buenos Aires. La experiencia funciona en una sala inmersiva: al entrar, un loop ambiental sitúa al visitante en un entorno acuático, seguido de una bienvenida que introduce el universo del trabajo. Tres de las cuatro paredes despliegan cada una una escena distinta y cada una tiene su propia interacción gestual, programada en TouchDesigner a través de un sensor. El sonido de la experiencia fue diseñado específicamente para cada momento, acompañando los cambios de escena y reforzando la atmósfera de cada una.",
         "imagenPrincipal": "assets/img/proyectos/proyecto-1.svg",
-        "altPrincipal": "[Descripción de la imagen principal del proyecto 1]",
+        "altPrincipal": "Vista de la instalación inmersiva Moluscos, clase gastrópoda",
         "galeria": [
           {
             "src": "assets/img/proyectos/proyecto-1-galeria-1.svg",
-            "alt": "[Descripción imagen de galería 1]"
+            "alt": "Registro de la instalación Moluscos, clase gastrópoda"
           },
           {
             "src": "assets/img/proyectos/proyecto-1-galeria-2.svg",
-            "alt": "[Descripción imagen de galería 2]"
+            "alt": "Registro de la instalación Moluscos, clase gastrópoda"
           }
         ],
         "video": null,
         "anteriorId": "proyecto-6",
         "siguienteId": "proyecto-2",
-        "audio": null
+        "audio": null,
+        "_ayudaMedia": "Cuando tengas las imágenes de este proyecto, guardalas en assets/img/proyectos/ y escribí acá la ruta. Portada/principal: \"imagenPrincipal\": \"assets/img/proyectos/proyecto-1.jpg\". Galería: agregá o sacá objetos del array \"galeria\", cada uno {\"src\": \"assets/img/proyectos/proyecto-1-galeria-1.jpg\", \"alt\": \"Descripción de la imagen\"}. Video: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) — si hay video, reemplaza a la imagen principal. Audio: \"audio\": \"assets/img/proyectos/proyecto-1-audio.mp3\". Ojo: la portada de la home se edita aparte, en home.proyectos (arriba en este mismo archivo)."
       },
       "proyecto-2": {
         "titulo": "[TÍTULO PROYECTO 2]",
@@ -258,8 +261,8 @@
       "proyectos": [
         {
           "id": "proyecto-1",
-          "titulo": "[PROJECT 1 TITLE]",
-          "altImagen": "[Description of project 1 cover image]",
+          "titulo": "Moluscos, class Gastropoda",
+          "altImagen": "Cover image of the project Moluscos, class Gastropoda",
           "imagen": "assets/img/proyectos/proyecto-1.svg"
         },
         {
@@ -334,30 +337,33 @@
     },
     "proyectos": {
       "proyecto-1": {
-        "titulo": "[PROJECT 1 TITLE]",
-        "anio": "[YEAR]",
-        "tipo": "[PROJECT TYPE]",
+        "titulo": "Moluscos, class Gastropoda",
+        "anio": "2025",
+        "tipo": "Interactive Information Design",
         "herramientas": [
-          "[TOOL 1]",
-          "[TOOL 2]"
+          "After Effects",
+          "Reaper",
+          "TouchDesigner",
+          "Resolume Arena"
         ],
-        "descripcion": "[Placeholder description for project 1. Replace with the real text when ready.]",
+        "descripcion": "Moluscos is an immersive, interactive installation developed as a group project, based on research into gastropods carried out at the Buenos Aires Natural Sciences Museum. The experience takes place in an immersive room: on entering, an ambient loop places the visitor in an aquatic environment, followed by a welcome sequence that introduces the world of the project. Three of the four walls each display a different scene, and each one has its own gestural interaction, programmed in TouchDesigner through a sensor. The sound design was created specifically for each moment, following the scene changes and reinforcing the atmosphere of each one.",
         "imagenPrincipal": "assets/img/proyectos/proyecto-1.svg",
-        "altPrincipal": "[Description of project 1 main image]",
+        "altPrincipal": "View of the immersive installation Moluscos, class Gastropoda",
         "galeria": [
           {
             "src": "assets/img/proyectos/proyecto-1-galeria-1.svg",
-            "alt": "[Description of gallery image 1]"
+            "alt": "Documentation of the installation Moluscos, class Gastropoda"
           },
           {
             "src": "assets/img/proyectos/proyecto-1-galeria-2.svg",
-            "alt": "[Description of gallery image 2]"
+            "alt": "Documentation of the installation Moluscos, class Gastropoda"
           }
         ],
         "video": null,
         "anteriorId": "proyecto-6",
         "siguienteId": "proyecto-2",
-        "audio": null
+        "audio": null,
+        "_mediaHelp": "Media paths are shared with the Spanish branch — edit them in es.proyectos.proyecto-1 (see the \"_ayudaMedia\" note there). Only text differs between languages."
       },
       "proyecto-2": {
         "titulo": "[PROJECT 2 TITLE]",
