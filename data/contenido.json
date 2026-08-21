@@ -40,8 +40,8 @@
         },
         {
           "id": "proyecto-4",
-          "titulo": "[TÍTULO PROYECTO 4]",
-          "altImagen": "[Descripción de la imagen de portada del proyecto 4]",
+          "titulo": "Conex",
+          "altImagen": "Portada del proyecto Conex",
           "imagen": "assets/img/proyectos/proyecto-4.svg"
         },
         {
@@ -181,24 +181,24 @@
         "_ayudaMedia": "Cuando tengas las imágenes de este proyecto, guardalas en assets/img/proyectos/ y escribí acá la ruta. Portada/principal: \"imagenPrincipal\": \"assets/img/proyectos/proyecto-3.jpg\". Galería: el array \"galeria\" acepta las que quieras — se acomodan solas en la grilla de dos columnas, en filas sucesivas. Cada una es {\"src\": \"assets/img/proyectos/proyecto-3-galeria-1.jpg\", \"alt\": \"Descripción de la imagen\"}. Video: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) — si hay video, reemplaza a la imagen principal. Audio: \"audio\": \"assets/img/proyectos/proyecto-3-audio.mp3\". Ojo: la portada de la home se edita aparte, en home.proyectos (arriba en este mismo archivo)."
       },
       "proyecto-4": {
-        "titulo": "[TÍTULO PROYECTO 4]",
-        "anio": "[AÑO]",
-        "tipo": "[TIPO DE PROYECTO]",
+        "titulo": "Conex",
+        "anio": "2025",
+        "tipo": "Desarrollo de marca y producto, Marketing",
         "herramientas": [
-          "[HERRAMIENTA 1]",
-          "[HERRAMIENTA 2]"
+          "Investigación de mercado",
+          "Frameworks"
         ],
-        "descripcion": "[Descripción placeholder del proyecto 4. Reemplazar con el texto real cuando esté listo.]",
+        "descripcion": "Conex es un proyecto de producto y estrategia de marketing desarrollado junto a un grupo de compañeras, que propone un sistema de ocho conos interactivos con luces LED y sonido para entrenamiento deportivo y recreativo. La idea parte de una necesidad concreta: las rutinas de ejercicio convencionales son repetitivas y terminan desmotivando. Los conos se activan de forma aleatoria o programada a través de una app vía bluetooth, convirtiendo el entrenamiento en una experiencia reactiva, lúdica y grupal. El trabajo incluyó el desarrollo completo de la marca, una investigación de mercado con encuestas, segmentación, posicionamiento, y la definición de las cuatro variables del marketing mix: producto, precio, plaza y promoción.",
         "imagenPrincipal": "assets/img/proyectos/proyecto-4.svg",
-        "altPrincipal": "[Descripción de la imagen principal del proyecto 4]",
+        "altPrincipal": "Sistema de conos interactivos Conex con luces LED",
         "galeria": [
           {
             "src": "assets/img/proyectos/proyecto-4-galeria-1.svg",
-            "alt": "[Descripción de la imagen 1 de la galería del proyecto 4]"
+            "alt": "Pieza del desarrollo de marca y producto de Conex"
           },
           {
             "src": "assets/img/proyectos/proyecto-4-galeria-2.svg",
-            "alt": "[Descripción de la imagen 2 de la galería del proyecto 4]"
+            "alt": "Pieza del desarrollo de marca y producto de Conex"
           }
         ],
         "video": null,
@@ -304,8 +304,8 @@
         },
         {
           "id": "proyecto-4",
-          "titulo": "[PROJECT 4 TITLE]",
-          "altImagen": "[Description of project 4 cover image]",
+          "titulo": "Conex",
+          "altImagen": "Cover image of the project Conex",
           "imagen": "assets/img/proyectos/proyecto-4.svg"
         },
         {
@@ -445,24 +445,24 @@
         "_mediaHelp": "Media paths are shared with the Spanish branch — edit them in es.proyectos.proyecto-3 (see the \"_ayudaMedia\" note there). Only text differs between languages."
       },
       "proyecto-4": {
-        "titulo": "[PROJECT 4 TITLE]",
-        "anio": "[YEAR]",
-        "tipo": "[PROJECT TYPE]",
+        "titulo": "Conex",
+        "anio": "2025",
+        "tipo": "Brand and product development, Marketing",
         "herramientas": [
-          "[TOOL 1]",
-          "[TOOL 2]"
+          "Market research",
+          "Frameworks"
         ],
-        "descripcion": "[Placeholder description for project 4. Replace with the real text when ready.]",
+        "descripcion": "Conex is a product and marketing strategy project developed with a group of classmates, proposing a system of eight interactive cones with LED lights and sound for sports and recreational training. The idea comes from a concrete need: conventional exercise routines are repetitive and end up being demotivating. The cones are triggered randomly or on a set sequence through an app over Bluetooth, turning training into a reactive, playful and collective experience. The work covered the full development of the brand, market research with surveys, segmentation and positioning, and the definition of the four variables of the marketing mix: product, price, place and promotion.",
         "imagenPrincipal": "assets/img/proyectos/proyecto-4.svg",
-        "altPrincipal": "[Description of project 4 main image]",
+        "altPrincipal": "Conex interactive cone system with LED lights",
         "galeria": [
           {
             "src": "assets/img/proyectos/proyecto-4-galeria-1.svg",
-            "alt": "[Description of gallery image 1 for project 4]"
+            "alt": "Piece from the Conex brand and product development"
           },
           {
             "src": "assets/img/proyectos/proyecto-4-galeria-2.svg",
-            "alt": "[Description of gallery image 2 for project 4]"
+            "alt": "Piece from the Conex brand and product development"
           }
         ],
         "video": null,

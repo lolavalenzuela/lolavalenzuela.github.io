@@ -187,11 +187,30 @@ function renderProyecto(contenido, idioma) {
     });
   }
 
-  // Navegación anterior / siguiente (el texto lo pone data-i18n en el HTML)
-  const anterior = document.querySelector("[data-proyecto-anterior]");
-  if (anterior) anterior.href = `${datos.anteriorId}.html`;
-  const siguiente = document.querySelector("[data-proyecto-siguiente]");
-  if (siguiente) siguiente.href = `${datos.siguienteId}.html`;
+  // Navegación anterior / siguiente: además del enlace, cada uno muestra el
+  // título real del proyecto vecino, sacado del JSON. La flecha (← / →) ya
+  // indica la dirección visualmente; el aria-label la deja explícita para
+  // quien navegue con lector de pantalla.
+  const vecinos = [
+    { el: document.querySelector("[data-proyecto-anterior]"),
+      id: datos.anteriorId,
+      span: "[data-proyecto-anterior-titulo]",
+      etiqueta: contenido[idioma].nav.anterior },
+    { el: document.querySelector("[data-proyecto-siguiente]"),
+      id: datos.siguienteId,
+      span: "[data-proyecto-siguiente-titulo]",
+      etiqueta: contenido[idioma].nav.siguiente },
+  ];
+
+  vecinos.forEach(({ el, id, span, etiqueta }) => {
+    if (!el) return;
+    el.href = `${id}.html`;
+    const tituloVecino = contenido[idioma].proyectos[id]?.titulo;
+    if (!tituloVecino) return;
+    const destino = el.querySelector(span);
+    if (destino) destino.textContent = tituloVecino;
+    el.setAttribute("aria-label", `${etiqueta}: ${tituloVecino}`);
+  });
 
   // Enlace "volver a inicio": comparte la transición con el thumbnail
   // correspondiente en la grilla de la home.
