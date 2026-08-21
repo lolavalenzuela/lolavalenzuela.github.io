@@ -173,6 +173,26 @@
   animation-timing-function: var(--ease-suave);
 }
 
+/* Imagen compartida entre la portada de la home y la imagen principal del
+   proyecto (el nombre lo asigna transiciones.js solo a la que participa).
+   Como son dos fotos distintas, el cross-fade entre ambas sucede mientras
+   el recuadro crece o se achica: "group" anima tamaño y posición, y
+   old/new se funden una sobre otra, sin salto brusco. */
+::view-transition-group(imagen-compartida) {
+  animation-duration: var(--dur-lenta);
+  animation-timing-function: var(--ease-suave);
+}
+
+::view-transition-old(imagen-compartida),
+::view-transition-new(imagen-compartida) {
+  animation-duration: var(--dur-lenta);
+  animation-timing-function: var(--ease-suave);
+  /* Las dos llenan el recuadro igual que en su página, así ninguna se
+     deforma mientras dura el crecimiento. */
+  height: 100%;
+  object-fit: cover;
+}
+
 /* -----------------------------------------------------------
    ANTI-FLASH del fallback FLIP: un script inline y bloqueante en el
    <head> de cada página agrega esta clase a <html> ANTES del primer

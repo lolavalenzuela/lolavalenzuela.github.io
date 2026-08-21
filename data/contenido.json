@@ -24,39 +24,46 @@
           "id": "proyecto-1",
           "titulo": "Moluscos, clase gastrópoda",
           "altImagen": "Portada del proyecto Moluscos, clase gastrópoda",
-          "imagen": "assets/img/proyectos/proyecto-1.svg"
+          "imagen": "assets/img/proyectos/proyecto-1.svg",
+          "encuadre": "center"
         },
         {
           "id": "proyecto-2",
           "titulo": "Profundidad Metálica",
           "altImagen": "Portada del proyecto Profundidad Metálica",
-          "imagen": "assets/img/proyectos/proyecto-2.svg"
+          "imagen": "assets/img/proyectos/proyecto-2.svg",
+          "encuadre": "center"
         },
         {
           "id": "proyecto-3",
           "titulo": "Fuera de Servicio",
           "altImagen": "Portada del proyecto Fuera de Servicio",
-          "imagen": "assets/img/proyectos/proyecto-3.svg"
+          "imagen": "assets/img/proyectos/proyecto-3.svg",
+          "encuadre": "center"
         },
         {
           "id": "proyecto-4",
           "titulo": "Conex",
           "altImagen": "Portada del proyecto Conex",
-          "imagen": "assets/img/proyectos/proyecto-4.svg"
+          "imagen": "assets/img/proyectos/proyecto-4.svg",
+          "encuadre": "center"
         },
         {
           "id": "proyecto-5",
           "titulo": "Frakto",
           "altImagen": "Portada del proyecto Frakto",
-          "imagen": "assets/img/proyectos/proyecto-5.svg"
+          "imagen": "assets/img/proyectos/proyecto-5.svg",
+          "encuadre": "center"
         },
         {
           "id": "proyecto-6",
           "titulo": "Quomos",
           "altImagen": "Portada del proyecto Quomos",
-          "imagen": "assets/img/proyectos/proyecto-6.svg"
+          "imagen": "assets/img/proyectos/proyecto-6.svg",
+          "encuadre": "center"
         }
-      ]
+      ],
+      "_ayudaEncuadre": "ENCUADRE de esta portada en la grilla de la home. Como cada foto tiene su propia proporción y el bloque tiene la suya, la imagen se recorta para llenarlo. \"encuadre\" decide qué parte se conserva. Por defecto es \"center\" (el centro). Si a alguna foto le corta algo importante, cambiá este valor por: \"top\" (conserva la parte de arriba), \"bottom\", \"left\", \"right\", o una combinación como \"center top\" o \"left bottom\". También acepta porcentajes, ej: \"50% 30%\" (0% = arriba/izquierda, 100% = abajo/derecha). Solo afecta a la portada de la home, no a la imagen de la página del proyecto."
     },
     "about": {
       "nombre": "Lola Valenzuela",
@@ -289,37 +296,43 @@
           "id": "proyecto-1",
           "titulo": "Moluscos, class Gastropoda",
           "altImagen": "Cover image of the project Moluscos, class Gastropoda",
-          "imagen": "assets/img/proyectos/proyecto-1.svg"
+          "imagen": "assets/img/proyectos/proyecto-1.svg",
+          "encuadre": "center"
         },
         {
           "id": "proyecto-2",
           "titulo": "Profundidad Metálica",
           "altImagen": "Cover image of the project Profundidad Metálica",
-          "imagen": "assets/img/proyectos/proyecto-2.svg"
+          "imagen": "assets/img/proyectos/proyecto-2.svg",
+          "encuadre": "center"
         },
         {
           "id": "proyecto-3",
           "titulo": "Out of Service",
           "altImagen": "Cover image of the project Out of Service",
-          "imagen": "assets/img/proyectos/proyecto-3.svg"
+          "imagen": "assets/img/proyectos/proyecto-3.svg",
+          "encuadre": "center"
         },
         {
           "id": "proyecto-4",
           "titulo": "Conex",
           "altImagen": "Cover image of the project Conex",
-          "imagen": "assets/img/proyectos/proyecto-4.svg"
+          "imagen": "assets/img/proyectos/proyecto-4.svg",
+          "encuadre": "center"
         },
         {
           "id": "proyecto-5",
           "titulo": "Frakto",
           "altImagen": "Cover image of the project Frakto",
-          "imagen": "assets/img/proyectos/proyecto-5.svg"
+          "imagen": "assets/img/proyectos/proyecto-5.svg",
+          "encuadre": "center"
         },
         {
           "id": "proyecto-6",
           "titulo": "Quomos",
           "altImagen": "Cover image of the project Quomos",
-          "imagen": "assets/img/proyectos/proyecto-6.svg"
+          "imagen": "assets/img/proyectos/proyecto-6.svg",
+          "encuadre": "center"
         }
       ]
     },

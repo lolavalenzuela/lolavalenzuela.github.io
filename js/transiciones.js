@@ -132,7 +132,81 @@ function animarEntradaSiCorresponde() {
   }
 }
 
+// -----------------------------------------------------------------
+// Elemento compartido en navegadores CON View Transitions.
+//
+// El nombre del header ya se transforma solo, porque lleva un
+// view-transition-name fijo en el CSS. Con las imágenes no se puede hacer
+// lo mismo: en la home hay seis, y solo la que se clickeó tiene que
+// participar de la transición. Por eso el nombre se asigna al vuelo, justo
+// antes de que el navegador saque la "foto" de la página que se va
+// (pageswap) y de la que llega (pagereveal), y se saca enseguida después.
+//
+// Como la portada de la home y la imagen principal del proyecto son
+// imágenes DISTINTAS, el navegador hace un cross-fade entre las dos
+// mientras el recuadro crece o se achica: no hay salto brusco.
+//
+// Si el navegador no soporta estos eventos, no se hace nada y la
+// navegación sigue funcionando igual (con el fallback FLIP de más arriba).
+const NOMBRE_COMPARTIDO = "imagen-compartida";
+
+function idDeProyectoEnURL(url) {
+  const coincidencia = url?.pathname.match(/proyecto-(\d+)\.html$/);
+  return coincidencia ? `proyecto-${coincidencia[1]}` : null;
+}
+
+// Devuelve la imagen que participa de la transición en ESTA página,
+// según cuál sea la otra punta de la navegación.
+function imagenCompartida(idProyecto) {
+  if (!idProyecto) return null;
+  return document.querySelector(`[data-elemento-transicion="imagen-${idProyecto}"]`);
+}
+
+function marcarTemporalmente(elemento) {
+  if (!elemento) return;
+  elemento.style.viewTransitionName = NOMBRE_COMPARTIDO;
+  // Se limpia en cuanto el navegador terminó de capturar, para no dejar el
+  // nombre puesto (dos elementos con el mismo nombre romperían la próxima
+  // transición).
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      elemento.style.viewTransitionName = "";
+    });
+  });
+}
+
+function activarElementoCompartido() {
+  if (!("startViewTransition" in document)) return;
+
+  // Página que se va: marca la imagen que corresponde al destino.
+  window.addEventListener("pageswap", (evento) => {
+    if (!evento.viewTransition) return;
+    const urlDestino = evento.activation?.entry?.url;
+    if (!urlDestino) return;
+    const propio = document.body.dataset.proyectoId;
+    // Desde la home hacia un proyecto: la portada clickeada.
+    // Desde un proyecto hacia la home u otro proyecto: la imagen principal.
+    const id = idDeProyectoEnURL(new URL(urlDestino)) || propio;
+    marcarTemporalmente(imagenCompartida(id));
+  });
+
+  // Página que llega: marca su contraparte antes del primer pintado.
+  window.addEventListener("pagereveal", (evento) => {
+    if (!evento.viewTransition) return;
+    // "navigation" es la Navigation API. Se consulta con typeof porque en
+    // los navegadores que no la implementan la variable no existe y
+    // nombrarla directamente lanzaría un ReferenceError (el ?. no protege
+    // contra identificadores no declarados).
+    const urlOrigen =
+      typeof navigation !== "undefined" ? navigation.activation?.from?.url : null;
+    const propio = document.body.dataset.proyectoId;
+    const id = propio || (urlOrigen ? idDeProyectoEnURL(new URL(urlOrigen)) : null);
+    marcarTemporalmente(imagenCompartida(id));
+  });
+}
+
 export function inicializarTransiciones() {
+  activarElementoCompartido();
   activarInterceptorDeSalida();
   animarEntradaSiCorresponde();
 }

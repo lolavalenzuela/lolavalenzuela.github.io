@@ -24,8 +24,12 @@ function crearBloqueProyecto(proyecto, indice) {
   imagen.className = "bloque-proyecto__imagen";
   imagen.dataset.elementoTransicion = nombreTransicion;
   imagen.loading = "lazy";
+  imagen.decoding = "async";
   imagen.src = resolverRuta(proyecto.imagen);
   imagen.alt = proyecto.altImagen;
+  // Encuadre configurable por proyecto desde contenido.json (ver la nota
+  // "_ayudaEncuadre" ahí). Sin valor, manda el "center" del CSS.
+  if (proyecto.encuadre) imagen.style.objectPosition = proyecto.encuadre;
 
   const titulo = document.createElement("span");
   titulo.className = "bloque-proyecto__titulo";
@@ -69,6 +73,7 @@ function renderHome(contenido, idioma) {
     const img = bloque.querySelector(".bloque-proyecto__imagen");
     img.alt = proyecto.altImagen;
     img.src = resolverRuta(proyecto.imagen);
+    if (proyecto.encuadre) img.style.objectPosition = proyecto.encuadre;
   });
 }
 
@@ -145,6 +150,7 @@ function renderProyecto(contenido, idioma) {
     if (imagenPrincipal) {
       imagenPrincipal.src = resolverRuta(datos.imagenPrincipal);
       imagenPrincipal.alt = datos.altPrincipal;
+      imagenPrincipal.decoding = "async";
       imagenPrincipal.dataset.elementoTransicion = nombreTransicion;
     }
   }
@@ -181,6 +187,7 @@ function renderProyecto(contenido, idioma) {
     datos.galeria.forEach((item) => {
       const img = document.createElement("img");
       img.loading = "lazy";
+      img.decoding = "async";
       img.src = resolverRuta(item.src);
       img.alt = item.alt;
       galeria.appendChild(img);
