@@ -23,7 +23,7 @@
         {
           "id": "proyecto-1",
           "titulo": "Moluscos, clase gastrópoda",
-          "altImagen": "Portada de Moluscos: el título en tipografía serif blanca sobre un fondo azul muy oscuro, como visto bajo el agua",
+          "altImagen": "Ilustración de un fondo marino: corales ramificados en tonos ocres, algas verdes y esponjas tubulares rosadas sobre un fondo violeta oscuro",
           "imagen": "assets/img/portada-1.jpg",
           "encuadre": "center"
         },
@@ -295,7 +295,7 @@
         {
           "id": "proyecto-1",
           "titulo": "Moluscos, class Gastropoda",
-          "altImagen": "Moluscos cover: the title set in white serif type over a deep dark blue background, as if seen underwater",
+          "altImagen": "Illustration of a seabed: branching corals in ochre tones, green algae and pink tube sponges against a deep purple background",
           "imagen": "assets/img/portada-1.jpg",
           "encuadre": "center"
         },
