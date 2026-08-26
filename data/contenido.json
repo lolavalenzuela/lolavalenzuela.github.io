@@ -22,7 +22,7 @@
       "proyectos": [
         {
           "id": "proyecto-1",
-          "titulo": "Moluscos, clase gastrópoda",
+          "titulo": "Moluscos",
           "altImagen": "Ilustración de un fondo marino: corales ramificados en tonos ocres, algas verdes y esponjas tubulares rosadas sobre un fondo violeta oscuro",
           "imagen": "assets/img/portada-1.jpg",
           "encuadre": "center"
@@ -58,7 +58,7 @@
         {
           "id": "proyecto-6",
           "titulo": "Quomos",
-          "altImagen": "Multitud vista desde arriba en blanco y negro, con una franja central oscurecida sobre la que se recorta en crema el logo de Quomos, hecho de círculos encadenados",
+          "altImagen": "Vista aérea en blanco y negro de gente cruzando la calle, con el patrón modular de Quomos —círculos encadenados— superpuesto en crema sobre la multitud",
           "imagen": "assets/img/portada-6.jpg",
           "encuadre": "center"
         }
@@ -105,7 +105,7 @@
     },
     "proyectos": {
       "proyecto-1": {
-        "titulo": "Moluscos, clase gastrópoda",
+        "titulo": "Moluscos",
         "anio": "2025",
         "tipo": "Diseño de Información Interactivo",
         "herramientas": [
@@ -116,15 +116,15 @@
         ],
         "descripcion": "Moluscos es una instalación inmersiva e interactiva desarrollada en grupo a partir de una investigación sobre gastrópodos realizada en el Museo de Ciencias Naturales de Buenos Aires. La experiencia funciona en una sala inmersiva: al entrar, un loop ambiental sitúa al visitante en un entorno acuático, seguido de una bienvenida que introduce el universo del trabajo. Tres de las cuatro paredes despliegan cada una una escena distinta y cada una tiene su propia interacción gestual, programada en TouchDesigner a través de un sensor. El sonido de la experiencia fue diseñado específicamente para cada momento, acompañando los cambios de escena y reforzando la atmósfera de cada una.",
         "imagenPrincipal": "assets/img/proyectos/proyecto-1.svg",
-        "altPrincipal": "Vista de la instalación inmersiva Moluscos, clase gastrópoda",
+        "altPrincipal": "Vista de la instalación inmersiva Moluscos",
         "galeria": [
           {
             "src": "assets/img/proyectos/proyecto-1-galeria-1.svg",
-            "alt": "Registro de la instalación Moluscos, clase gastrópoda"
+            "alt": "Registro de la instalación Moluscos"
           },
           {
             "src": "assets/img/proyectos/proyecto-1-galeria-2.svg",
-            "alt": "Registro de la instalación Moluscos, clase gastrópoda"
+            "alt": "Registro de la instalación Moluscos"
           }
         ],
         "video": null,
@@ -294,7 +294,7 @@
       "proyectos": [
         {
           "id": "proyecto-1",
-          "titulo": "Moluscos, class Gastropoda",
+          "titulo": "Moluscos",
           "altImagen": "Illustration of a seabed: branching corals in ochre tones, green algae and pink tube sponges against a deep purple background",
           "imagen": "assets/img/portada-1.jpg",
           "encuadre": "center"
@@ -330,7 +330,7 @@
         {
           "id": "proyecto-6",
           "titulo": "Quomos",
-          "altImagen": "An aerial black and white view of a crowd, with a darkened central band from which the Quomos logo — built from chained circles — is cut out in cream",
+          "altImagen": "Aerial black and white view of people crossing a street, with the Quomos modular pattern —chained circles— overlaid in cream across the crowd",
           "imagen": "assets/img/portada-6.jpg",
           "encuadre": "center"
         }
@@ -376,7 +376,7 @@
     },
     "proyectos": {
       "proyecto-1": {
-        "titulo": "Moluscos, class Gastropoda",
+        "titulo": "Moluscos",
         "anio": "2025",
         "tipo": "Interactive Information Design",
         "herramientas": [
@@ -387,15 +387,15 @@
         ],
         "descripcion": "Moluscos is an immersive, interactive installation developed as a group project, based on research into gastropods carried out at the Buenos Aires Natural Sciences Museum. The experience takes place in an immersive room: on entering, an ambient loop places the visitor in an aquatic environment, followed by a welcome sequence that introduces the world of the project. Three of the four walls each display a different scene, and each one has its own gestural interaction, programmed in TouchDesigner through a sensor. The sound design was created specifically for each moment, following the scene changes and reinforcing the atmosphere of each one.",
         "imagenPrincipal": "assets/img/proyectos/proyecto-1.svg",
-        "altPrincipal": "View of the immersive installation Moluscos, class Gastropoda",
+        "altPrincipal": "View of the immersive installation Moluscos",
         "galeria": [
           {
             "src": "assets/img/proyectos/proyecto-1-galeria-1.svg",
-            "alt": "Documentation of the installation Moluscos, class Gastropoda"
+            "alt": "Documentation of the installation Moluscos"
           },
           {
             "src": "assets/img/proyectos/proyecto-1-galeria-2.svg",
-            "alt": "Documentation of the installation Moluscos, class Gastropoda"
+            "alt": "Documentation of the installation Moluscos"
           }
         ],
         "video": null,

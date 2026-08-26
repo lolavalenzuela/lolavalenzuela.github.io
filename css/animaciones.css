@@ -58,14 +58,17 @@
       transform var(--dur-media) var(--ease-suave);
   }
 
-  .grilla-proyectos:has(.bloque-proyecto:hover) .bloque-proyecto {
+  /* Se atenúan los que NO están en hover. El ":not(:hover)" no es
+     decorativo: sin él, esta regla también alcanzaba al bloque apuntado
+     y le ganaba en especificidad al "opacity: 1" de más abajo, así que
+     se atenuaba todo por igual. */
+  .grilla-proyectos:has(.bloque-proyecto:hover) .bloque-proyecto:not(:hover) {
     opacity: var(--opacidad-atenuada);
   }
 
   .bloque-proyecto:hover {
     transform: translateY(calc(var(--desplazamiento-hover) * -1))
       scale(var(--escala-hover-bloque));
-    opacity: 1;
   }
 
   .bloque-proyecto:hover .bloque-proyecto__imagen {
@@ -112,8 +115,15 @@
   }
 }
 
+/* "backwards" y no "both": con "both" la animación conserva su fotograma
+   final para siempre, y como las animaciones le ganan a las reglas
+   normales en la cascada, terminaba pisando el hover — el bloque no
+   escalaba y los otros no se atenuaban. Con "backwards" el fotograma
+   inicial se aplica durante el retraso (así no hay destello antes de
+   entrar) y, apenas termina, el elemento vuelve a sus estilos normales y
+   el hover funciona. */
 .grilla-proyectos.js-lista-para-animar .bloque-proyecto {
-  animation: aparecer var(--dur-lenta) var(--ease-suave) both;
+  animation: aparecer var(--dur-lenta) var(--ease-suave) backwards;
 }
 
 .grilla-proyectos.js-lista-para-animar .bloque-proyecto:nth-child(1) { animation-delay: calc(var(--paso-stagger) * 0); }
