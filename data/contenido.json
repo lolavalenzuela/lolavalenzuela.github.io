@@ -37,16 +37,16 @@
         {
           "id": "proyecto-3",
           "titulo": "Fuera de Servicio",
-          "altImagen": "El fanzine de Fuera de Servicio abierto en una mano: a la izquierda el manifiesto, a la derecha una grilla de fotos urbanas tramadas",
+          "altImagen": "Tapa de alcantarilla vista desde arriba, en alto contraste y trama bitmap: un círculo con una flecha triangular sobre el empedrado",
           "imagen": "assets/img/portada-3.jpg",
-          "encuadre": "30% center"
+          "encuadre": "center"
         },
         {
           "id": "proyecto-4",
           "titulo": "Conex",
-          "altImagen": "Cartel de Conex Training System en una tienda: dos corredores entrenando entre conos interactivos verdes y azules",
+          "altImagen": "Logo de Conex: la palabra CONEX en tipografía geométrica azul sobre un fondo verde lima",
           "imagen": "assets/img/portada-4.jpg",
-          "encuadre": "center 20%"
+          "encuadre": "center"
         },
         {
           "id": "proyecto-5",
@@ -58,9 +58,9 @@
         {
           "id": "proyecto-6",
           "titulo": "Quomos",
-          "altImagen": "Afiche de Quomos en un pasillo de subte de azulejos blancos, con la pregunta “¿Cuáles son las cosas que nos unen?” en rojo",
+          "altImagen": "Logo de Quomos: la palabra QUOMOS construida con círculos encadenados, en gris oscuro sobre fondo crema",
           "imagen": "assets/img/portada-6.jpg",
-          "encuadre": "55% center"
+          "encuadre": "center"
         }
       ],
       "_ayudaEncuadre": "ENCUADRE de esta portada en la grilla de la home. Como cada foto tiene su propia proporción y el bloque tiene la suya, la imagen se recorta para llenarlo. \"encuadre\" decide qué parte se conserva. Por defecto es \"center\" (el centro). Si a alguna foto le corta algo importante, cambiá este valor por: \"top\" (conserva la parte de arriba), \"bottom\", \"left\", \"right\", o una combinación como \"center top\" o \"left bottom\". También acepta porcentajes, ej: \"50% 30%\" (0% = arriba/izquierda, 100% = abajo/derecha). Solo afecta a la portada de la home, no a la imagen de la página del proyecto."
@@ -309,16 +309,16 @@
         {
           "id": "proyecto-3",
           "titulo": "Out of Service",
-          "altImagen": "The Fuera de Servicio fanzine held open in one hand: the manifesto on the left page, a grid of halftoned urban photographs on the right",
+          "altImagen": "A manhole cover seen from above in high-contrast bitmap halftone: a circle with a triangular arrow set into tiled pavement",
           "imagen": "assets/img/portada-3.jpg",
-          "encuadre": "30% center"
+          "encuadre": "center"
         },
         {
           "id": "proyecto-4",
           "titulo": "Conex",
-          "altImagen": "Conex Training System poster in a shop: two runners training among green and blue interactive cones",
+          "altImagen": "Conex logo: the word CONEX in geometric blue type on a lime green background",
           "imagen": "assets/img/portada-4.jpg",
-          "encuadre": "center 20%"
+          "encuadre": "center"
         },
         {
           "id": "proyecto-5",
@@ -330,9 +330,9 @@
         {
           "id": "proyecto-6",
           "titulo": "Quomos",
-          "altImagen": "Quomos poster in a white-tiled subway corridor, asking “¿Cuáles son las cosas que nos unen?” in red",
+          "altImagen": "Quomos logo: the word QUOMOS built from chained circles, in dark grey on a cream background",
           "imagen": "assets/img/portada-6.jpg",
-          "encuadre": "55% center"
+          "encuadre": "center"
         }
       ]
     },
