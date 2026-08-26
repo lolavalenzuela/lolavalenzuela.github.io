@@ -58,7 +58,7 @@
         {
           "id": "proyecto-6",
           "titulo": "Quomos",
-          "altImagen": "Logo de Quomos: la palabra QUOMOS construida con círculos encadenados, en gris oscuro sobre fondo crema",
+          "altImagen": "Multitud vista desde arriba en blanco y negro, con una franja central oscurecida sobre la que se recorta en crema el logo de Quomos, hecho de círculos encadenados",
           "imagen": "assets/img/portada-6.jpg",
           "encuadre": "center"
         }
@@ -330,7 +330,7 @@
         {
           "id": "proyecto-6",
           "titulo": "Quomos",
-          "altImagen": "Quomos logo: the word QUOMOS built from chained circles, in dark grey on a cream background",
+          "altImagen": "An aerial black and white view of a crowd, with a darkened central band from which the Quomos logo — built from chained circles — is cut out in cream",
           "imagen": "assets/img/portada-6.jpg",
           "encuadre": "center"
         }
