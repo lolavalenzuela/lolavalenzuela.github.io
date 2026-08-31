@@ -5,7 +5,8 @@
    CÓMO CALIBRAR LA INTENSIDAD:
    - Las duraciones y curvas están centralizadas en las variables de acá
      abajo. Si querés que el hover sea más o menos notorio, tocá
-     --escala-hover-bloque y --escala-hover-imagen (más cerca de 1 = más sutil).
+     --escala-hover-bloque y --escala-hover-imagen (más cerca de 1 = más
+     sutil) y --hover-oscurecimiento (cuánto se apagan los otros bloques).
    - --dur-rapida / --dur-media / --dur-lenta controlan la velocidad de
      cada tipo de animación.
    - --ease-suave es la curva usada en todos lados para que se sienta
@@ -32,7 +33,13 @@
   --escala-hover-bloque: 1.015;
   --escala-hover-imagen: 1.04;
   --desplazamiento-hover: 3px;
-  --opacidad-atenuada: 0.6;
+
+  /* Cuánto se oscurecen los OTROS proyectos cuando apuntás uno.
+     0 = no se oscurecen nada; 1 = quedan totalmente negros.
+     Rango cómodo: 0.10 (apenas se insinúa) a 0.35 (bien marcado).
+     Por encima de 0.45 la portada empieza a taparse y cuesta leerla.
+     Es el único número que hay que tocar para calibrar el efecto. */
+  --hover-oscurecimiento: 0.18;
 
   /* Stagger de entrada */
   --paso-stagger: 60ms;
@@ -63,7 +70,10 @@
      y le ganaba en especificidad al "opacity: 1" de más abajo, así que
      se atenuaba todo por igual. */
   .grilla-proyectos:has(.bloque-proyecto:hover) .bloque-proyecto:not(:hover) {
-    opacity: var(--opacidad-atenuada);
+    /* El fondo del sitio es negro, así que bajar la opacidad equivale a
+       oscurecer. La resta convierte "cuánto oscurece" en "cuánta opacidad
+       queda", para que la variable se lea en el sentido intuitivo. */
+    opacity: calc(1 - var(--hover-oscurecimiento));
   }
 
   .bloque-proyecto:hover {
