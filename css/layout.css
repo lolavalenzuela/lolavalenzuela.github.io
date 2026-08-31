@@ -392,6 +392,7 @@ body[data-pagina="about"] main {
    evita que las barras del navegador rompan el cálculo).
    Ver --respiro-hero y --alto-minimo-hero en base.css para calibrarlo. */
 .proyecto__hero {
+  position: relative;   /* ancla el botón de sonido del video de portada */
   overflow: hidden;
   margin-bottom: clamp(1.5rem, 1rem + 2vw, 2.5rem);
   height: calc(100vh - var(--alto-header) - var(--padding-superior-proyecto) - var(--respiro-hero));
@@ -401,12 +402,54 @@ body[data-pagina="about"] main {
 
 /* Llena el recuadro sin deformarse, sea cual sea la proporción original
    de la imagen: recorta con cover en vez de hacer saltar el layout. */
-.proyecto__imagen-principal {
+.proyecto__imagen-principal,
+.proyecto__video-portada {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   background: var(--gris-placeholder);
+}
+
+/* Control de sonido del video de portada. Va sobre el video, en la
+   esquina inferior derecha del hero. El video arranca muteado porque los
+   navegadores bloquean el autoplay con audio; este botón (y un click en
+   cualquier parte del video) lo activa. */
+.proyecto__sonido {
+  position: absolute;
+  right: clamp(0.75rem, 0.5rem + 1vw, 1.5rem);
+  bottom: clamp(0.75rem, 0.5rem + 1vw, 1.5rem);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  color: var(--rojo);
+  background: rgba(0, 0, 0, 0.55);
+  transition: background var(--dur-rapida) ease, opacity var(--dur-rapida) ease;
+}
+
+.proyecto__sonido[hidden] {
+  display: none;
+}
+
+.proyecto__sonido svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: block;
+  fill: currentColor;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .proyecto__sonido:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* El video entero es clickeable para activar o silenciar el audio. */
+.proyecto__hero:has(.proyecto__video-portada) {
+  cursor: pointer;
 }
 
 .proyecto__video-wrapper {
@@ -485,10 +528,13 @@ body[data-pagina="about"] main {
 
 /* aspect-ratio fijo + cover: todos los bloques miden igual y quedan
    alineados arriba y abajo, sin importar la proporción original de la
-   imagen que cargues después. */
+   imagen que cargues después. La proporción sale de "galeriaProporcion"
+   en contenido.json (main.js la escribe acá como variable); si el
+   proyecto no la define, se usa 4/3. Cuando la proporción coincide con
+   la de las fotos, "cover" no recorta nada. */
 .proyecto__galeria img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: var(--galeria-proporcion, 4 / 3);
   object-fit: cover;
   object-position: center;
   background: var(--gris-placeholder);
@@ -505,9 +551,16 @@ body[data-pagina="about"] main {
   }
 }
 
-/* Desktop: los tres datos en una sola fila, columnas de igual ancho. */
+/* Desktop: los tres datos en una sola fila, columnas de igual ancho.
+   La galería pasa a 3 columnas solo si el proyecto tiene 3 fotos o más
+   (main.js escribe data-columnas con la cantidad), para que 3 fotos no
+   dejen un hueco en la segunda fila. */
 @media (min-width: 900px) {
   .proyecto__ficha {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .proyecto__galeria[data-columnas="3"] {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }

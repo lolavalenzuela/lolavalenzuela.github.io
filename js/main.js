@@ -101,6 +101,108 @@ function renderAbout(contenido, idioma) {
   renderListaSimple("[data-lista='herramientas']", about.herramientas);
 }
 
+// Video de portada: ocupa el mismo recuadro que la imagen principal.
+//
+// Los navegadores bloquean el autoplay con sonido, así que primero se
+// intenta reproducir CON audio (funciona si la persona ya interactuó con
+// el sitio) y, si lo rechazan, se cae a muteado. En los dos casos queda
+// visible un botón para activar o silenciar, y el video entero es
+// clickeable para lo mismo. Con "prefers-reduced-motion" no arranca solo:
+// se muestra el póster y se reproduce a pedido.
+function montarVideoPortada(hero, datos, textos) {
+  const video = document.createElement("video");
+  video.className = "proyecto__video-portada";
+  video.loop = true;
+  video.playsInline = true;
+  video.preload = "metadata";
+  video.poster = resolverRuta(datos.poster);
+  video.width = datos.ancho;
+  video.height = datos.alto;
+  video.setAttribute("aria-label", datos.alt);
+  // El .webm va primero: pesa menos y el navegador que no lo soporte
+  // pasa solo al .mp4.
+  [["webm", "video/webm"], ["mp4", "video/mp4"]].forEach(([clave, tipo]) => {
+    if (!datos[clave]) return;
+    const fuente = document.createElement("source");
+    fuente.src = resolverRuta(datos[clave]);
+    fuente.type = tipo;
+    video.appendChild(fuente);
+  });
+
+  const boton = document.createElement("button");
+  boton.type = "button";
+  boton.className = "proyecto__sonido";
+
+  const ICONOS = {
+    // Altavoz tachado (está muteado: tocá para escuchar)
+    mudo: '<path d="M3 9v6h4l5 5V4L7 9H3zm13.6 3l2.7-2.7-1.4-1.4-2.7 2.7-2.7-2.7-1.4 1.4 2.7 2.7-2.7 2.7 1.4 1.4 2.7-2.7 2.7 2.7 1.4-1.4-2.7-2.7z"/>',
+    // Altavoz con ondas (suena: tocá para silenciar)
+    sonando: '<path d="M3 9v6h4l5 5V4L7 9H3zm11.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM12 2v2.1a7.5 7.5 0 0 1 0 15.8V22a9.5 9.5 0 0 0 0-20z"/>',
+  };
+
+  function pintarBoton() {
+    const mudo = video.muted;
+    boton.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${mudo ? ICONOS.mudo : ICONOS.sonando}</svg>`;
+    const etiqueta = mudo ? textos.activarSonido : textos.silenciarSonido;
+    boton.setAttribute("aria-label", etiqueta);
+    boton.title = etiqueta;
+    boton.setAttribute("aria-pressed", String(!mudo));
+  }
+
+  function alternarSonido() {
+    video.muted = !video.muted;
+    if (!video.muted) video.play().catch(() => {});
+    pintarBoton();
+  }
+
+  boton.addEventListener("click", (evento) => {
+    evento.preventDefault();
+    evento.stopPropagation();
+    alternarSonido();
+  });
+
+  // Un click en cualquier parte del video hace lo mismo.
+  hero.addEventListener("click", alternarSonido);
+
+  hero.innerHTML = "";
+  hero.append(video, boton);
+  pintarBoton();
+
+  // Casos en los que NO conviene arrancar solo: si la persona pidió menos
+  // movimiento, o si el navegador avisa que está ahorrando datos o que la
+  // conexión es lenta (ahí bajar 5 MB de video sin que lo pidan es un
+  // abuso). En esos casos queda el póster y el botón lo reproduce.
+  const conexion = navigator.connection;
+  const ahorroDeDatos = Boolean(conexion?.saveData);
+  const conexionLenta = /^(slow-)?2g$/.test(conexion?.effectiveType || "");
+  const sinMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (sinMovimiento || ahorroDeDatos || conexionLenta) {
+    video.preload = "none";
+    boton.addEventListener(
+      "click",
+      () => {
+        video.muted = false;
+        video.play().catch(() => {});
+        pintarBoton();
+      },
+      { once: true }
+    );
+    return video;
+  }
+
+  // Intento con sonido; si el navegador lo rechaza, mute y reintento.
+  video.muted = false;
+  pintarBoton();
+  video.play().catch(() => {
+    video.muted = true;
+    pintarBoton();
+    video.play().catch(() => {});
+  });
+
+  return video;
+}
+
 // Cada dato de la ficha va envuelto en un <div> para que sea una columna
 // entera de la grilla (etiqueta arriba, valor abajo). Un <div> agrupando
 // dt+dd dentro de un <dl> es HTML válido.
@@ -138,7 +240,29 @@ function renderProyecto(contenido, idioma) {
   const wrapperVideo = document.querySelector("[data-proyecto-video-wrapper]");
   const nombreTransicion = `imagen-${id}`;
 
-  if (datos.video) {
+  if (datos.videoPortada) {
+    // Video propio en el recuadro grande de arriba (mismo espacio que la
+    // imagen principal). Se monta una sola vez por carga de página.
+    wrapperVideo?.setAttribute("hidden", "");
+    wrapperImagen?.removeAttribute("hidden");
+    if (wrapperImagen && !wrapperImagen.dataset.videoMontado) {
+      const video = montarVideoPortada(wrapperImagen, datos.videoPortada, datos.videoPortada);
+      video.dataset.elementoTransicion = nombreTransicion;
+      wrapperImagen.dataset.videoMontado = "true";
+    } else if (wrapperImagen) {
+      // Cambio de idioma: solo se actualizan los textos accesibles.
+      const video = wrapperImagen.querySelector("video");
+      video?.setAttribute("aria-label", datos.videoPortada.alt);
+      const boton = wrapperImagen.querySelector(".proyecto__sonido");
+      if (boton && video) {
+        const etiqueta = video.muted
+          ? datos.videoPortada.activarSonido
+          : datos.videoPortada.silenciarSonido;
+        boton.setAttribute("aria-label", etiqueta);
+        boton.title = etiqueta;
+      }
+    }
+  } else if (datos.video) {
     wrapperImagen?.setAttribute("hidden", "");
     wrapperVideo?.removeAttribute("hidden");
     const iframe = wrapperVideo?.querySelector("iframe");
@@ -184,6 +308,14 @@ function renderProyecto(contenido, idioma) {
   const galeria = document.querySelector("[data-proyecto-galeria]");
   if (galeria) {
     galeria.innerHTML = "";
+    // El CSS usa estos dos datos: cuántas columnas armar y con qué
+    // proporción recortar cada foto (ver "galeriaProporcion" en el JSON).
+    galeria.dataset.columnas = String(Math.min(datos.galeria.length, 3));
+    if (datos.galeriaProporcion) {
+      galeria.style.setProperty("--galeria-proporcion", datos.galeriaProporcion);
+    } else {
+      galeria.style.removeProperty("--galeria-proporcion");
+    }
     datos.galeria.forEach((item) => {
       const img = document.createElement("img");
       img.loading = "lazy";

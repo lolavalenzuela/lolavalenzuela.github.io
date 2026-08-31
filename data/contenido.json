@@ -119,19 +119,35 @@
         "altPrincipal": "Vista de la instalación inmersiva Moluscos",
         "galeria": [
           {
-            "src": "assets/img/proyectos/proyecto-1-galeria-1.svg",
-            "alt": "Registro de la instalación Moluscos"
+            "src": "assets/img/proyectos/proyecto-1-galeria-1.jpg",
+            "alt": "Escena de la línea de tiempo: “500 millones de años atrás, vida marina” y “300 millones de años atrás, habitan la tierra”, con ilustraciones de gastrópodos sobre fondo azul y verde"
           },
           {
-            "src": "assets/img/proyectos/proyecto-1-galeria-2.svg",
-            "alt": "Registro de la instalación Moluscos"
+            "src": "assets/img/proyectos/proyecto-1-galeria-2.jpg",
+            "alt": "Escena “Anatomía” desplegada en tres paredes: un caracol con su concha en corte y el cuerpo del molusco con sus órganos señalados"
+          },
+          {
+            "src": "assets/img/proyectos/proyecto-1-galeria-3.jpg",
+            "alt": "Escena “Escultores” en violeta: la concha de un caracol flotando entre textos sobre su crecimiento y los minerales que la forman"
           }
         ],
         "video": null,
         "anteriorId": "proyecto-6",
         "siguienteId": "proyecto-2",
         "audio": null,
-        "_ayudaMedia": "Cuando tengas las imágenes de este proyecto, guardalas en assets/img/proyectos/ y escribí acá la ruta. Portada/principal: \"imagenPrincipal\": \"assets/img/proyectos/proyecto-1.jpg\". Galería: el array \"galeria\" acepta las que quieras — se acomodan solas en la grilla de dos columnas, en filas sucesivas. Cada una es {\"src\": \"assets/img/proyectos/proyecto-1-galeria-1.jpg\", \"alt\": \"Descripción de la imagen\"}. Video: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) — si hay video, reemplaza a la imagen principal. Audio: \"audio\": \"assets/img/proyectos/proyecto-1-audio.mp3\". Ojo: la portada de la home se edita aparte, en home.proyectos (arriba en este mismo archivo)."
+        "_ayudaMedia": "Cuando tengas las imágenes de este proyecto, guardalas en assets/img/proyectos/ y escribí acá la ruta. Portada/principal: \"imagenPrincipal\": \"assets/img/proyectos/proyecto-1.jpg\". Galería: el array \"galeria\" acepta las que quieras — se acomodan solas en la grilla de dos columnas, en filas sucesivas. Cada una es {\"src\": \"assets/img/proyectos/proyecto-1-galeria-1.jpg\", \"alt\": \"Descripción de la imagen\"}. Video: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) — si hay video, reemplaza a la imagen principal. Audio: \"audio\": \"assets/img/proyectos/proyecto-1-audio.mp3\". Ojo: la portada de la home se edita aparte, en home.proyectos (arriba en este mismo archivo).",
+        "videoPortada": {
+          "mp4": "assets/video/proyecto-1.mp4",
+          "webm": "assets/video/proyecto-1.webm",
+          "poster": "assets/video/proyecto-1-poster.jpg",
+          "ancho": 1280,
+          "alto": 960,
+          "alt": "Recorrido por la sala inmersiva de Moluscos: las paredes proyectan gastrópodos que se mueven y cambian de escena",
+          "activarSonido": "Activar sonido del video",
+          "silenciarSonido": "Silenciar el video"
+        },
+        "galeriaProporcion": "842 / 595",
+        "_ayudaGaleria": "GALERÍA: el array acepta las fotos que quieras. Para sumar una cuarta, agregá otro objeto con la misma forma — {\"src\": \"assets/img/proyectos/proyecto-1-galeria-4.jpg\", \"alt\": \"Descripción\"} — y acordate de agregarla también en la rama \"en\" con su alt traducido. Las columnas se acomodan solas: 1 en mobile, 2 desde 640px y 3 desde 900px cuando hay 3 o más. \"galeriaProporcion\" es la proporción del recuadro de cada foto (ancho / alto); está puesta en 842/595, que es la medida real de estas tres, para que no se recorte nada. Si sumás una foto de otra proporción, se va a recortar al centro para no descuadrar la fila."
       },
       "proyecto-2": {
         "titulo": "Profundidad Metálica",
@@ -390,19 +406,34 @@
         "altPrincipal": "View of the immersive installation Moluscos",
         "galeria": [
           {
-            "src": "assets/img/proyectos/proyecto-1-galeria-1.svg",
-            "alt": "Documentation of the installation Moluscos"
+            "src": "assets/img/proyectos/proyecto-1-galeria-1.jpg",
+            "alt": "Timeline scene: “500 million years ago, marine life” and “300 million years ago, they inhabit the land”, with gastropod illustrations over blue and green backgrounds"
           },
           {
-            "src": "assets/img/proyectos/proyecto-1-galeria-2.svg",
-            "alt": "Documentation of the installation Moluscos"
+            "src": "assets/img/proyectos/proyecto-1-galeria-2.jpg",
+            "alt": "“Anatomy” scene across three walls: a snail with its shell in cross-section and the mollusc’s body with its organs labelled"
+          },
+          {
+            "src": "assets/img/proyectos/proyecto-1-galeria-3.jpg",
+            "alt": "“Sculptors” scene in purple: a snail shell floating among texts about its growth and the minerals that form it"
           }
         ],
         "video": null,
         "anteriorId": "proyecto-6",
         "siguienteId": "proyecto-2",
         "audio": null,
-        "_mediaHelp": "Media paths are shared with the Spanish branch — edit them in es.proyectos.proyecto-1 (see the \"_ayudaMedia\" note there). Only text differs between languages."
+        "_mediaHelp": "Media paths are shared with the Spanish branch — edit them in es.proyectos.proyecto-1 (see the \"_ayudaMedia\" note there). Only text differs between languages.",
+        "videoPortada": {
+          "mp4": "assets/video/proyecto-1.mp4",
+          "webm": "assets/video/proyecto-1.webm",
+          "poster": "assets/video/proyecto-1-poster.jpg",
+          "ancho": 1280,
+          "alto": 960,
+          "alt": "Walkthrough of the Moluscos immersive room: the walls project gastropods that move and shift between scenes",
+          "activarSonido": "Turn the video sound on",
+          "silenciarSonido": "Mute the video"
+        },
+        "galeriaProporcion": "842 / 595"
       },
       "proyecto-2": {
         "titulo": "Profundidad Metálica",
