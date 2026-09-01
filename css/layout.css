@@ -522,6 +522,89 @@ body[data-pagina="about"] main {
    tocar nada acá. El gap es el mismo que usa la grilla de la home, y el
    ancho total coincide con el de la imagen principal porque ambas cuelgan
    del padding lateral de .proyecto. */
+/* -----------------------------------------------------------
+   MEDIA DE LA SECCIÓN DE ABAJO — filas de 1, 2 o 3 piezas
+   -----------------------------------------------------------
+   Cada fila reparte su ancho en tantas columnas como piezas tenga (el JS
+   escribe --columnas desde el JSON). Cada pieza conserva su proporción
+   real vía --proporcion, así nada se recorta ni se estira, y el espacio
+   queda reservado antes de que cargue. Las piezas se centran verticalmente
+   dentro de la fila: cuando conviven proporciones distintas, quedan
+   equilibradas en lugar de colgar del borde de arriba. */
+.proyecto__media {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-grilla);
+  margin-bottom: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+}
+
+.proyecto__media[hidden] {
+  display: none;
+}
+
+.proyecto__media-fila {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-grilla);
+  align-items: center;
+}
+
+.proyecto__media-pieza {
+  margin: 0;
+  aspect-ratio: var(--proporcion);
+  background: var(--gris-placeholder);
+  overflow: hidden;
+}
+
+/* Una pieza vertical a media columna se vuelve larguísima: se le pone un
+   tope de ancho y se centra en su celda. El número es el ancho máximo que
+   puede ocupar; subilo o bajalo si querés verlas más grandes o más chicas. */
+.proyecto__media-pieza--vertical {
+  max-width: min(100%, 22rem);
+  margin-inline: auto;
+}
+
+.proyecto__media-imagen,
+.proyecto__media-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Desde 640px cada fila usa sus columnas reales. Por debajo, todo en una
+   sola columna y en el mismo orden. */
+@media (min-width: 640px) {
+  .proyecto__media-fila {
+    grid-template-columns: repeat(var(--columnas, 1), 1fr);
+  }
+}
+
+/* -----------------------------------------------------------
+   ENLACE EXTERNO del proyecto (sitio publicado)
+   ----------------------------------------------------------- */
+.proyecto__enlace-externo {
+  margin-bottom: clamp(1.25rem, 0.9rem + 1.5vw, 2rem);
+  font-size: var(--tam-nav);
+}
+
+.proyecto__enlace-externo[hidden] {
+  display: none;
+}
+
+.proyecto__enlace-externo a {
+  color: var(--rojo);
+  text-decoration-line: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: rgba(255, 0, 0, 0.45);
+  transition: text-decoration-color var(--dur-rapida) ease;
+}
+
+.proyecto__enlace-externo a:hover,
+.proyecto__enlace-externo a:focus-visible {
+  text-decoration-color: var(--rojo);
+}
+
 .proyecto__galeria {
   display: grid;
   grid-template-columns: 1fr;

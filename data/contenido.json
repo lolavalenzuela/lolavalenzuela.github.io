@@ -272,21 +272,97 @@
         "descripcion": "Quomos es un proyecto de identidad y comunicación a partir de una selección de quince objetos de diseño argentino vinculados por un concepto común: la comunidad. Desde un cenicero hasta una revista, cada objeto fue elegido por su capacidad de ser compartido, directa o indirectamente, y de construir pertenencia sin que nadie lo haya decidido del todo. A partir de ahí se desarrolló una marca completa — naming, identidad visual, sistema modular — y un ecosistema de piezas que va desde afiches en el subte y objetos físicos como encendedores o una tarjeta SUBE, hasta una página web, una app y videos para tótems urbanos. Quomos propone que lo que nos une está más cerca de lo que creemos, y que el diseño puede volver visible eso que ya compartimos sin notarlo.",
         "imagenPrincipal": "assets/img/proyectos/proyecto-6.svg",
         "altPrincipal": "Pieza del sistema de identidad visual de Quomos",
-        "galeria": [
-          {
-            "src": "assets/img/proyectos/proyecto-6-galeria-1.svg",
-            "alt": "Pieza del ecosistema de comunicación de Quomos"
-          },
-          {
-            "src": "assets/img/proyectos/proyecto-6-galeria-2.svg",
-            "alt": "Pieza del ecosistema de comunicación de Quomos"
-          }
-        ],
+        "galeria": [],
         "video": null,
         "anteriorId": "proyecto-5",
         "siguienteId": "proyecto-1",
         "audio": null,
-        "_ayudaMedia": "Cuando tengas las imágenes de este proyecto, guardalas en assets/img/proyectos/ y escribí acá la ruta. Portada/principal: \"imagenPrincipal\": \"assets/img/proyectos/proyecto-6.jpg\". Galería: el array \"galeria\" acepta las que quieras — se acomodan solas en la grilla de dos columnas, en filas sucesivas. Cada una es {\"src\": \"assets/img/proyectos/proyecto-6-galeria-1.jpg\", \"alt\": \"Descripción de la imagen\"}. Video: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) — si hay video, reemplaza a la imagen principal. Audio: \"audio\": \"assets/img/proyectos/proyecto-6-audio.mp3\". Ojo: la portada de la home se edita aparte, en home.proyectos (arriba en este mismo archivo)."
+        "_ayudaMedia": "Cuando tengas las imágenes de este proyecto, guardalas en assets/img/proyectos/ y escribí acá la ruta. Portada/principal: \"imagenPrincipal\": \"assets/img/proyectos/proyecto-6.jpg\". Galería: el array \"galeria\" acepta las que quieras — se acomodan solas en la grilla de dos columnas, en filas sucesivas. Cada una es {\"src\": \"assets/img/proyectos/proyecto-6-galeria-1.jpg\", \"alt\": \"Descripción de la imagen\"}. Video: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) — si hay video, reemplaza a la imagen principal. Audio: \"audio\": \"assets/img/proyectos/proyecto-6-audio.mp3\". Ojo: la portada de la home se edita aparte, en home.proyectos (arriba en este mismo archivo).",
+        "videoPortada": {
+          "mp4": "assets/video/proyecto-6-teaser.mp4",
+          "poster": "assets/img/proyectos/proyecto-6-teaser-poster.jpg",
+          "ancho": 1280,
+          "alto": 720,
+          "audio": true,
+          "alt": "Teaser de Quomos: piezas de la identidad —el patrón de círculos encadenados, los afiches y los objetos— encadenadas en movimiento",
+          "activarSonido": "Activar el sonido del video",
+          "silenciarSonido": "Silenciar el video"
+        },
+        "media": [
+          [
+            {
+              "tipo": "imagen",
+              "src": "assets/img/proyectos/proyecto-6-billboard-invisible.jpg",
+              "ancho": 1400,
+              "alto": 1050,
+              "alt": "Afiche de Quomos en un pasillo de subte: sobre fondo oscuro, la pregunta “¿Lo invisible nos conecta?” en rojo junto al patrón de círculos"
+            },
+            {
+              "tipo": "imagen",
+              "src": "assets/img/proyectos/proyecto-6-billboard-unen.jpg",
+              "ancho": 1400,
+              "alto": 1050,
+              "alt": "Afiche de Quomos en un pasillo de subte: sobre fondo crema, la pregunta “¿Cuáles son las cosas que nos unen?” en rojo"
+            }
+          ],
+          [
+            {
+              "tipo": "imagen",
+              "src": "assets/img/proyectos/proyecto-6-afiches-objetos.jpg",
+              "ancho": 1800,
+              "alto": 1350,
+              "alt": "Dos afiches enmarcados en una pared de azulejos blancos: uno rojo con el patrón modular en crema y otro con la pregunta “¿Un objeto nos puede unir?”"
+            }
+          ],
+          [
+            {
+              "tipo": "imagen",
+              "src": "assets/img/proyectos/proyecto-6-encendedores.jpg",
+              "ancho": 1138,
+              "alto": 908,
+              "alt": "Dos encendedores de la línea Quomos: uno negro con el logotipo en blanco y otro crema con el patrón de círculos en rojo y negro"
+            },
+            {
+              "tipo": "imagen",
+              "src": "assets/img/proyectos/proyecto-6-papelitos.jpg",
+              "ancho": 736,
+              "alto": 736,
+              "alt": "Volante de Quomos pegado a una columna de la calle, con tiras cortadas abajo y objetos ilustrados unidos por el patrón rojo"
+            },
+            {
+              "tipo": "imagen",
+              "src": "assets/img/proyectos/proyecto-6-sube.jpg",
+              "ancho": 1800,
+              "alto": 1350,
+              "alt": "Tarjeta SUBE intervenida con la identidad de Quomos: el patrón de círculos encadenados en gris sobre la tarjeta"
+            }
+          ],
+          [
+            {
+              "tipo": "video",
+              "mp4": "assets/video/proyecto-6-totem.mp4",
+              "poster": "assets/img/proyectos/proyecto-6-totem-poster.jpg",
+              "ancho": 832,
+              "alto": 1200,
+              "alt": "Reel vertical para tótems urbanos: el patrón de Quomos y las preguntas de la campaña en movimiento"
+            },
+            {
+              "tipo": "video",
+              "webm": "assets/video/proyecto-6-app.webm",
+              "mp4": "assets/video/proyecto-6-app.mp4",
+              "poster": "assets/img/proyectos/proyecto-6-app-poster.jpg",
+              "ancho": 734,
+              "alto": 1200,
+              "alt": "Recorrido por la app de Quomos: la pantalla de un celular navegando entre los objetos de la colección"
+            }
+          ]
+        ],
+        "enlace": {
+          "url": "https://quomos-37wx.vercel.app",
+          "texto": "ver el sitio"
+        },
+        "_ayudaMediaSeccion": "MEDIA de la sección de abajo (reemplaza a \"galeria\" cuando existe). Es una lista de FILAS; cada fila es una lista de piezas y se reparte en tantas columnas como piezas tenga: una fila de 1 ocupa el ancho completo, una de 2 va a mitades, una de 3 a tercios. En mobile todo pasa a una columna, en este mismo orden. Cada pieza lleva \"ancho\" y \"alto\" reales para reservar su espacio y conservar su proporción: nada se recorta ni se estira. IMAGEN: {\"tipo\":\"imagen\", \"src\":\"assets/img/proyectos/archivo.jpg\", \"ancho\":1400, \"alto\":1050, \"alt\":\"...\"}. VIDEO: {\"tipo\":\"video\", \"mp4\":\"assets/video/archivo.mp4\", \"webm\":\"...\" (opcional, solo si pesa menos), \"poster\":\"assets/img/proyectos/archivo-poster.jpg\", \"ancho\":832, \"alto\":1200, \"alt\":\"...\"}. Los videos de esta sección van en loop y muteados, y arrancan solos al entrar en pantalla. Si alguno tiene audio que valga la pena, agregale \"audio\": true y aparece el mismo botón rojo del video de portada. PARA AGREGAR O SACAR una pieza: sumá o quitá objetos dentro de una fila (cambia solo cuántas columnas tiene esa fila), o agregá una fila nueva al array. Si dejás \"media\" vacío, la sección desaparece sola.",
+        "_ayudaEnlace": "ENLACE EXTERNO del proyecto (sitio publicado, Behance, etc.). Si esta clave existe, aparece un link rojo debajo de la ficha. \"url\" es la dirección y \"texto\" lo que se lee; el texto se traduce en cada idioma y la url es la misma. Abre en pestaña nueva. Si un proyecto no tiene sitio, no pongas esta clave."
       }
     }
   },
@@ -558,21 +634,95 @@
         "descripcion": "Quomos is an identity and communication project built around a selection of fifteen Argentine design objects linked by a common concept: community. From an ashtray to a magazine, each object was chosen for its capacity to be shared, directly or indirectly, and to build a sense of belonging that no one quite decided on. From there we developed a complete brand — naming, visual identity, modular system — along with an ecosystem of pieces ranging from subway posters and physical objects such as lighters or a SUBE card, to a website, an app and videos for urban totems. Quomos suggests that what connects us is closer than we think, and that design can make visible what we already share without noticing.",
         "imagenPrincipal": "assets/img/proyectos/proyecto-6.svg",
         "altPrincipal": "Piece from the Quomos visual identity system",
-        "galeria": [
-          {
-            "src": "assets/img/proyectos/proyecto-6-galeria-1.svg",
-            "alt": "Piece from the Quomos communication ecosystem"
-          },
-          {
-            "src": "assets/img/proyectos/proyecto-6-galeria-2.svg",
-            "alt": "Piece from the Quomos communication ecosystem"
-          }
-        ],
+        "galeria": [],
         "video": null,
         "anteriorId": "proyecto-5",
         "siguienteId": "proyecto-1",
         "audio": null,
-        "_mediaHelp": "Media paths are shared with the Spanish branch — edit them in es.proyectos.proyecto-6 (see the \"_ayudaMedia\" note there). Only text differs between languages."
+        "_mediaHelp": "Media paths are shared with the Spanish branch — edit them in es.proyectos.proyecto-6 (see the \"_ayudaMedia\" note there). Only text differs between languages.",
+        "videoPortada": {
+          "mp4": "assets/video/proyecto-6-teaser.mp4",
+          "poster": "assets/img/proyectos/proyecto-6-teaser-poster.jpg",
+          "ancho": 1280,
+          "alto": 720,
+          "audio": true,
+          "alt": "Quomos teaser: pieces of the identity —the chained-circle pattern, the posters and the objects— strung together in motion",
+          "activarSonido": "Turn the video sound on",
+          "silenciarSonido": "Mute the video"
+        },
+        "media": [
+          [
+            {
+              "tipo": "imagen",
+              "src": "assets/img/proyectos/proyecto-6-billboard-invisible.jpg",
+              "ancho": 1400,
+              "alto": 1050,
+              "alt": "Quomos poster in a subway corridor: on a dark background, the question “¿Lo invisible nos conecta?” in red beside the circle pattern"
+            },
+            {
+              "tipo": "imagen",
+              "src": "assets/img/proyectos/proyecto-6-billboard-unen.jpg",
+              "ancho": 1400,
+              "alto": 1050,
+              "alt": "Quomos poster in a subway corridor: on a cream background, the question “¿Cuáles son las cosas que nos unen?” in red"
+            }
+          ],
+          [
+            {
+              "tipo": "imagen",
+              "src": "assets/img/proyectos/proyecto-6-afiches-objetos.jpg",
+              "ancho": 1800,
+              "alto": 1350,
+              "alt": "Two framed posters on a white tiled wall: one red with the modular pattern in cream, the other asking “¿Un objeto nos puede unir?”"
+            }
+          ],
+          [
+            {
+              "tipo": "imagen",
+              "src": "assets/img/proyectos/proyecto-6-encendedores.jpg",
+              "ancho": 1138,
+              "alto": 908,
+              "alt": "Two lighters from the Quomos line: one black with the logo in white, the other cream with the circle pattern in red and black"
+            },
+            {
+              "tipo": "imagen",
+              "src": "assets/img/proyectos/proyecto-6-papelitos.jpg",
+              "ancho": 736,
+              "alto": 736,
+              "alt": "A Quomos flyer taped to a street pole, with tear-off tabs along the bottom and illustrated objects linked by the red pattern"
+            },
+            {
+              "tipo": "imagen",
+              "src": "assets/img/proyectos/proyecto-6-sube.jpg",
+              "ancho": 1800,
+              "alto": 1350,
+              "alt": "A SUBE travel card carrying the Quomos identity: the chained-circle pattern in grey across the card"
+            }
+          ],
+          [
+            {
+              "tipo": "video",
+              "mp4": "assets/video/proyecto-6-totem.mp4",
+              "poster": "assets/img/proyectos/proyecto-6-totem-poster.jpg",
+              "ancho": 832,
+              "alto": 1200,
+              "alt": "Vertical reel for urban totems: the Quomos pattern and the campaign questions in motion"
+            },
+            {
+              "tipo": "video",
+              "webm": "assets/video/proyecto-6-app.webm",
+              "mp4": "assets/video/proyecto-6-app.mp4",
+              "poster": "assets/img/proyectos/proyecto-6-app-poster.jpg",
+              "ancho": 734,
+              "alto": 1200,
+              "alt": "Walkthrough of the Quomos app: a phone screen browsing the objects in the collection"
+            }
+          ]
+        ],
+        "enlace": {
+          "url": "https://quomos-37wx.vercel.app",
+          "texto": "view the site"
+        }
       }
     }
   }

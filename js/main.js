@@ -225,6 +225,104 @@ function montarVideoPortada(hero, datos, textos) {
 // Cada dato de la ficha va envuelto en un <div> para que sea una columna
 // entera de la grilla (etiqueta arriba, valor abajo). Un <div> agrupando
 // dt+dd dentro de un <dl> es HTML válido.
+// Crea un <video> de galería: loop, muteado y sin controles, salvo que la
+// pieza declare "audio": true, en cuyo caso reutiliza el mismo control de
+// sonido rojo del video de portada.
+function crearVideoMedia(pieza, textos) {
+  const video = document.createElement("video");
+  video.className = "proyecto__media-video";
+  video.loop = true;
+  video.playsInline = true;
+  video.muted = pieza.audio !== true;
+  video.preload = "metadata";
+  video.poster = resolverRuta(pieza.poster);
+  video.width = pieza.ancho;
+  video.height = pieza.alto;
+  video.setAttribute("aria-label", pieza.alt);
+  [["webm", "video/webm"], ["mp4", "video/mp4"]].forEach(([clave, tipo]) => {
+    if (!pieza[clave]) return;
+    const fuente = document.createElement("source");
+    fuente.src = resolverRuta(pieza[clave]);
+    fuente.type = tipo;
+    video.appendChild(fuente);
+  });
+  return video;
+}
+
+// Media de la sección de abajo, organizada en filas. Cada fila del JSON es
+// un array de piezas (imágenes o videos) y se reparte en tantas columnas
+// como piezas tenga, así una fila puede llevar una, dos o tres. Cada pieza
+// conserva su propia proporción: nada se recorta ni se estira.
+//
+// Los videos arrancan solos cuando entran en pantalla y se pausan al salir,
+// para no tener tres reproduciéndose a la vez ni bajar datos de más.
+function renderMedia(contenedor, filas, textos) {
+  contenedor.innerHTML = "";
+  const hayMedia = Array.isArray(filas) && filas.length > 0;
+  contenedor.hidden = !hayMedia;
+  if (!hayMedia) return;
+
+  const videos = [];
+
+  filas.forEach((fila) => {
+    const divFila = document.createElement("div");
+    divFila.className = "proyecto__media-fila";
+    divFila.style.setProperty("--columnas", String(fila.length));
+
+    fila.forEach((pieza) => {
+      const marco = document.createElement("figure");
+      marco.className = "proyecto__media-pieza";
+      // Las piezas verticales (video de celular, afiche parado) llevan un
+      // tope de ancho: a media columna quedarían altísimas y se comerían
+      // la página. Ver la clase en layout.css.
+      if (pieza.alto > pieza.ancho) marco.classList.add("proyecto__media-pieza--vertical");
+      // La proporción real del archivo reserva el espacio antes de cargar.
+      marco.style.setProperty("--proporcion", `${pieza.ancho} / ${pieza.alto}`);
+
+      if (pieza.tipo === "video") {
+        const video = crearVideoMedia(pieza, textos);
+        marco.appendChild(video);
+        videos.push(video);
+      } else {
+        const img = document.createElement("img");
+        img.className = "proyecto__media-imagen";
+        img.loading = "lazy";
+        img.decoding = "async";
+        img.width = pieza.ancho;
+        img.height = pieza.alto;
+        img.src = resolverRuta(pieza.src);
+        img.alt = pieza.alt;
+        marco.appendChild(img);
+      }
+
+      divFila.appendChild(marco);
+    });
+
+    contenedor.appendChild(divFila);
+  });
+
+  // Reproducir solo lo que se ve. Si el navegador no soporta
+  // IntersectionObserver, o si se pidió menos movimiento, quedan los
+  // pósters quietos y no se descarga ningún video.
+  const sinMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (sinMovimiento || typeof IntersectionObserver === "undefined") {
+    videos.forEach((v) => { v.preload = "none"; });
+    return;
+  }
+
+  const observador = new IntersectionObserver(
+    (entradas) => {
+      entradas.forEach((entrada) => {
+        const v = entrada.target;
+        if (entrada.isIntersecting) v.play().catch(() => {});
+        else v.pause();
+      });
+    },
+    { rootMargin: "200px 0px" }
+  );
+  videos.forEach((v) => observador.observe(v));
+}
+
 function crearFichaItem(etiqueta, valor) {
   const grupo = document.createElement("div");
   grupo.className = "proyecto__ficha-item";
@@ -323,12 +421,35 @@ function renderProyecto(contenido, idioma) {
     );
   }
 
+  // Enlace externo (sitio publicado). Solo aparece si el proyecto define
+  // "enlace" en el JSON; la url es la misma en los dos idiomas y el texto
+  // se traduce. Abre en pestaña nueva.
+  const enlaceWrapper = document.querySelector("[data-proyecto-enlace-wrapper]");
+  const enlaceExterno = document.querySelector("[data-proyecto-enlace]");
+  if (enlaceWrapper && enlaceExterno) {
+    const tiene = Boolean(datos.enlace?.url);
+    enlaceWrapper.hidden = !tiene;
+    if (tiene) {
+      enlaceExterno.href = datos.enlace.url;
+      enlaceExterno.textContent = datos.enlace.texto;
+    }
+  }
+
+  // Sección de media de abajo. Si el proyecto define "media" (filas con
+  // imágenes y videos mezclados), manda eso; si no, se usa la "galeria"
+  // clásica de dos columnas. Así conviven los dos formatos sin pisarse.
+  const contenedorMedia = document.querySelector("[data-proyecto-media]");
+  const usaMedia = Array.isArray(datos.media) && datos.media.length > 0;
+  if (contenedorMedia) {
+    renderMedia(contenedorMedia, usaMedia ? datos.media : [], contenido[idioma].proyecto);
+  }
+
   // Galería. Si el proyecto no tiene fotos cargadas, el bloque entero se
   // oculta para que no quede un hueco debajo de la descripción. Basta con
   // volver a poner objetos en "galeria" en el JSON para que reaparezca.
   const galeria = document.querySelector("[data-proyecto-galeria]");
   if (galeria) {
-    const hayFotos = Array.isArray(datos.galeria) && datos.galeria.length > 0;
+    const hayFotos = !usaMedia && Array.isArray(datos.galeria) && datos.galeria.length > 0;
     galeria.hidden = !hayFotos;
     galeria.innerHTML = "";
     // El CSS usa estos dos datos: cuántas columnas armar y con qué
