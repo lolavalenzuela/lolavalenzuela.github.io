@@ -393,6 +393,14 @@ function renderProyecto(contenido, idioma) {
       imagenPrincipal.alt = datos.altPrincipal;
       imagenPrincipal.decoding = "async";
       imagenPrincipal.dataset.elementoTransicion = nombreTransicion;
+      // Medidas reales del archivo: el navegador reserva el espacio antes
+      // de que la foto cargue, así la página no salta.
+      if (datos.anchoPrincipal) imagenPrincipal.width = datos.anchoPrincipal;
+      if (datos.altoPrincipal) imagenPrincipal.height = datos.altoPrincipal;
+      // Encuadre: el recuadro de arriba es mucho más apaisado que la foto,
+      // así que algo se recorta. "encuadrePrincipal" en el JSON decide qué
+      // franja se conserva; si el proyecto no lo define, queda centrada.
+      imagenPrincipal.style.objectPosition = datos.encuadrePrincipal || "";
     }
   }
 
@@ -449,24 +457,47 @@ function renderProyecto(contenido, idioma) {
   // volver a poner objetos en "galeria" en el JSON para que reaparezca.
   const galeria = document.querySelector("[data-proyecto-galeria]");
   if (galeria) {
-    const hayFotos = !usaMedia && Array.isArray(datos.galeria) && datos.galeria.length > 0;
+    const fotos = Array.isArray(datos.galeria) ? datos.galeria : [];
+    const hayFotos = !usaMedia && fotos.length > 0;
     galeria.hidden = !hayFotos;
     galeria.innerHTML = "";
-    // El CSS usa estos dos datos: cuántas columnas armar y con qué
-    // proporción recortar cada foto (ver "galeriaProporcion" en el JSON).
-    galeria.dataset.columnas = String(Math.min(datos.galeria.length, 3));
+    // El CSS usa estos tres datos: cuántas columnas armar, con qué
+    // proporción mostrar cada pieza, y si la pieza entra entera o llena el
+    // recuadro recortándose (ver "galeriaColumnas", "galeriaProporcion" y
+    // "galeriaAjuste" en el JSON). Si el proyecto no los define, se usa lo
+    // de siempre: hasta 3 columnas según cuántas fotos haya, y recorte.
+    galeria.dataset.columnas = String(datos.galeriaColumnas || Math.min(fotos.length, 3));
+    galeria.dataset.ajuste = datos.galeriaAjuste || "cover";
     if (datos.galeriaProporcion) {
       galeria.style.setProperty("--galeria-proporcion", datos.galeriaProporcion);
     } else {
       galeria.style.removeProperty("--galeria-proporcion");
     }
-    datos.galeria.forEach((item) => {
+    fotos.forEach((item) => {
       const img = document.createElement("img");
       img.loading = "lazy";
       img.decoding = "async";
       img.src = resolverRuta(item.src);
       img.alt = item.alt;
-      galeria.appendChild(img);
+      // Medidas reales del archivo: reservan el lugar antes de que cargue.
+      if (item.ancho) img.width = item.ancho;
+      if (item.alto) img.height = item.alto;
+      // Click para verla en grande: si la pieza define "grande" en el JSON,
+      // la imagen va envuelta en un enlace que abre ese archivo (el PDF
+      // original, en tamaño real) en una pestaña nueva. Sin "grande", la
+      // pieza no es clickeable y no cambia nada más.
+      if (item.grande) {
+        const enlace = document.createElement("a");
+        enlace.className = "proyecto__galeria-enlace";
+        enlace.href = resolverRuta(item.grande);
+        enlace.target = "_blank";
+        enlace.rel = "noopener noreferrer";
+        enlace.setAttribute("aria-label", `${item.alt} — ${etiquetas.verGrandeLabel}`);
+        enlace.appendChild(img);
+        galeria.appendChild(enlace);
+      } else {
+        galeria.appendChild(img);
+      }
     });
   }
 

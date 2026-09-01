@@ -643,10 +643,46 @@ body[data-pagina="about"] main {
    la de las fotos, "cover" no recorta nada. */
 .proyecto__galeria img {
   width: 100%;
+  /* height: auto es obligatorio, no decorativo: las piezas traen sus
+     medidas reales en el HTML (width/height) para reservar el lugar antes
+     de cargar, y si no se anula ese alto, el navegador lo respeta al pie
+     de la letra y el aspect-ratio de abajo no llega a aplicarse nunca. */
+  height: auto;
   aspect-ratio: var(--galeria-proporcion, 4 / 3);
   object-fit: cover;
   object-position: center;
   background: var(--gris-placeholder);
+}
+
+/* Piezas que no se pueden recortar (afiches, tapas, cualquier cosa donde
+   perder un borde arruine la composición). Con "galeriaAjuste": "contain"
+   en el JSON, la pieza entra entera y lo que sobra del recuadro queda en
+   negro, o sea invisible contra el fondo del sitio. Los recuadros siguen
+   midiendo todos igual, así que la grilla no se despareja. */
+.proyecto__galeria[data-ajuste="contain"] img {
+  object-fit: contain;
+  background: var(--negro);
+}
+
+/* Pieza clickeable: abre el archivo grande en una pestaña nueva. El enlace
+   solo existe si la pieza define "grande" en el JSON. El cursor de lupa y
+   el filete rojo al pasar por encima son las dos únicas señales, para no
+   sumar nada arriba de la imagen. El rojo es el mismo que usa el foco del
+   teclado, así que mouse y teclado se ven igual. */
+.proyecto__galeria-enlace {
+  display: block;
+  cursor: zoom-in;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .proyecto__galeria-enlace img {
+    transition: outline-color var(--dur-rapida) ease;
+    outline: 2px solid transparent;
+  }
+
+  .proyecto__galeria-enlace:hover img {
+    outline-color: var(--rojo);
+  }
 }
 
 /* Tablet: 2 columnas — Herramientas baja sola a la segunda fila. */
@@ -663,7 +699,10 @@ body[data-pagina="about"] main {
 /* Desktop: los tres datos en una sola fila, columnas de igual ancho.
    La galería pasa a 3 columnas solo si el proyecto tiene 3 fotos o más
    (main.js escribe data-columnas con la cantidad), para que 3 fotos no
-   dejen un hueco en la segunda fila. */
+   dejen un hueco en la segunda fila. Un proyecto puede fijar el número a
+   mano con "galeriaColumnas" en el JSON: así los seis afiches de Fuera de
+   Servicio se quedan en 2 columnas parejas (3 filas de 2) en vez de pasar
+   a 3, que es lo que harían por cantidad. */
 @media (min-width: 900px) {
   .proyecto__ficha {
     grid-template-columns: repeat(3, minmax(0, 1fr));

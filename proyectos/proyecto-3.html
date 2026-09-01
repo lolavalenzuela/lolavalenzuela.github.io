@@ -9,7 +9,7 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="Fuera de Servicio — Lola Valenzuela">
   <meta property="og:description" content="Manifiesto y serie de piezas gráficas sobre la dependencia del GPS y la optimización de los recorridos urbanos. Expuestas en la feria MAPA, Buenos Aires, 2026.">
-  <meta property="og:image" content="../assets/img/proyectos/proyecto-3.svg">
+  <meta property="og:image" content="../assets/img/proyectos/proyecto-3-portada.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Fuera de Servicio — Lola Valenzuela">
   <meta name="twitter:description" content="Manifiesto y serie de piezas gráficas sobre la dependencia del GPS y la optimización de los recorridos urbanos. Expuestas en la feria MAPA, Buenos Aires, 2026.">
@@ -44,7 +44,14 @@
   <main class="js-fade-idioma">
     <article class="proyecto">
       <div class="proyecto__hero" data-proyecto-imagen-wrapper>
-        <img class="proyecto__imagen-principal" data-proyecto-imagen-principal src="../assets/img/proyectos/proyecto-3.svg" alt="Pieza gráfica de la serie Fuera de Servicio">
+        <!-- La portada, sus medidas y su encuadre se editan en data/contenido.json
+             (proyectos.proyecto-3). Acá van repetidos solo para que la foto se vea
+             ya en el primer pintado, antes de que corra el JS; si cambiás la foto
+             en el JSON, actualizá también esta línea o va a haber un parpadeo. -->
+        <img class="proyecto__imagen-principal" data-proyecto-imagen-principal
+             src="../assets/img/proyectos/proyecto-3-portada.jpg" width="2400" height="1800"
+             style="object-position: center 20%"
+             alt="Pared del stand de la feria MAPA con los afiches de la muestra colgados en dos filas; a la izquierda, el texto de sala: MAPA COLECTIVOS 2026, CONVERGENCIAS ARTE Y DISEÑO, UTDT">
       </div>
 
       <div class="proyecto__video-wrapper" data-proyecto-video-wrapper hidden>
