@@ -129,6 +129,25 @@ function montarVideoPortada(hero, datos, textos) {
     video.appendChild(fuente);
   });
 
+  // ¿Este video lleva control de sonido? Lo decide "audio" en el JSON, no
+  // el código: los proyectos sin banda sonora no muestran ningún control
+  // ni reaccionan al click. Si la clave falta, se asume que sí tiene
+  // audio, para no cambiar el comportamiento de lo ya cargado.
+  const tieneAudio = datos.audio !== false;
+
+  if (!tieneAudio) {
+    video.muted = true;
+    hero.innerHTML = "";
+    hero.appendChild(video);
+    // Con movimiento reducido queda el póster quieto, sin loop.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      video.preload = "none";
+      return video;
+    }
+    video.play().catch(() => {});
+    return video;
+  }
+
   const boton = document.createElement("button");
   boton.type = "button";
   boton.className = "proyecto__sonido";
@@ -304,9 +323,13 @@ function renderProyecto(contenido, idioma) {
     );
   }
 
-  // Galería
+  // Galería. Si el proyecto no tiene fotos cargadas, el bloque entero se
+  // oculta para que no quede un hueco debajo de la descripción. Basta con
+  // volver a poner objetos en "galeria" en el JSON para que reaparezca.
   const galeria = document.querySelector("[data-proyecto-galeria]");
   if (galeria) {
+    const hayFotos = Array.isArray(datos.galeria) && datos.galeria.length > 0;
+    galeria.hidden = !hayFotos;
     galeria.innerHTML = "";
     // El CSS usa estos dos datos: cuántas columnas armar y con qué
     // proporción recortar cada foto (ver "galeriaProporcion" en el JSON).

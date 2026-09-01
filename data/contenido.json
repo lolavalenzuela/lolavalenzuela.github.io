@@ -142,6 +142,7 @@
           "poster": "assets/img/proyectos/proyecto-1-poster.jpg",
           "ancho": 1280,
           "alto": 960,
+          "audio": true,
           "alt": "Registro de la instalación Moluscos: sobre una pared oscura se proyecta la anatomía ilustrada de un gastrópodo mientras una mano la señala con un gesto",
           "activarSonido": "Activar el sonido del video",
           "silenciarSonido": "Silenciar el video"
@@ -161,21 +162,22 @@
         "descripcion": "Profundidad Metálica es una experiencia de realidad virtual construida a partir de un audio como punto de partida. A través de él, desarrollamos un entorno industrial, denso y distópico: estructuras de wireframe que simulan fierros y torres a escala monumental, formas sólidas que emergen de la oscuridad, voladores que orbitan el espacio. Todo fue modelado en Blender y animado en sincronía con el sonido. El resultado es un espacio que desorienta: uno se encuentra dentro de algo construido pero en ruinas, reconocible pero ajeno. La luz rebota entre las estructuras, las intensidades suben y bajan de manera aleatoria, y lo que parecía estable empieza a ceder.",
         "imagenPrincipal": "assets/img/proyectos/proyecto-2.svg",
         "altPrincipal": "Vista del entorno industrial en wireframe de Profundidad Metálica",
-        "galeria": [
-          {
-            "src": "assets/img/proyectos/proyecto-2-galeria-1.svg",
-            "alt": "Registro de la experiencia de realidad virtual Profundidad Metálica"
-          },
-          {
-            "src": "assets/img/proyectos/proyecto-2-galeria-2.svg",
-            "alt": "Registro de la experiencia de realidad virtual Profundidad Metálica"
-          }
-        ],
+        "galeria": [],
         "video": null,
         "anteriorId": "proyecto-1",
         "siguienteId": "proyecto-3",
         "audio": null,
-        "_ayudaMedia": "Cuando tengas las imágenes de este proyecto, guardalas en assets/img/proyectos/ y escribí acá la ruta. Portada/principal: \"imagenPrincipal\": \"assets/img/proyectos/proyecto-2.jpg\". Galería: el array \"galeria\" acepta las que quieras — se acomodan solas en la grilla de dos columnas, en filas sucesivas. Cada una es {\"src\": \"assets/img/proyectos/proyecto-2-galeria-1.jpg\", \"alt\": \"Descripción de la imagen\"}. Video: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) — si hay video, reemplaza a la imagen principal. Audio: \"audio\": \"assets/img/proyectos/proyecto-2-audio.mp3\". Ojo: la portada de la home se edita aparte, en home.proyectos (arriba en este mismo archivo)."
+        "_ayudaMedia": "Cuando tengas las imágenes de este proyecto, guardalas en assets/img/proyectos/ y escribí acá la ruta. Portada/principal: \"imagenPrincipal\": \"assets/img/proyectos/proyecto-2.jpg\". Galería: el array \"galeria\" acepta las que quieras — se acomodan solas en la grilla de dos columnas, en filas sucesivas. Cada una es {\"src\": \"assets/img/proyectos/proyecto-2-galeria-1.jpg\", \"alt\": \"Descripción de la imagen\"}. Video: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) — si hay video, reemplaza a la imagen principal. Audio: \"audio\": \"assets/img/proyectos/proyecto-2-audio.mp3\". Ojo: la portada de la home se edita aparte, en home.proyectos (arriba en este mismo archivo).",
+        "videoPortada": {
+          "mp4": "assets/video/proyecto-2.mp4",
+          "webm": "assets/video/proyecto-2.webm",
+          "poster": "assets/img/proyectos/proyecto-2-poster.jpg",
+          "ancho": 1920,
+          "alto": 886,
+          "audio": false,
+          "alt": "Recorrido por el entorno de realidad virtual de Profundidad Metálica: estructuras de wireframe que simulan torres y fierros emergen de la oscuridad mientras la cámara avanza entre ellas"
+        },
+        "_ayudaGaleria": "GALERÍA vacía a propósito: este proyecto no tiene fotos, así que el bloque no se renderiza y debajo de la descripción no queda ningún hueco. Para volver a activarla, agregá objetos a este array con la forma de siempre: {\"src\": \"assets/img/proyectos/proyecto-2-galeria-1.jpg\", \"alt\": \"Descripción\"}. Con una sola ya reaparece; se acomodan solas en la grilla."
       },
       "proyecto-3": {
         "titulo": "Fuera de Servicio",
@@ -430,6 +432,7 @@
           "poster": "assets/img/proyectos/proyecto-1-poster.jpg",
           "ancho": 1280,
           "alto": 960,
+          "audio": true,
           "alt": "Documentation of the Moluscos installation: the illustrated anatomy of a gastropod is projected onto a dark wall while a hand points at it with a gesture",
           "activarSonido": "Turn the video sound on",
           "silenciarSonido": "Mute the video"
@@ -447,21 +450,21 @@
         "descripcion": "Profundidad Metálica is a virtual reality experience built outward from a single audio track as its starting point. Working from that sound, we developed a dense, dystopian industrial environment: wireframe structures standing in for ironwork and towers at monumental scale, solid forms emerging out of the darkness, floating bodies orbiting the space. Everything was modelled in Blender and animated in sync with the sound. The result is a space that disorients: you find yourself inside something built but in ruins, recognisable yet foreign. Light bounces between the structures, intensities rise and fall at random, and what seemed stable begins to give way.",
         "imagenPrincipal": "assets/img/proyectos/proyecto-2.svg",
         "altPrincipal": "View of the wireframe industrial environment of Profundidad Metálica",
-        "galeria": [
-          {
-            "src": "assets/img/proyectos/proyecto-2-galeria-1.svg",
-            "alt": "Documentation of the virtual reality experience Profundidad Metálica"
-          },
-          {
-            "src": "assets/img/proyectos/proyecto-2-galeria-2.svg",
-            "alt": "Documentation of the virtual reality experience Profundidad Metálica"
-          }
-        ],
+        "galeria": [],
         "video": null,
         "anteriorId": "proyecto-1",
         "siguienteId": "proyecto-3",
         "audio": null,
-        "_mediaHelp": "Media paths are shared with the Spanish branch — edit them in es.proyectos.proyecto-2 (see the \"_ayudaMedia\" note there). Only text differs between languages."
+        "_mediaHelp": "Media paths are shared with the Spanish branch — edit them in es.proyectos.proyecto-2 (see the \"_ayudaMedia\" note there). Only text differs between languages.",
+        "videoPortada": {
+          "mp4": "assets/video/proyecto-2.mp4",
+          "webm": "assets/video/proyecto-2.webm",
+          "poster": "assets/img/proyectos/proyecto-2-poster.jpg",
+          "ancho": 1920,
+          "alto": 886,
+          "audio": false,
+          "alt": "Fly-through of the Profundidad Metálica virtual reality environment: wireframe structures standing in for towers and ironwork emerge from the darkness as the camera moves among them"
+        }
       },
       "proyecto-3": {
         "titulo": "Out of Service",
