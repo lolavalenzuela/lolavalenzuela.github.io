@@ -80,15 +80,40 @@ ul {
   --alto-header: calc(var(--tam-nombre) + var(--padding-header) * 2);
 
   /* -- Primera pantalla de las páginas de proyecto --
-     La imagen principal ocupa el alto que sobra del viewport una vez
-     descontados el header, el aire de arriba del contenido y un respiro
-     negro abajo (para que se intuya que la página sigue).
-     Para que la imagen se vea más alta o más baja, tocá --respiro-hero.
-     --alto-minimo-hero evita que quede como una franja aplastada en
-     pantallas muy bajas; si el cálculo da menos, gana el mínimo. */
-  --padding-superior-proyecto: clamp(1.5rem, 1rem + 2vw, 3rem);
-  --respiro-hero: clamp(1.5rem, 1rem + 2vw, 3rem);
+     El bloque de media (video o imagen) toma el alto que sobra de la
+     ventana una vez descontado todo lo que tiene que entrar con él:
+     el header, el aire de arriba, el espacio hasta el título, el propio
+     título y un asomo de la metadata que viene abajo.
+
+     LA PERILLA es --asomo-metadata: cuánto se deja ver de lo que sigue
+     después del título. Subirla achica el media y muestra más metadata;
+     bajarla agranda el media. Rango cómodo: 2rem (apenas se insinúa) a
+     6rem (se lee la primera fila entera). En 0 el título queda justo
+     contra el borde y no se intuye que la página sigue.
+
+     --alto-minimo-hero evita que el media quede como una franja
+     aplastada en ventanas muy bajas: si la cuenta da menos, gana el
+     mínimo y el título pasa abajo del corte (es preferible a un video
+     de 100px). */
+  --padding-superior-proyecto: clamp(1rem, 0.6rem + 1.2vw, 1.75rem);
+  --gap-hero-titulo: clamp(1rem, 0.7rem + 1vw, 1.5rem);
+  --margen-titulo-proyecto: clamp(1rem, 0.7rem + 1vw, 1.75rem);
+  --asomo-metadata: clamp(2.5rem, 2rem + 1.5vw, 4rem);
   --alto-minimo-hero: 18rem;
+
+  /* Alto reservado para el título: su tamaño por el interlineado del
+     cuerpo (1.5). Se calcula, no se escribe a mano, para que siga a
+     --tam-titulo-proyecto si lo cambiás. */
+  --alto-titulo-proyecto: calc(var(--tam-titulo-proyecto) * 1.5);
+
+  /* Todo lo que NO es el media dentro de la primera pantalla. Se define
+     una sola vez para no repetir la cuenta en las dos declaraciones de
+     alto (la de vh y la de dvh) de .proyecto__hero. */
+  --descuento-hero: calc(
+    var(--alto-header) + var(--padding-superior-proyecto) +
+    var(--gap-hero-titulo) + var(--alto-titulo-proyecto) +
+    var(--margen-titulo-proyecto) + var(--asomo-metadata)
+  );
 }
 
 body {

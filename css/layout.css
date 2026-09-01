@@ -384,20 +384,33 @@ body[data-pagina="about"] main {
   padding: var(--padding-superior-proyecto) var(--espacio-borde) clamp(2rem, 1rem + 3vw, 4rem);
 }
 
-/* Primera pantalla: la imagen principal ocupa el alto que sobra del
-   viewport, de modo que header + imagen entren completos sin scrollear y
-   el scroll arranque recién en el título y la metadata.
+/* Primera pantalla: el media cede el alto necesario para que entren con
+   él el header, el título del proyecto y un asomo de la metadata.
+   El descuento sale de --descuento-hero (base.css), que suma todo lo que
+   no es el media; ahí está también --asomo-metadata, la perilla para
+   calibrar cuánto se ve de lo que sigue.
    La primera declaración con vh es el fallback para navegadores viejos;
    la segunda, con dvh, es la que vale en los que lo soportan (en mobile
-   evita que las barras del navegador rompan el cálculo).
-   Ver --respiro-hero y --alto-minimo-hero en base.css para calibrarlo. */
+   evita que las barras del navegador rompan el cálculo). */
 .proyecto__hero {
   position: relative;   /* ancla el botón de sonido del video de portada */
   overflow: hidden;
-  margin-bottom: clamp(1.5rem, 1rem + 2vw, 2.5rem);
-  height: calc(100vh - var(--alto-header) - var(--padding-superior-proyecto) - var(--respiro-hero));
-  height: calc(100dvh - var(--alto-header) - var(--padding-superior-proyecto) - var(--respiro-hero));
+  margin-bottom: var(--gap-hero-titulo);
+  height: calc(100vh - var(--descuento-hero));
+  height: calc(100dvh - var(--descuento-hero));
   min-height: var(--alto-minimo-hero);
+}
+
+/* MOBILE (< 640px): acá no se fuerza que el título entre en la primera
+   pantalla. A ese ancho, descontar el título dejaría el media convertido
+   en una franja, así que se prioriza que el video/la foto se vean bien y
+   el título queda apenas abajo del corte. Se descuenta solo el header, el
+   aire de arriba y un respiro, sin reservar el título. */
+@media (max-width: 639px) {
+  .proyecto__hero {
+    height: calc(100vh - var(--alto-header) - var(--padding-superior-proyecto) - var(--asomo-metadata));
+    height: calc(100dvh - var(--alto-header) - var(--padding-superior-proyecto) - var(--asomo-metadata));
+  }
 }
 
 /* Llena el recuadro sin deformarse, sea cual sea la proporción original
@@ -475,7 +488,9 @@ body[data-pagina="about"] main {
   color: var(--rojo);
   font-size: var(--tam-titulo-proyecto);
   font-weight: 600;
-  margin-bottom: clamp(1rem, 0.7rem + 1vw, 1.75rem);
+  /* Mismo valor que entra en --descuento-hero: si se cambia acá, hay que
+     cambiarlo allá, así que sale de la misma variable. */
+  margin-bottom: var(--margen-titulo-proyecto);
 }
 
 /* Ficha del proyecto: Año / Tipo / Herramientas.
