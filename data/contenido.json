@@ -139,15 +139,16 @@
         "videoPortada": {
           "mp4": "assets/video/proyecto-1.mp4",
           "webm": "assets/video/proyecto-1.webm",
-          "poster": "assets/video/proyecto-1-poster.jpg",
+          "poster": "assets/img/proyectos/proyecto-1-poster.jpg",
           "ancho": 1280,
           "alto": 960,
-          "alt": "Recorrido por la sala inmersiva de Moluscos: las paredes proyectan gastrópodos que se mueven y cambian de escena",
-          "activarSonido": "Activar sonido del video",
+          "alt": "Registro de la instalación Moluscos: sobre una pared oscura se proyecta la anatomía ilustrada de un gastrópodo mientras una mano la señala con un gesto",
+          "activarSonido": "Activar el sonido del video",
           "silenciarSonido": "Silenciar el video"
         },
         "galeriaProporcion": "842 / 595",
-        "_ayudaGaleria": "GALERÍA: el array acepta las fotos que quieras. Para sumar una cuarta, agregá otro objeto con la misma forma — {\"src\": \"assets/img/proyectos/proyecto-1-galeria-4.jpg\", \"alt\": \"Descripción\"} — y acordate de agregarla también en la rama \"en\" con su alt traducido. Las columnas se acomodan solas: 1 en mobile, 2 desde 640px y 3 desde 900px cuando hay 3 o más. \"galeriaProporcion\" es la proporción del recuadro de cada foto (ancho / alto); está puesta en 842/595, que es la medida real de estas tres, para que no se recorte nada. Si sumás una foto de otra proporción, se va a recortar al centro para no descuadrar la fila."
+        "_ayudaGaleria": "GALERÍA: el array acepta las fotos que quieras. Para sumar una cuarta, agregá otro objeto con la misma forma — {\"src\": \"assets/img/proyectos/proyecto-1-galeria-4.jpg\", \"alt\": \"Descripción\"} — y acordate de agregarla también en la rama \"en\" con su alt traducido. Las columnas se acomodan solas: 1 en mobile, 2 desde 640px y 3 desde 900px cuando hay 3 o más. \"galeriaProporcion\" es la proporción del recuadro de cada foto (ancho / alto); está puesta en 842/595, que es la medida real de estas tres, para que no se recorte nada. Si sumás una foto de otra proporción, se va a recortar al centro para no descuadrar la fila.",
+        "_ayudaVideoPortada": "VIDEO DE PORTADA del proyecto (el recuadro grande de arriba, el que ocupa la primera pantalla). Si esta clave existe, reemplaza a \"imagenPrincipal\". Formato que espera el código: \"mp4\" y \"webm\" son las dos fuentes (el navegador elige; el webm va primero porque pesa menos, el mp4 es el respaldo). \"poster\" es el frame que se ve mientras carga. \"ancho\" y \"alto\" son los píxeles reales del archivo, y sirven para que no salte el layout. \"alt\" describe el video, y \"activarSonido\"/\"silenciarSonido\" son las etiquetas del botón de audio. Para los otros proyectos: copiá este bloque entero dentro de su \"proyecto-N\", cambiá el número en las rutas y reescribí los textos. Si un proyecto no tiene video, simplemente no pongas esta clave."
       },
       "proyecto-2": {
         "titulo": "Profundidad Metálica",
@@ -426,10 +427,10 @@
         "videoPortada": {
           "mp4": "assets/video/proyecto-1.mp4",
           "webm": "assets/video/proyecto-1.webm",
-          "poster": "assets/video/proyecto-1-poster.jpg",
+          "poster": "assets/img/proyectos/proyecto-1-poster.jpg",
           "ancho": 1280,
           "alto": 960,
-          "alt": "Walkthrough of the Moluscos immersive room: the walls project gastropods that move and shift between scenes",
+          "alt": "Documentation of the Moluscos installation: the illustrated anatomy of a gastropod is projected onto a dark wall while a hand points at it with a gesture",
           "activarSonido": "Turn the video sound on",
           "silenciarSonido": "Mute the video"
         },
