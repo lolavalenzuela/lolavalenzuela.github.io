@@ -424,6 +424,15 @@ body[data-pagina="about"] main {
   background: var(--gris-placeholder);
 }
 
+/* Video que entra COMPLETO en vez de recortarse (object-fit: contain, lo
+   pide "ajuste": "contain" en el JSON). Se usa cuando la proporción del
+   video no se parece a la del recuadro y recortarlo se comería contenido:
+   entonces el video entra entero y las franjas que sobran se rellenan con
+   el negro del sitio, como barras. */
+.proyecto__video-portada--completo {
+  background: var(--negro);
+}
+
 /* Control de sonido del video de portada. Va sobre el video, en la
    esquina inferior derecha del hero. El video arranca muteado porque los
    navegadores bloquean el autoplay con audio; este botón (y un click en
@@ -579,6 +588,14 @@ body[data-pagina="about"] main {
   margin-inline: auto;
 }
 
+/* Pieza que entra completa dentro de su caja (lo pide "ajuste": "contain"
+   en la fila del JSON). Lo que sobra se rellena de negro en lugar del gris
+   de placeholder, así dos piezas de proporciones distintas pueden ocupar
+   cajas idénticas sin que se les recorte nada. */
+.proyecto__media-pieza--completa {
+  background: var(--negro);
+}
+
 .proyecto__media-imagen,
 .proyecto__media-video {
   display: block;
@@ -597,10 +614,17 @@ body[data-pagina="about"] main {
 
 /* -----------------------------------------------------------
    ENLACE EXTERNO del proyecto (sitio publicado)
-   ----------------------------------------------------------- */
+   -----------------------------------------------------------
+   Va al final de la página, después de toda la media, y la cierra. Es un
+   botón de verdad: recuadro rojo, padding generoso, centrado y con aire
+   arriba y abajo. Al pasar por encima se rellena de rojo con el texto en
+   negro (la inversión completa, no un oscurecimiento: es un llamado a la
+   acción, no un bloque de la grilla).
+   Aparece solo en los proyectos que tengan "enlace" en el JSON; el resto
+   lo dejan oculto. */
 .proyecto__enlace-externo {
-  margin-bottom: clamp(1.25rem, 0.9rem + 1.5vw, 2rem);
-  font-size: var(--tam-nav);
+  margin: clamp(2.5rem, 1.8rem + 3vw, 5rem) 0;
+  text-align: center;
 }
 
 .proyecto__enlace-externo[hidden] {
@@ -608,16 +632,29 @@ body[data-pagina="about"] main {
 }
 
 .proyecto__enlace-externo a {
+  display: inline-block;
+  padding: clamp(0.9rem, 0.7rem + 0.8vw, 1.35rem)
+    clamp(1.75rem, 1.1rem + 2.6vw, 3.5rem);
+  border: 2px solid var(--rojo);
   color: var(--rojo);
-  text-decoration-line: underline;
-  text-underline-offset: 4px;
-  text-decoration-color: rgba(255, 0, 0, 0.45);
-  transition: text-decoration-color var(--dur-rapida) ease;
+  font-size: clamp(1rem, 0.9rem + 0.45vw, 1.25rem);
+  letter-spacing: 0.02em;
+  transition: background-color var(--dur-rapida) ease,
+    color var(--dur-rapida) ease;
 }
 
-.proyecto__enlace-externo a:hover,
+@media (hover: hover) and (pointer: fine) {
+  .proyecto__enlace-externo a:hover {
+    background: var(--rojo);
+    color: var(--negro);
+  }
+}
+
+/* Con teclado se ve lo mismo que con el mouse, más el contorno de foco
+   que ya pone :focus-visible en base.css. */
 .proyecto__enlace-externo a:focus-visible {
-  text-decoration-color: var(--rojo);
+  background: var(--rojo);
+  color: var(--negro);
 }
 
 .proyecto__galeria {

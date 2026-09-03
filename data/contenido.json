@@ -141,8 +141,8 @@
           "mp4": "assets/video/proyecto-1.mp4",
           "webm": "assets/video/proyecto-1.webm",
           "poster": "assets/img/proyectos/proyecto-1-poster.jpg",
-          "ancho": 1280,
-          "alto": 960,
+          "ancho": 1440,
+          "alto": 1080,
           "audio": true,
           "alt": "Registro de la instalación Moluscos: sobre una pared oscura se proyecta la anatomía ilustrada de un gastrópodo mientras una mano la señala con un gesto",
           "activarSonido": "Activar el sonido del video",
@@ -189,12 +189,12 @@
           "Photoshop"
         ],
         "descripcion": "Fuera de Servicio es un manifiesto y una serie de piezas gráficas desarrollados en colectivo a partir del eje “Ciudad”. El punto de partida fue una crítica a la dependencia del GPS y a la optimización constante de los recorridos urbanos: la idea de que todo tiene una ruta óptima, un tiempo estimado de llegada, mientras dejamos de mirar lo que nos rodea. A partir de ese manifiesto diseñamos seis piezas gráficas que traducen visualmente esa tensión entre lo automático y lo espontáneo, combinando fotografía urbana en blanco y negro, una estética de grilla y trama bitmap, y una paleta de rojo, negro y blanco con tipografía condensada de fuerte carga institucional. El resultado es una serie que interpela directamente a quien la mira, invitándolo a abandonar el modo automático y recuperar el desvío como forma de volver a habitar la ciudad. Las piezas fueron expuestas en la feria MAPA, Buenos Aires, julio de 2026.",
-        "imagenPrincipal": "assets/img/proyectos/proyecto-3-portada.jpg",
+        "imagenPrincipal": "assets/img/proyectos/proyecto-3-portada.png",
         "anchoPrincipal": 3200,
-        "altoPrincipal": 2400,
-        "encuadrePrincipal": "center 20%",
-        "_ayudaPortada": "PORTADA de la página del proyecto: la foto grande de arriba de todo. \"encuadrePrincipal\" decide qué parte de la foto se ve, porque el recuadro es mucho más apaisado que la foto y algo se recorta sí o sí. El valor es horizontal y después vertical: \"center 20%\" mantiene el centro a lo ancho y se queda con la franja de arriba (el texto de sala y la fila de afiches de arriba entran completos). Bajalo hacia 0% para mostrar más del techo, subilo hacia 100% para mostrar más del piso. \"anchoPrincipal\" y \"altoPrincipal\" son las medidas reales del archivo. El original de esta foto, sin enderezar ni retocar, está guardado en assets/img/proyectos/originales/.",
-        "altPrincipal": "Pared del stand de la feria MAPA con los afiches de la muestra colgados en dos filas; a la izquierda, el texto de sala: MAPA COLECTIVOS 2026, CONVERGENCIAS ARTE Y DISEÑO, UTDT",
+        "altoPrincipal": 1385,
+        "encuadrePrincipal": "center",
+        "_ayudaPortada": "PORTADA de la página del proyecto: la imagen grande de arriba de todo. NO es una foto: es un recorte a gran escala del AFICHE 1, sacado del PDF original en vectorial, así que se ve nítido a cualquier tamaño. El archivo ya viene con la proporción del recuadro (3200x1385, casi exactamente lo que mide el bloque), por eso \"encuadrePrincipal\" está en \"center\" y no recorta nada en desktop; en pantallas angostas el bloque se hace más alto y recorta un poco de los costados, siempre desde el centro. SI QUERÉS PROBAR CON OTRO AFICHE: no alcanza con cambiar esta ruta, porque hay que volver a recortar el PDF. Pedime el recorte y cambio este \"imagenPrincipal\" junto con \"anchoPrincipal\" y \"altoPrincipal\". La foto de la pared de la feria, ya enderezada, quedó guardada en assets/img/proyectos/originales/proyecto-3-portada-foto-enderezada.jpg, y la foto original sin tocar en assets/img/proyectos/originales/proyecto-3-portada-original.JPEG.",
+        "altPrincipal": "Fragmento a gran escala del primer afiche de la serie: la fachada de una torre en trama bitmap de alto contraste, donde las filas de ventanas se leen como bandas negras apiladas y la arista vertical del edificio parte la imagen",
         "galeriaColumnas": 2,
         "galeriaProporcion": "4 / 5",
         "galeriaAjuste": "contain",
@@ -323,13 +323,15 @@
         "_ayudaMedia": "Cuando tengas las imágenes de este proyecto, guardalas en assets/img/proyectos/ y escribí acá la ruta. Portada/principal: \"imagenPrincipal\": \"assets/img/proyectos/proyecto-6.jpg\". Galería: el array \"galeria\" acepta las que quieras — se acomodan solas en la grilla de dos columnas, en filas sucesivas. Cada una es {\"src\": \"assets/img/proyectos/proyecto-6-galeria-1.jpg\", \"alt\": \"Descripción de la imagen\"}. Video: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) — si hay video, reemplaza a la imagen principal. Audio: \"audio\": \"assets/img/proyectos/proyecto-6-audio.mp3\". Ojo: la portada de la home se edita aparte, en home.proyectos (arriba en este mismo archivo).",
         "videoPortada": {
           "mp4": "assets/video/proyecto-6-teaser.mp4",
+          "webm": "assets/video/proyecto-6-teaser.webm",
           "poster": "assets/img/proyectos/proyecto-6-teaser-poster.jpg",
-          "ancho": 1280,
-          "alto": 720,
+          "ancho": 1920,
+          "alto": 1080,
+          "ajuste": "contain",
           "audio": true,
-          "alt": "Teaser de Quomos: piezas de la identidad —el patrón de círculos encadenados, los afiches y los objetos— encadenadas en movimiento",
           "activarSonido": "Activar el sonido del video",
-          "silenciarSonido": "Silenciar el video"
+          "silenciarSonido": "Silenciar el video",
+          "alt": "Teaser de Quomos: piezas de la identidad —el patrón de círculos encadenados, los afiches y los objetos— encadenadas en movimiento"
         },
         "media": [
           [
@@ -357,55 +359,63 @@
               "alt": "Dos afiches enmarcados en una pared de azulejos blancos: uno rojo con el patrón modular en crema y otro con la pregunta “¿Un objeto nos puede unir?”"
             }
           ],
-          [
-            {
-              "tipo": "imagen",
-              "src": "assets/img/proyectos/proyecto-6-encendedores.jpg",
-              "ancho": 1138,
-              "alto": 908,
-              "alt": "Dos encendedores de la línea Quomos: uno negro con el logotipo en blanco y otro crema con el patrón de círculos en rojo y negro"
-            },
-            {
-              "tipo": "imagen",
-              "src": "assets/img/proyectos/proyecto-6-papelitos.jpg",
-              "ancho": 736,
-              "alto": 736,
-              "alt": "Volante de Quomos pegado a una columna de la calle, con tiras cortadas abajo y objetos ilustrados unidos por el patrón rojo"
-            },
-            {
-              "tipo": "imagen",
-              "src": "assets/img/proyectos/proyecto-6-sube.jpg",
-              "ancho": 1800,
-              "alto": 1350,
-              "alt": "Tarjeta SUBE intervenida con la identidad de Quomos: el patrón de círculos encadenados en gris sobre la tarjeta"
-            }
-          ],
-          [
-            {
-              "tipo": "video",
-              "mp4": "assets/video/proyecto-6-totem.mp4",
-              "poster": "assets/img/proyectos/proyecto-6-totem-poster.jpg",
-              "ancho": 832,
-              "alto": 1200,
-              "alt": "Reel vertical para tótems urbanos: el patrón de Quomos y las preguntas de la campaña en movimiento"
-            },
-            {
-              "tipo": "video",
-              "webm": "assets/video/proyecto-6-app.webm",
-              "mp4": "assets/video/proyecto-6-app.mp4",
-              "poster": "assets/img/proyectos/proyecto-6-app-poster.jpg",
-              "ancho": 734,
-              "alto": 1200,
-              "alt": "Recorrido por la app de Quomos: la pantalla de un celular navegando entre los objetos de la colección"
-            }
-          ]
+          {
+            "proporcion": "4 / 3",
+            "piezas": [
+              {
+                "tipo": "imagen",
+                "src": "assets/img/proyectos/proyecto-6-encendedores.jpg",
+                "ancho": 1138,
+                "alto": 908,
+                "alt": "Dos encendedores de la línea Quomos: uno negro con el logotipo en blanco y otro crema con el patrón de círculos en rojo y negro"
+              },
+              {
+                "tipo": "imagen",
+                "src": "assets/img/proyectos/proyecto-6-papelitos.jpg",
+                "ancho": 736,
+                "alto": 736,
+                "alt": "Volante de Quomos pegado a una columna de la calle, con tiras cortadas abajo y objetos ilustrados unidos por el patrón rojo"
+              },
+              {
+                "tipo": "imagen",
+                "src": "assets/img/proyectos/proyecto-6-sube.jpg",
+                "ancho": 1800,
+                "alto": 1350,
+                "alt": "Tarjeta SUBE intervenida con la identidad de Quomos: el patrón de círculos encadenados en gris sobre la tarjeta"
+              }
+            ]
+          },
+          {
+            "proporcion": "832 / 1200",
+            "ajuste": "contain",
+            "piezas": [
+              {
+                "tipo": "video",
+                "mp4": "assets/video/proyecto-6-totem.mp4",
+                "poster": "assets/img/proyectos/proyecto-6-totem-poster.jpg",
+                "ancho": 832,
+                "alto": 1200,
+                "alt": "Reel vertical para tótems urbanos: el patrón de Quomos y las preguntas de la campaña en movimiento"
+              },
+              {
+                "tipo": "video",
+                "webm": "assets/video/proyecto-6-app.webm",
+                "mp4": "assets/video/proyecto-6-app.mp4",
+                "poster": "assets/img/proyectos/proyecto-6-app-poster.jpg",
+                "ancho": 734,
+                "alto": 1200,
+                "alt": "Recorrido por la app de Quomos: la pantalla de un celular navegando entre los objetos de la colección"
+              }
+            ]
+          }
         ],
         "enlace": {
           "url": "https://quomos-37wx.vercel.app",
-          "texto": "ver el sitio"
+          "texto": "Ver la web de Quomos"
         },
         "_ayudaMediaSeccion": "MEDIA de la sección de abajo (reemplaza a \"galeria\" cuando existe). Es una lista de FILAS; cada fila es una lista de piezas y se reparte en tantas columnas como piezas tenga: una fila de 1 ocupa el ancho completo, una de 2 va a mitades, una de 3 a tercios. En mobile todo pasa a una columna, en este mismo orden. Cada pieza lleva \"ancho\" y \"alto\" reales para reservar su espacio y conservar su proporción: nada se recorta ni se estira. IMAGEN: {\"tipo\":\"imagen\", \"src\":\"assets/img/proyectos/archivo.jpg\", \"ancho\":1400, \"alto\":1050, \"alt\":\"...\"}. VIDEO: {\"tipo\":\"video\", \"mp4\":\"assets/video/archivo.mp4\", \"webm\":\"...\" (opcional, solo si pesa menos), \"poster\":\"assets/img/proyectos/archivo-poster.jpg\", \"ancho\":832, \"alto\":1200, \"alt\":\"...\"}. Los videos de esta sección van en loop y muteados, y arrancan solos al entrar en pantalla. Si alguno tiene audio que valga la pena, agregale \"audio\": true y aparece el mismo botón rojo del video de portada. PARA AGREGAR O SACAR una pieza: sumá o quitá objetos dentro de una fila (cambia solo cuántas columnas tiene esa fila), o agregá una fila nueva al array. Si dejás \"media\" vacío, la sección desaparece sola.",
-        "_ayudaEnlace": "ENLACE EXTERNO del proyecto (sitio publicado, Behance, etc.). Si esta clave existe, aparece un link rojo debajo de la ficha. \"url\" es la dirección y \"texto\" lo que se lee; el texto se traduce en cada idioma y la url es la misma. Abre en pestaña nueva. Si un proyecto no tiene sitio, no pongas esta clave."
+        "_ayudaEnlace": "BOTÓN al sitio publicado del proyecto. \"url\" es a dónde va y \"texto\" es lo que dice el botón (cada idioma tiene el suyo). Se dibuja al final de la página, después de toda la media, como un recuadro rojo grande, y abre en una pestaña nueva. Cualquier otro proyecto que quiera uno solo tiene que agregar su propia clave \"enlace\" con la misma forma; los que no la tienen, no lo muestran.",
+        "_ayudaFilas": "FILAS DE LA MEDIA. Cada elemento de \"media\" es una fila. Hay dos formas de escribirla. (1) Un array de piezas, como siempre: cada pieza conserva su proporción real, así que si tienen proporciones distintas la fila queda despareja. (2) Un objeto {\"proporcion\": \"4 / 3\", \"piezas\": [...]}: TODAS las piezas de esa fila usan esa misma proporción y quedan exactamente del mismo tamaño, alineadas arriba y abajo. Lo que sobra de cada foto se recorta desde el centro; si a alguna le corta algo importante, agregale \"encuadre\": \"center top\" (o \"50% 30%\", etc.) a esa pieza en particular. Si además ponés \"ajuste\": \"contain\" en la fila, las piezas entran ENTERAS y lo que sobra se rellena de negro en vez de recortarse: es lo que usan los dos videos verticales, que tienen proporciones distintas y así ocupan cajas idénticas sin perder nada."
       }
     }
   },
@@ -550,8 +560,8 @@
           "mp4": "assets/video/proyecto-1.mp4",
           "webm": "assets/video/proyecto-1.webm",
           "poster": "assets/img/proyectos/proyecto-1-poster.jpg",
-          "ancho": 1280,
-          "alto": 960,
+          "ancho": 1440,
+          "alto": 1080,
           "audio": true,
           "alt": "Documentation of the Moluscos installation: the illustrated anatomy of a gastropod is projected onto a dark wall while a hand points at it with a gesture",
           "activarSonido": "Turn the video sound on",
@@ -595,11 +605,11 @@
           "Photoshop"
         ],
         "descripcion": "Fuera de Servicio is a manifesto and a series of graphic pieces developed collectively around the theme “City”. The starting point was a critique of our dependence on GPS and the constant optimisation of urban journeys: the idea that everything has an optimal route and an estimated time of arrival, while we stop looking at what surrounds us. Working from that manifesto, we designed six graphic pieces that give visual form to the tension between the automatic and the spontaneous, combining black and white urban photography, a grid and bitmap-halftone aesthetic, and a palette of red, black and white set in condensed type with a strong institutional charge. The result is a series that addresses the viewer directly, inviting them to leave autopilot behind and reclaim the detour as a way of inhabiting the city again. The pieces were exhibited at the MAPA fair, Buenos Aires, July 2026.",
-        "imagenPrincipal": "assets/img/proyectos/proyecto-3-portada.jpg",
+        "imagenPrincipal": "assets/img/proyectos/proyecto-3-portada.png",
         "anchoPrincipal": 3200,
-        "altoPrincipal": 2400,
-        "encuadrePrincipal": "center 20%",
-        "altPrincipal": "Exhibition wall at the MAPA fair with the show's posters hung in two rows; on the left, the wall text: MAPA COLECTIVOS 2026, CONVERGENCIAS ARTE Y DISEÑO, UTDT",
+        "altoPrincipal": 1385,
+        "encuadrePrincipal": "center",
+        "altPrincipal": "Large-scale fragment of the first poster in the series: a tower facade in high-contrast bitmap halftone, where the rows of windows read as stacked black bands and the building's vertical corner splits the image",
         "galeriaColumnas": 2,
         "galeriaProporcion": "4 / 5",
         "galeriaAjuste": "contain",
@@ -727,13 +737,15 @@
         "_mediaHelp": "Media paths are shared with the Spanish branch — edit them in es.proyectos.proyecto-6 (see the \"_ayudaMedia\" note there). Only text differs between languages.",
         "videoPortada": {
           "mp4": "assets/video/proyecto-6-teaser.mp4",
+          "webm": "assets/video/proyecto-6-teaser.webm",
           "poster": "assets/img/proyectos/proyecto-6-teaser-poster.jpg",
-          "ancho": 1280,
-          "alto": 720,
+          "ancho": 1920,
+          "alto": 1080,
+          "ajuste": "contain",
           "audio": true,
-          "alt": "Quomos teaser: pieces of the identity —the chained-circle pattern, the posters and the objects— strung together in motion",
           "activarSonido": "Turn the video sound on",
-          "silenciarSonido": "Mute the video"
+          "silenciarSonido": "Mute the video",
+          "alt": "Quomos teaser: pieces of the identity —the chained-circle pattern, the posters and the objects— strung together in motion"
         },
         "media": [
           [
@@ -761,52 +773,59 @@
               "alt": "Two framed posters on a white tiled wall: one red with the modular pattern in cream, the other asking “¿Un objeto nos puede unir?”"
             }
           ],
-          [
-            {
-              "tipo": "imagen",
-              "src": "assets/img/proyectos/proyecto-6-encendedores.jpg",
-              "ancho": 1138,
-              "alto": 908,
-              "alt": "Two lighters from the Quomos line: one black with the logo in white, the other cream with the circle pattern in red and black"
-            },
-            {
-              "tipo": "imagen",
-              "src": "assets/img/proyectos/proyecto-6-papelitos.jpg",
-              "ancho": 736,
-              "alto": 736,
-              "alt": "A Quomos flyer taped to a street pole, with tear-off tabs along the bottom and illustrated objects linked by the red pattern"
-            },
-            {
-              "tipo": "imagen",
-              "src": "assets/img/proyectos/proyecto-6-sube.jpg",
-              "ancho": 1800,
-              "alto": 1350,
-              "alt": "A SUBE travel card carrying the Quomos identity: the chained-circle pattern in grey across the card"
-            }
-          ],
-          [
-            {
-              "tipo": "video",
-              "mp4": "assets/video/proyecto-6-totem.mp4",
-              "poster": "assets/img/proyectos/proyecto-6-totem-poster.jpg",
-              "ancho": 832,
-              "alto": 1200,
-              "alt": "Vertical reel for urban totems: the Quomos pattern and the campaign questions in motion"
-            },
-            {
-              "tipo": "video",
-              "webm": "assets/video/proyecto-6-app.webm",
-              "mp4": "assets/video/proyecto-6-app.mp4",
-              "poster": "assets/img/proyectos/proyecto-6-app-poster.jpg",
-              "ancho": 734,
-              "alto": 1200,
-              "alt": "Walkthrough of the Quomos app: a phone screen browsing the objects in the collection"
-            }
-          ]
+          {
+            "proporcion": "4 / 3",
+            "piezas": [
+              {
+                "tipo": "imagen",
+                "src": "assets/img/proyectos/proyecto-6-encendedores.jpg",
+                "ancho": 1138,
+                "alto": 908,
+                "alt": "Two lighters from the Quomos line: one black with the logo in white, the other cream with the circle pattern in red and black"
+              },
+              {
+                "tipo": "imagen",
+                "src": "assets/img/proyectos/proyecto-6-papelitos.jpg",
+                "ancho": 736,
+                "alto": 736,
+                "alt": "A Quomos flyer taped to a street pole, with tear-off tabs along the bottom and illustrated objects linked by the red pattern"
+              },
+              {
+                "tipo": "imagen",
+                "src": "assets/img/proyectos/proyecto-6-sube.jpg",
+                "ancho": 1800,
+                "alto": 1350,
+                "alt": "A SUBE travel card carrying the Quomos identity: the chained-circle pattern in grey across the card"
+              }
+            ]
+          },
+          {
+            "proporcion": "832 / 1200",
+            "ajuste": "contain",
+            "piezas": [
+              {
+                "tipo": "video",
+                "mp4": "assets/video/proyecto-6-totem.mp4",
+                "poster": "assets/img/proyectos/proyecto-6-totem-poster.jpg",
+                "ancho": 832,
+                "alto": 1200,
+                "alt": "Vertical reel for urban totems: the Quomos pattern and the campaign questions in motion"
+              },
+              {
+                "tipo": "video",
+                "webm": "assets/video/proyecto-6-app.webm",
+                "mp4": "assets/video/proyecto-6-app.mp4",
+                "poster": "assets/img/proyectos/proyecto-6-app-poster.jpg",
+                "ancho": 734,
+                "alto": 1200,
+                "alt": "Walkthrough of the Quomos app: a phone screen browsing the objects in the collection"
+              }
+            ]
+          }
         ],
         "enlace": {
           "url": "https://quomos-37wx.vercel.app",
-          "texto": "view the site"
+          "texto": "View the Quomos website"
         }
       }
     }

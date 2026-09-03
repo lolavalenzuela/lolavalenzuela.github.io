@@ -6,6 +6,7 @@ import { cargarContenido, resolverRuta } from "./contenido.js";
 import { obtenerIdioma, aplicarTextosEstaticos, inicializarToggleIdioma } from "./idioma.js";
 import { inicializarContacto } from "./contacto.js";
 import { inicializarTransiciones } from "./transiciones.js";
+import * as gestorAudio from "./audio.js";
 
 const NUMERO_DE_BLOQUE = { 0: "1", 1: "2", 2: "3", 3: "4", 4: "5", 5: "6" };
 
@@ -103,22 +104,41 @@ function renderAbout(contenido, idioma) {
 
 // Video de portada: ocupa el mismo recuadro que la imagen principal.
 //
-// Los navegadores bloquean el autoplay con sonido, así que primero se
-// intenta reproducir CON audio (funciona si la persona ya interactuó con
-// el sitio) y, si lo rechazan, se cae a muteado. En los dos casos queda
-// visible un botón para activar o silenciar, y el video entero es
-// clickeable para lo mismo. Con "prefers-reduced-motion" no arranca solo:
-// se muestra el póster y se reproduce a pedido.
+// El sonido NO se maneja acá: se delega entero en js/audio.js, que es el
+// único que decide qué video suena en todo el sitio. Acá solo se arma el
+// video, se arma el botón rojo y se los registra en ese gestor.
+//
+// El video arranca siempre muteado y con el botón visible desde el
+// primer momento. No es una decisión de diseño: los navegadores bloquean
+// el autoplay con sonido y no hay forma de saltearlo, así que intentar
+// arrancar con audio solo produce un botón que miente.
+//
+// Con "prefers-reduced-motion" no arranca solo: se muestra el póster y se
+// reproduce recién cuando la persona toca el botón.
 function montarVideoPortada(hero, datos, textos) {
   const video = document.createElement("video");
   video.className = "proyecto__video-portada";
   video.loop = true;
   video.playsInline = true;
+  video.muted = true;
   video.preload = "metadata";
   video.poster = resolverRuta(datos.poster);
   video.width = datos.ancho;
   video.height = datos.alto;
   video.setAttribute("aria-label", datos.alt);
+  // Encuadre del video dentro del recuadro. Por defecto "cover" (llena el
+  // bloque y recorta lo que sobra). Un proyecto puede pedir "contain" en
+  // el JSON ("ajustePortada") para que el video entre completo, con negro
+  // en lo que sobre: es lo que hace falta cuando la proporción del video
+  // no se parece a la del bloque y recortarlo se comería contenido.
+  if (datos.ajuste) {
+    video.style.objectFit = datos.ajuste;
+    // Con "contain" lo que sobra del recuadro se rellena con el negro del
+    // sitio, no con el gris de placeholder.
+    if (datos.ajuste === "contain") {
+      video.classList.add("proyecto__video-portada--completo");
+    }
+  }
   // El .webm va primero: pesa menos y el navegador que no lo soporte
   // pasa solo al .mp4.
   [["webm", "video/webm"], ["mp4", "video/mp4"]].forEach(([clave, tipo]) => {
@@ -135,12 +155,19 @@ function montarVideoPortada(hero, datos, textos) {
   // audio, para no cambiar el comportamiento de lo ya cargado.
   const tieneAudio = datos.audio !== false;
 
+  // Motivos para no arrancar solo: movimiento reducido, ahorro de datos o
+  // conexión lenta (bajar varios MB de video sin que lo pidan es un abuso).
+  const conexion = navigator.connection;
+  const arranqueDiferido =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+    Boolean(conexion?.saveData) ||
+    /^(slow-)?2g$/.test(conexion?.effectiveType || "");
+
+  hero.innerHTML = "";
+
   if (!tieneAudio) {
-    video.muted = true;
-    hero.innerHTML = "";
     hero.appendChild(video);
-    // Con movimiento reducido queda el póster quieto, sin loop.
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (arranqueDiferido) {
       video.preload = "none";
       return video;
     }
@@ -152,72 +179,55 @@ function montarVideoPortada(hero, datos, textos) {
   boton.type = "button";
   boton.className = "proyecto__sonido";
 
-  const ICONOS = {
-    // Altavoz tachado (está muteado: tocá para escuchar)
-    mudo: '<path d="M3 9v6h4l5 5V4L7 9H3zm13.6 3l2.7-2.7-1.4-1.4-2.7 2.7-2.7-2.7-1.4 1.4 2.7 2.7-2.7 2.7 1.4 1.4 2.7-2.7 2.7 2.7 1.4-1.4-2.7-2.7z"/>',
-    // Altavoz con ondas (suena: tocá para silenciar)
-    sonando: '<path d="M3 9v6h4l5 5V4L7 9H3zm11.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM12 2v2.1a7.5 7.5 0 0 1 0 15.8V22a9.5 9.5 0 0 0 0-20z"/>',
-  };
-
-  function pintarBoton() {
-    const mudo = video.muted;
-    boton.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${mudo ? ICONOS.mudo : ICONOS.sonando}</svg>`;
-    const etiqueta = mudo ? textos.activarSonido : textos.silenciarSonido;
-    boton.setAttribute("aria-label", etiqueta);
-    boton.title = etiqueta;
-    boton.setAttribute("aria-pressed", String(!mudo));
-  }
-
-  function alternarSonido() {
-    video.muted = !video.muted;
-    if (!video.muted) video.play().catch(() => {});
-    pintarBoton();
-  }
+  hero.append(video, boton);
+  // A partir de acá el estado del sonido y el dibujo del botón son
+  // asunto del gestor.
+  gestorAudio.registrar(video, boton, {
+    activar: textos.activarSonido,
+    silenciar: textos.silenciarSonido,
+  });
 
   boton.addEventListener("click", (evento) => {
     evento.preventDefault();
     evento.stopPropagation();
-    alternarSonido();
+    gestorAudio.alternar(video);
   });
 
-  // Un click en cualquier parte del video hace lo mismo.
-  hero.addEventListener("click", alternarSonido);
+  // Un click en cualquier parte del video hace lo mismo. Va en el <video>
+  // y no en el contenedor a propósito: el contenedor sobrevive a los
+  // re-renders y se le irían acumulando listeners; el video se reemplaza
+  // entero, así que su listener se va con él.
+  video.addEventListener("click", () => gestorAudio.alternar(video));
 
-  hero.innerHTML = "";
-  hero.append(video, boton);
-  pintarBoton();
-
-  // Casos en los que NO conviene arrancar solo: si la persona pidió menos
-  // movimiento, o si el navegador avisa que está ahorrando datos o que la
-  // conexión es lenta (ahí bajar 5 MB de video sin que lo pidan es un
-  // abuso). En esos casos queda el póster y el botón lo reproduce.
-  const conexion = navigator.connection;
-  const ahorroDeDatos = Boolean(conexion?.saveData);
-  const conexionLenta = /^(slow-)?2g$/.test(conexion?.effectiveType || "");
-  const sinMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  if (sinMovimiento || ahorroDeDatos || conexionLenta) {
+  if (arranqueDiferido) {
     video.preload = "none";
-    boton.addEventListener(
-      "click",
-      () => {
-        video.muted = false;
-        video.play().catch(() => {});
-        pintarBoton();
-      },
-      { once: true }
-    );
     return video;
   }
 
-  // Intento con sonido; si el navegador lo rechaza, mute y reintento.
-  video.muted = false;
-  pintarBoton();
-  video.play().catch(() => {
-    video.muted = true;
-    pintarBoton();
-    video.play().catch(() => {});
-  });
+  video.play().catch(() => {});
+
+  // Si el video se va de pantalla, se corta el sonido y se pausa. Muteo Y
+  // pauso: mutear es lo que resuelve el problema de audio, y pausar además
+  // ahorra batería y deja el video igual que los de la sección de abajo.
+  // Al volver a entrar en pantalla se reanuda la imagen pero NO el sonido:
+  // reactivarlo solo sería justo lo que no queremos, y además dejaría el
+  // ícono rojo diciendo una cosa distinta de la que pasa.
+  if (typeof IntersectionObserver !== "undefined") {
+    const observador = new IntersectionObserver(
+      (entradas) => {
+        entradas.forEach((entrada) => {
+          if (entrada.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            gestorAudio.silenciar(video);
+            video.pause();
+          }
+        });
+      },
+      { rootMargin: "0px" }
+    );
+    observador.observe(video);
+  }
 
   return video;
 }
@@ -256,7 +266,24 @@ function crearVideoMedia(pieza, textos) {
 //
 // Los videos arrancan solos cuando entran en pantalla y se pausan al salir,
 // para no tener tres reproduciéndose a la vez ni bajar datos de más.
+// "832 / 1200" -> true (es más alta que ancha). Sirve tanto para la
+// proporción propia de una pieza como para la que impone su fila.
+function esProporcionVertical(proporcion) {
+  const [ancho, alto] = String(proporcion).split("/").map((n) => parseFloat(n));
+  return Boolean(ancho && alto) && ancho < alto;
+}
+
 function renderMedia(contenedor, filas, textos) {
+  // Desmontar de verdad lo que había: un <video> que se saca del DOM con
+  // innerHTML sigue reproduciéndose (y sonando, si tuviera audio). Y el
+  // IntersectionObserver del render anterior seguiría observando elementos
+  // que ya no existen. Las dos cosas se limpian acá.
+  contenedor.querySelectorAll("video").forEach((v) => {
+    gestorAudio.olvidar(v);
+    v.pause();
+  });
+  contenedor._observadorMedia?.disconnect();
+  contenedor._observadorMedia = null;
   contenedor.innerHTML = "";
   const hayMedia = Array.isArray(filas) && filas.length > 0;
   contenedor.hidden = !hayMedia;
@@ -264,36 +291,60 @@ function renderMedia(contenedor, filas, textos) {
 
   const videos = [];
 
-  filas.forEach((fila) => {
+  filas.forEach((filaCruda) => {
+    // Una fila del JSON puede venir de dos formas:
+    //   · un array de piezas (lo de siempre): cada una conserva su propia
+    //     proporción, así que pueden quedar de altos distintos;
+    //   · un objeto { proporcion, ajuste, piezas }: todas las piezas de esa
+    //     fila usan la MISMA proporción y quedan exactamente del mismo
+    //     tamaño, alineadas arriba y abajo. Es lo que hace falta cuando la
+    //     fila tiene que leerse pareja.
+    const filaPareja = !Array.isArray(filaCruda);
+    const piezas = filaPareja ? filaCruda.piezas : filaCruda;
+    const proporcionFila = filaPareja ? filaCruda.proporcion : null;
+    const ajusteFila = filaPareja ? filaCruda.ajuste : null;
+
     const divFila = document.createElement("div");
     divFila.className = "proyecto__media-fila";
-    divFila.style.setProperty("--columnas", String(fila.length));
+    divFila.style.setProperty("--columnas", String(piezas.length));
 
-    fila.forEach((pieza) => {
+    piezas.forEach((pieza) => {
       const marco = document.createElement("figure");
       marco.className = "proyecto__media-pieza";
+      const proporcion = proporcionFila || `${pieza.ancho} / ${pieza.alto}`;
       // Las piezas verticales (video de celular, afiche parado) llevan un
       // tope de ancho: a media columna quedarían altísimas y se comerían
       // la página. Ver la clase en layout.css.
-      if (pieza.alto > pieza.ancho) marco.classList.add("proyecto__media-pieza--vertical");
-      // La proporción real del archivo reserva el espacio antes de cargar.
-      marco.style.setProperty("--proporcion", `${pieza.ancho} / ${pieza.alto}`);
-
-      if (pieza.tipo === "video") {
-        const video = crearVideoMedia(pieza, textos);
-        marco.appendChild(video);
-        videos.push(video);
-      } else {
-        const img = document.createElement("img");
-        img.className = "proyecto__media-imagen";
-        img.loading = "lazy";
-        img.decoding = "async";
-        img.width = pieza.ancho;
-        img.height = pieza.alto;
-        img.src = resolverRuta(pieza.src);
-        img.alt = pieza.alt;
-        marco.appendChild(img);
+      if (esProporcionVertical(proporcion)) {
+        marco.classList.add("proyecto__media-pieza--vertical");
       }
+      // La proporción reserva el espacio antes de que cargue el archivo.
+      marco.style.setProperty("--proporcion", proporcion);
+      // Con "contain" la pieza entra entera y lo que sobra se rellena con
+      // el negro del sitio en vez del gris de placeholder.
+      if (ajusteFila === "contain") {
+        marco.classList.add("proyecto__media-pieza--completa");
+      }
+
+      let elemento;
+      if (pieza.tipo === "video") {
+        elemento = crearVideoMedia(pieza, textos);
+        videos.push(elemento);
+      } else {
+        elemento = document.createElement("img");
+        elemento.className = "proyecto__media-imagen";
+        elemento.loading = "lazy";
+        elemento.decoding = "async";
+        elemento.width = pieza.ancho;
+        elemento.height = pieza.alto;
+        elemento.src = resolverRuta(pieza.src);
+        elemento.alt = pieza.alt;
+      }
+      if (ajusteFila) elemento.style.objectFit = ajusteFila;
+      // Cuando la fila recorta (cover), "encuadre" decide qué parte de esa
+      // pieza en particular se conserva. Ver la nota del JSON.
+      if (pieza.encuadre) elemento.style.objectPosition = pieza.encuadre;
+      marco.appendChild(elemento);
 
       divFila.appendChild(marco);
     });
@@ -321,6 +372,7 @@ function renderMedia(contenedor, filas, textos) {
     { rootMargin: "200px 0px" }
   );
   videos.forEach((v) => observador.observe(v));
+  contenedor._observadorMedia = observador;
 }
 
 function crearFichaItem(etiqueta, valor) {
@@ -367,16 +419,17 @@ function renderProyecto(contenido, idioma) {
       video.dataset.elementoTransicion = nombreTransicion;
       wrapperImagen.dataset.videoMontado = "true";
     } else if (wrapperImagen) {
-      // Cambio de idioma: solo se actualizan los textos accesibles.
+      // Cambio de idioma: el video no se remonta (perdería el punto de
+      // reproducción), solo se le pasan los textos nuevos. El botón lo
+      // repinta el gestor a partir del estado real del audio, así que no
+      // hay forma de que el ícono y el sonido queden desfasados.
       const video = wrapperImagen.querySelector("video");
       video?.setAttribute("aria-label", datos.videoPortada.alt);
-      const boton = wrapperImagen.querySelector(".proyecto__sonido");
-      if (boton && video) {
-        const etiqueta = video.muted
-          ? datos.videoPortada.activarSonido
-          : datos.videoPortada.silenciarSonido;
-        boton.setAttribute("aria-label", etiqueta);
-        boton.title = etiqueta;
+      if (video) {
+        gestorAudio.actualizarTextos(video, {
+          activar: datos.videoPortada.activarSonido,
+          silenciar: datos.videoPortada.silenciarSonido,
+        });
       }
     }
   } else if (datos.video) {
@@ -602,15 +655,35 @@ async function iniciar() {
       return;
     }
     main.classList.add("js-idioma-cambiando");
-    main.addEventListener(
-      "transitionend",
-      () => {
-        render(nuevoIdioma);
-        idiomaActual = nuevoIdioma;
-        requestAnimationFrame(() => main.classList.remove("js-idioma-cambiando"));
-      },
-      { once: true }
-    );
+
+    // El contenido se vuelve a armar cuando termina el fundido. Pero ese
+    // evento puede no llegar nunca: si la pestaña está en segundo plano, si
+    // la transición se interrumpe, o si el navegador la resuelve en cero.
+    // Y si no llega, la página se queda en blanco (opacidad 0) y encima en
+    // el idioma viejo. Así que hay dos disparadores, el evento y un reloj,
+    // y el que llega primero hace el trabajo una única vez.
+    let yaSeAplico = false;
+    let reloj = 0;
+
+    function aplicarIdioma() {
+      if (yaSeAplico) return;
+      yaSeAplico = true;
+      clearTimeout(reloj);
+      main.removeEventListener("transitionend", alTerminarFundido);
+      render(nuevoIdioma);
+      idiomaActual = nuevoIdioma;
+      requestAnimationFrame(() => main.classList.remove("js-idioma-cambiando"));
+    }
+
+    // transitionend burbujea: hay que asegurarse de que sea el fundido del
+    // propio <main> y no el de cualquier cosa que tenga adentro.
+    function alTerminarFundido(evento) {
+      if (evento.target !== main || evento.propertyName !== "opacity") return;
+      aplicarIdioma();
+    }
+
+    main.addEventListener("transitionend", alTerminarFundido);
+    reloj = setTimeout(aplicarIdioma, 400);
   });
 
   inicializarContacto();
