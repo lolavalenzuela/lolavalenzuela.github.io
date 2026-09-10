@@ -235,8 +235,7 @@
         "imagenPrincipal": "assets/img/proyectos/proyecto-3-portada.jpg",
         "anchoPrincipal": 3200,
         "altoPrincipal": 2400,
-        "encuadrePrincipal": "center",
-        "_ayudaPortada": "PORTADA de la página del proyecto: la imagen grande de arriba de todo. Es la foto de los afiches montados en la vidriera, exportada del PNG original de 4000x3000 que está en la carpeta \"PROYECTO 3/portada 3.png\" (ese archivo queda intacto, no se toca). El recuadro es más apaisado que la foto, así que algo se recorta sí o sí: \"encuadrePrincipal\" decide qué parte se conserva. Está en \"center\" porque centrado entra la franja de afiches completa. El valor es horizontal y después vertical: bajalo hacia \"center 30%\" para mostrar más chapa arriba, subilo hacia \"center 70%\" para mostrar más vereda abajo. \"anchoPrincipal\" y \"altoPrincipal\" son las medidas reales del archivo. Las portadas anteriores están en assets/img/proyectos/originales/: \"proyecto-3-portada-recorte-afiche-1.png\" (el recorte de la fachada) y \"proyecto-3-portada-foto-enderezada.jpg\" (la foto de la pared de la feria).",
+        "_ayudaPortada": "PORTADA de la página del proyecto: la imagen grande de arriba de todo. Es la foto de los afiches montados en la vidriera, exportada del PNG original de 4000x3000 que está en \"PROYECTO 3/portada 3.png\" (ese archivo queda intacto, no se toca). ESTA FOTO NO SE RECORTA: \"ajustePrincipal\" está en \"contain\", así que entra entera y no se le corta nada, ni arriba, ni abajo, ni a los costados. Por eso tampoco hay \"encuadrePrincipal\": un encuadre sólo tiene sentido cuando la imagen se recorta, y acá no se recorta. Además el recuadro toma la misma proporción que la foto (4:3), así que no le quedan franjas negras al costado: mide exactamente lo que mide la foto y queda centrado. El alto lo sigue topeando la primera pantalla, para que el título se vea al entrar sin scrollear. Si algún día querés volver al recuadro apaisado de siempre, borrá \"ajustePrincipal\" y la foto vuelve a llenar el bloque recortándose (ahí sí podés agregar \"encuadrePrincipal\" para elegir qué franja se conserva). \"anchoPrincipal\" y \"altoPrincipal\" son las medidas reales del archivo. Las portadas anteriores están en assets/img/proyectos/originales/: \"proyecto-3-portada-recorte-afiche-1.png\" (el recorte de la fachada) y \"proyecto-3-portada-foto-enderezada.jpg\" (la foto de la pared de la feria).",
         "altPrincipal": "Los afiches de Fuera de Servicio montados en la vidriera de un local a la calle: la serie en blanco, negro y rojo alineada bajo un frente de chapa acanalada y sobre una vereda de adoquines; en el centro, la pieza roja que dice “El ojo también necesita perderse”",
         "galeriaColumnas": 2,
         "galeriaProporcion": "4 / 5",
@@ -290,7 +289,8 @@
         "anteriorId": "proyecto-2",
         "siguienteId": "proyecto-4",
         "audio": null,
-        "_ayudaMedia": "Este proyecto ya tiene su material cargado: la foto de arriba se explica en \"_ayudaPortada\" y los seis afiches en \"_ayudaGaleria\", más abajo. Lo que queda libre por si algún día hace falta: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) reemplaza a la foto de arriba, y \"audio\": \"assets/img/proyectos/proyecto-3-audio.mp3\" agrega un reproductor. Ojo: la portada chica de la home se edita aparte, en home.proyectos (arriba en este mismo archivo) — es otra imagen, no esta."
+        "_ayudaMedia": "Este proyecto ya tiene su material cargado: la foto de arriba se explica en \"_ayudaPortada\" y los seis afiches en \"_ayudaGaleria\", más abajo. Lo que queda libre por si algún día hace falta: \"video\": \"https://player.vimeo.com/video/ID\" (URL de embed, no la del navegador) reemplaza a la foto de arriba, y \"audio\": \"assets/img/proyectos/proyecto-3-audio.mp3\" agrega un reproductor. Ojo: la portada chica de la home se edita aparte, en home.proyectos (arriba en este mismo archivo) — es otra imagen, no esta.",
+        "ajustePrincipal": "contain"
       },
       "proyecto-4": {
         "titulo": "Conex",
@@ -693,7 +693,6 @@
         "imagenPrincipal": "assets/img/proyectos/proyecto-3-portada.jpg",
         "anchoPrincipal": 3200,
         "altoPrincipal": 2400,
-        "encuadrePrincipal": "center",
         "altPrincipal": "The Fuera de Servicio posters installed in a shopfront window: the series in black, white and red lined up beneath a corrugated metal facade and above a cobblestone pavement; at the centre, the red piece reading “El ojo también necesita perderse”",
         "galeriaColumnas": 2,
         "galeriaProporcion": "4 / 5",
@@ -747,7 +746,8 @@
         "anteriorId": "proyecto-2",
         "siguienteId": "proyecto-4",
         "audio": null,
-        "_mediaHelp": "Media paths are shared with the Spanish branch — edit them in es.proyectos.proyecto-3 (see the \"_ayudaMedia\" note there). Only text differs between languages."
+        "_mediaHelp": "Media paths are shared with the Spanish branch — edit them in es.proyectos.proyecto-3 (see the \"_ayudaMedia\" note there). Only text differs between languages.",
+        "ajustePrincipal": "contain"
       },
       "proyecto-4": {
         "titulo": "Conex",

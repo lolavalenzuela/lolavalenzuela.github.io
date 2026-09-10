@@ -500,10 +500,49 @@ function renderProyecto(contenido, idioma) {
       // de que la foto cargue, así la página no salta.
       if (datos.anchoPrincipal) imagenPrincipal.width = datos.anchoPrincipal;
       if (datos.altoPrincipal) imagenPrincipal.height = datos.altoPrincipal;
-      // Encuadre: el recuadro de arriba es mucho más apaisado que la foto,
-      // así que algo se recorta. "encuadrePrincipal" en el JSON decide qué
-      // franja se conserva; si el proyecto no lo define, queda centrada.
-      imagenPrincipal.style.objectPosition = datos.encuadrePrincipal || "";
+      // Ajuste de la foto dentro del recuadro. Por defecto "cover": llena
+      // el bloque y recorta lo que sobra. Un proyecto puede pedir
+      // "contain" en el JSON ("ajustePrincipal") para que la foto entre
+      // ENTERA, sin que se le corte nada, y lo que sobre del recuadro se
+      // rellene con el negro del sitio. Es el mismo mecanismo que usa el
+      // video de portada de Quomos.
+      const entraCompleta = datos.ajustePrincipal === "contain";
+      imagenPrincipal.style.objectFit = datos.ajustePrincipal || "";
+      imagenPrincipal.classList.toggle(
+        "proyecto__imagen-principal--completa",
+        entraCompleta
+      );
+      // Encuadre: solo tiene sentido cuando la foto se recorta. Con
+      // "contain" no se recorta nada, así que no se aplica ninguno.
+      imagenPrincipal.style.objectPosition = entraCompleta
+        ? ""
+        : datos.encuadrePrincipal || "";
+
+      // Cuando la foto entra completa, el recuadro toma SU MISMA proporción
+      // en vez de quedarse apaisado. Si no, a una foto 4:3 dentro de un
+      // recuadro mucho más ancho le sobrarían franjas negras enormes a los
+      // costados (y en mobile, arriba y abajo). Con esto el recuadro mide
+      // lo mismo que la foto: entra entera, sin deformarse y sin que sobre
+      // nada. La altura la sigue topeando la primera pantalla.
+      const recuadro = imagenPrincipal.closest("[data-proyecto-imagen-wrapper]");
+      if (recuadro) {
+        recuadro.classList.toggle("proyecto__hero--ajustado", entraCompleta);
+        if (entraCompleta && datos.anchoPrincipal && datos.altoPrincipal) {
+          recuadro.style.setProperty(
+            "--proporcion-portada",
+            `${datos.anchoPrincipal} / ${datos.altoPrincipal}`
+          );
+          // El mismo dato como número suelto: calc() no puede multiplicar
+          // por una proporción escrita con barra, necesita un factor.
+          recuadro.style.setProperty(
+            "--factor-portada",
+            String(datos.anchoPrincipal / datos.altoPrincipal)
+          );
+        } else {
+          recuadro.style.removeProperty("--proporcion-portada");
+          recuadro.style.removeProperty("--factor-portada");
+        }
+      }
     }
   }
 

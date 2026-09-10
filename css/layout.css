@@ -424,6 +424,39 @@ body[data-pagina="about"] main {
   background: var(--gris-placeholder);
 }
 
+/* RECUADRO QUE SE ADAPTA A LA PROPORCIÓN DE SU FOTO.
+   Lo enciende main.js cuando el proyecto pide "ajustePrincipal": "contain"
+   en el JSON, y le pasa la proporción real del archivo.
+   Por qué hace falta: el recuadro de portada es deliberadamente apaisado,
+   y una foto que tiene que entrar ENTERA ahí adentro dejaría franjas
+   negras enormes a los costados (y en pantallas angostas, arriba y abajo).
+   Con esto el recuadro mide exactamente lo mismo que la foto, así que la
+   foto entra completa, sin deformarse y sin que sobre nada.
+   Cómo se comporta: el alto lo sigue mandando la primera pantalla — el
+   ancho se topea a lo que ese alto permite (de ahí el factor, que es
+   ancho/alto de la foto) y el recuadro queda centrado. En pantallas
+   angostas manda el ancho disponible y el alto baja solo, que además hace
+   que el título entre más cómodo.
+   El min-height se anula a propósito: si no, en mobile estiraría el
+   recuadro más allá de la proporción y volverían a aparecer las franjas. */
+.proyecto__hero--ajustado {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: var(--proporcion-portada, 4 / 3);
+  max-width: calc((100vh - var(--descuento-hero)) * var(--factor-portada, 1.3333));
+  max-width: calc((100dvh - var(--descuento-hero)) * var(--factor-portada, 1.3333));
+  margin-inline: auto;
+}
+
+/* Foto de portada que entra COMPLETA en vez de recortarse (object-fit:
+   contain, lo pide "ajustePrincipal": "contain" en el JSON). Se usa cuando
+   la imagen no se puede cortar por nada — un mockup, por ejemplo. Lo que
+   sobra del recuadro se rellena con el negro del sitio y no con el gris de
+   placeholder, así se lee como aire y no como un parche. */
+.proyecto__imagen-principal--completa {
+  background: var(--negro);
+}
+
 /* Video que entra COMPLETO en vez de recortarse (object-fit: contain, lo
    pide "ajuste": "contain" en el JSON). Se usa cuando la proporción del
    video no se parece a la del recuadro y recortarlo se comería contenido:
