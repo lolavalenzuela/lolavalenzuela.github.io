@@ -678,6 +678,14 @@ body[data-pagina="about"] main {
    en contenido.json (main.js la escribe acá como variable); si el
    proyecto no la define, se usa 4/3. Cuando la proporción coincide con
    la de las fotos, "cover" no recorta nada. */
+/* Cuando la foto viene en varios formatos, el elemento de la grilla pasa a
+   ser el <picture> que envuelve al <img>. Se lo hace block para que ocupe
+   la celda igual que ocupaba el <img> suelto: el tamaño lo sigue mandando
+   la regla de abajo. */
+.proyecto__galeria picture {
+  display: block;
+}
+
 .proyecto__galeria img {
   width: 100%;
   /* height: auto es obligatorio, no decorativo: las piezas traen sus

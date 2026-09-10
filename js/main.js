@@ -388,6 +388,56 @@ function crearFichaItem(etiqueta, valor) {
   return grupo;
 }
 
+// Cuánto ocupa cada foto de la galería en pantalla. El navegador lo usa
+// para decidir de qué ancho se baja el archivo, así que tiene que seguir a
+// las columnas del CSS: tres desde 900px, dos desde 640px, una abajo.
+// Sin esto, un celular se bajaría la versión de escritorio al pedo.
+const SIZES_GALERIA = "(min-width: 900px) 31vw, (min-width: 640px) 46vw, 92vw";
+
+// Una foto de la galería. Si el JSON trae "variantes", se arma un <picture>
+// con AVIF primero (pesa bastante menos) y el JPEG de respaldo para los
+// navegadores que no lo soporten, y cada formato con su srcset para que
+// cada pantalla se baje el ancho que le sirve y no más.
+// Si no trae variantes queda un <img> pelado, exactamente como antes: los
+// proyectos que todavía no las tienen no cambian en nada.
+function crearFotoGaleria(item, sizes) {
+  const img = document.createElement("img");
+  img.loading = "lazy";
+  img.decoding = "async";
+  img.src = resolverRuta(item.src);
+  img.alt = item.alt;
+  // Medidas reales del archivo: reservan el lugar antes de que cargue.
+  if (item.ancho) img.width = item.ancho;
+  if (item.alto) img.height = item.alto;
+
+  const variantes = Array.isArray(item.variantes) ? item.variantes : [];
+  if (variantes.length === 0) return img;
+
+  const medidas = sizes || SIZES_GALERIA;
+  const armarSrcset = (formato) =>
+    variantes
+      .filter((v) => v[formato] && v.ancho)
+      .map((v) => `${resolverRuta(v[formato])} ${v.ancho}w`)
+      .join(", ");
+
+  const enJpg = armarSrcset("jpg");
+  if (enJpg) {
+    img.srcset = enJpg;
+    img.sizes = medidas;
+  }
+
+  const enAvif = armarSrcset("avif");
+  if (!enAvif) return img;
+
+  const picture = document.createElement("picture");
+  const fuente = document.createElement("source");
+  fuente.type = "image/avif";
+  fuente.srcset = enAvif;
+  fuente.sizes = medidas;
+  picture.append(fuente, img);
+  return picture;
+}
+
 function renderProyecto(contenido, idioma) {
   const id = document.body.dataset.proyectoId;
   const datos = contenido[idioma].proyectos[id];
@@ -527,14 +577,7 @@ function renderProyecto(contenido, idioma) {
       galeria.style.removeProperty("--galeria-proporcion");
     }
     fotos.forEach((item) => {
-      const img = document.createElement("img");
-      img.loading = "lazy";
-      img.decoding = "async";
-      img.src = resolverRuta(item.src);
-      img.alt = item.alt;
-      // Medidas reales del archivo: reservan el lugar antes de que cargue.
-      if (item.ancho) img.width = item.ancho;
-      if (item.alto) img.height = item.alto;
+      const foto = crearFotoGaleria(item, datos.galeriaSizes);
       // Click para verla en grande: si la pieza define "grande" en el JSON,
       // la imagen va envuelta en un enlace que abre ese archivo (el PDF
       // original, en tamaño real) en una pestaña nueva. Sin "grande", la
@@ -546,10 +589,10 @@ function renderProyecto(contenido, idioma) {
         enlace.target = "_blank";
         enlace.rel = "noopener noreferrer";
         enlace.setAttribute("aria-label", `${item.alt} — ${etiquetas.verGrandeLabel}`);
-        enlace.appendChild(img);
+        enlace.appendChild(foto);
         galeria.appendChild(enlace);
       } else {
-        galeria.appendChild(img);
+        galeria.appendChild(foto);
       }
     });
   }
