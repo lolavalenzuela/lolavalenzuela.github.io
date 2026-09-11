@@ -9,7 +9,7 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="Fuera de Servicio — Lola Valenzuela">
   <meta property="og:description" content="Manifiesto y serie de piezas gráficas sobre la dependencia del GPS y la optimización de los recorridos urbanos. Expuestas en la feria MAPA, Buenos Aires, 2026.">
-  <meta property="og:image" content="../assets/img/proyectos/proyecto-3-portada.jpg">
+  <meta property="og:image" content="../assets/img/proyectos/proyecto-3-portada-a.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Fuera de Servicio — Lola Valenzuela">
   <meta name="twitter:description" content="Manifiesto y serie de piezas gráficas sobre la dependencia del GPS y la optimización de los recorridos urbanos. Expuestas en la feria MAPA, Buenos Aires, 2026.">
@@ -43,15 +43,21 @@
 
   <main class="js-fade-idioma">
     <article class="proyecto">
-      <div class="proyecto__hero" data-proyecto-imagen-wrapper>
-        <!-- La portada, sus medidas y su encuadre se editan en data/contenido.json
-             (proyectos.proyecto-3). Acá van repetidos solo para que la foto se vea
-             ya en el primer pintado, antes de que corra el JS; si cambiás la foto
-             en el JSON, actualizá también esta línea o va a haber un parpadeo. -->
-        <img class="proyecto__imagen-principal" data-proyecto-imagen-principal
-             src="../assets/img/proyectos/proyecto-3-portada.jpg" width="3200" height="2400"
-             style="object-position: center 20%"
-             alt="Pared del stand de la feria MAPA con los afiches de la muestra colgados en dos filas; a la izquierda, el texto de sala: MAPA COLECTIVOS 2026, CONVERGENCIAS ARTE Y DISEÑO, UTDT">
+      <!-- Las dos portadas, sus medidas y sus textos se editan en
+           data/contenido.json (proyectos.proyecto-3.portadas). Acá van repetidas
+           solo para que se vean ya en el primer pintado, antes de que corra el
+           JS: así la página no parpadea ni salta. El JS las reconoce y no las
+           vuelve a armar, sólo les cambia el texto al cambiar de idioma.
+           Si cambiás las fotos en el JSON, actualizá también estas dos líneas
+           (ruta y medidas) o vas a ver un parpadeo al cargar. -->
+      <div class="proyecto__hero proyecto__hero--portadas" data-proyecto-imagen-wrapper
+           style="--proporcion-portada: 2000 / 1334; --factor-portada: 1.4993">
+        <img class="proyecto__portada"
+             src="../assets/img/proyectos/proyecto-3-portada-a.jpg" width="2000" height="1334"
+             alt="El mockup de la serie en una cartelera sobre un muro de hormigón: tres afiches de Fuera de Servicio en blanco y negro, con la palabra “Desvío” en rojo sobre el primero, un pasaje urbano en el del medio y la fachada de una torre en el tercero">
+        <img class="proyecto__portada"
+             src="../assets/img/proyectos/proyecto-3-portada-b.jpg" width="2000" height="1334"
+             alt="El mismo mockup con las otras tres piezas de la serie: el afiche rojo que dice “El ojo también necesita perderse”, la tapa de alcantarilla con la flecha y la maraña de cables sobre el empedrado">
       </div>
 
       <div class="proyecto__video-wrapper" data-proyecto-video-wrapper hidden>

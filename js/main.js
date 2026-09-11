@@ -490,58 +490,78 @@ function renderProyecto(contenido, idioma) {
   } else {
     wrapperVideo?.setAttribute("hidden", "");
     wrapperImagen?.removeAttribute("hidden");
-    const imagenPrincipal = document.querySelector("[data-proyecto-imagen-principal]");
-    if (imagenPrincipal) {
-      imagenPrincipal.src = resolverRuta(datos.imagenPrincipal);
-      imagenPrincipal.alt = datos.altPrincipal;
-      imagenPrincipal.decoding = "async";
-      imagenPrincipal.dataset.elementoTransicion = nombreTransicion;
-      // Medidas reales del archivo: el navegador reserva el espacio antes
-      // de que la foto cargue, así la página no salta.
-      if (datos.anchoPrincipal) imagenPrincipal.width = datos.anchoPrincipal;
-      if (datos.altoPrincipal) imagenPrincipal.height = datos.altoPrincipal;
-      // Ajuste de la foto dentro del recuadro. Por defecto "cover": llena
-      // el bloque y recorta lo que sobra. Un proyecto puede pedir
-      // "contain" en el JSON ("ajustePrincipal") para que la foto entre
-      // ENTERA, sin que se le corte nada, y lo que sobre del recuadro se
-      // rellene con el negro del sitio. Es el mismo mecanismo que usa el
-      // video de portada de Quomos.
-      const entraCompleta = datos.ajustePrincipal === "contain";
-      imagenPrincipal.style.objectFit = datos.ajustePrincipal || "";
-      imagenPrincipal.classList.toggle(
-        "proyecto__imagen-principal--completa",
-        entraCompleta
-      );
-      // Encuadre: solo tiene sentido cuando la foto se recorta. Con
-      // "contain" no se recorta nada, así que no se aplica ninguno.
-      imagenPrincipal.style.objectPosition = entraCompleta
-        ? ""
-        : datos.encuadrePrincipal || "";
 
-      // Cuando la foto entra completa, el recuadro toma SU MISMA proporción
-      // en vez de quedarse apaisado. Si no, a una foto 4:3 dentro de un
-      // recuadro mucho más ancho le sobrarían franjas negras enormes a los
-      // costados (y en mobile, arriba y abajo). Con esto el recuadro mide
-      // lo mismo que la foto: entra entera, sin deformarse y sin que sobre
-      // nada. La altura la sigue topeando la primera pantalla.
-      const recuadro = imagenPrincipal.closest("[data-proyecto-imagen-wrapper]");
-      if (recuadro) {
-        recuadro.classList.toggle("proyecto__hero--ajustado", entraCompleta);
-        if (entraCompleta && datos.anchoPrincipal && datos.altoPrincipal) {
-          recuadro.style.setProperty(
-            "--proporcion-portada",
-            `${datos.anchoPrincipal} / ${datos.altoPrincipal}`
-          );
-          // El mismo dato como número suelto: calc() no puede multiplicar
-          // por una proporción escrita con barra, necesita un factor.
-          recuadro.style.setProperty(
-            "--factor-portada",
-            String(datos.anchoPrincipal / datos.altoPrincipal)
-          );
-        } else {
-          recuadro.style.removeProperty("--proporcion-portada");
-          recuadro.style.removeProperty("--factor-portada");
-        }
+    // PORTADA: puede ser UNA foto o VARIAS.
+    // Si el proyecto trae "portadas" en el JSON (un array), el recuadro se
+    // arma con todas ellas, cada una entera y todas del mismo tamaño. Si no,
+    // sigue el camino de siempre: una sola foto que llena el recuadro.
+    const portadas = Array.isArray(datos.portadas) ? datos.portadas : null;
+
+    if (wrapperImagen && portadas && portadas.length) {
+      wrapperImagen.classList.add("proyecto__hero--portadas");
+      // Todas las fotos de un mismo proyecto tienen que medir igual, así que
+      // la proporción de la primera manda para todas. El factor es el mismo
+      // dato como número suelto: calc() no puede multiplicar por una
+      // proporción escrita con barra.
+      wrapperImagen.style.setProperty(
+        "--proporcion-portada",
+        `${portadas[0].ancho} / ${portadas[0].alto}`
+      );
+      wrapperImagen.style.setProperty(
+        "--factor-portada",
+        String(portadas[0].ancho / portadas[0].alto)
+      );
+
+      const yaPuestas = wrapperImagen.querySelectorAll("img.proyecto__portada");
+      const sonLasMismas =
+        yaPuestas.length === portadas.length &&
+        Array.from(yaPuestas).every(
+          // Se compara "img.src" y no el atributo: resolverRuta devuelve una
+          // URL absoluta, y el atributo del HTML es relativo. Comparando la
+          // propiedad, las dos quedan resueltas contra la misma base y las
+          // fotos que ya vienen puestas en el HTML se reconocen en vez de
+          // volver a armarse (que haría parpadear la portada al cargar).
+          (img, i) => img.src === resolverRuta(portadas[i].src)
+        );
+
+      if (sonLasMismas) {
+        // Cambio de idioma: las fotos ya están cargadas, sólo cambia el texto
+        // alternativo. Volver a armarlas las haría parpadear.
+        yaPuestas.forEach((img, i) => {
+          img.alt = portadas[i].alt;
+        });
+      } else {
+        wrapperImagen.innerHTML = "";
+        portadas.forEach((foto, i) => {
+          const img = document.createElement("img");
+          img.className = "proyecto__portada";
+          img.src = resolverRuta(foto.src);
+          img.alt = foto.alt;
+          img.decoding = "async";
+          // Medidas reales del archivo: el navegador reserva el espacio
+          // antes de que la foto cargue, así la página no salta.
+          img.width = foto.ancho;
+          img.height = foto.alto;
+          // La transición desde la home aterriza en la primera.
+          if (i === 0) img.dataset.elementoTransicion = nombreTransicion;
+          wrapperImagen.appendChild(img);
+        });
+      }
+    } else {
+      const imagenPrincipal = document.querySelector("[data-proyecto-imagen-principal]");
+      if (imagenPrincipal) {
+        imagenPrincipal.src = resolverRuta(datos.imagenPrincipal);
+        imagenPrincipal.alt = datos.altPrincipal;
+        imagenPrincipal.decoding = "async";
+        imagenPrincipal.dataset.elementoTransicion = nombreTransicion;
+        // Medidas reales del archivo: el navegador reserva el espacio antes
+        // de que la foto cargue, así la página no salta.
+        if (datos.anchoPrincipal) imagenPrincipal.width = datos.anchoPrincipal;
+        if (datos.altoPrincipal) imagenPrincipal.height = datos.altoPrincipal;
+        // Encuadre: el recuadro es más apaisado que la foto, así que algo se
+        // recorta. "encuadrePrincipal" en el JSON decide qué franja se
+        // conserva; si el proyecto no lo define, queda centrada.
+        imagenPrincipal.style.objectPosition = datos.encuadrePrincipal || "";
       }
     }
   }
