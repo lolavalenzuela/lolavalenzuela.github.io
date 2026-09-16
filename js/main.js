@@ -8,59 +8,50 @@ import { inicializarContacto } from "./contacto.js";
 import { inicializarTransiciones } from "./transiciones.js";
 import * as gestorAudio from "./audio.js";
 
-// DISTRIBUCIÓN DE LA GRILLA DE LA HOME
-// Qué proyecto va en cada columna y si su caja es "corta" (un poco más
-// ancha que alta) o "alta" (un poco más alta que ancha). Los números son la
-// posición del proyecto en home.proyectos de contenido.json, contando desde
-// 0: el 0 es el primero de la lista, el 5 el sexto. Así, si reordenás los
-// proyectos en el JSON, el patrón de cajas se mantiene.
-//
-// Para que la grilla cierre en un rectángulo, todas las columnas de un
-// mismo ancho tienen que llevar la misma combinación de cajas (en tablet:
-// dos cortas y una alta cada una). Las proporciones de cada tipo de caja
-// se tocan en layout.css (--proporcion-caja-corta y --proporcion-caja-alta).
-const DISTRIBUCION_GRILLA = [
-  {
-    // Desde 900px: tres columnas, como la referencia.
-    desde: 900,
-    columnas: [
-      [[0, "corta"], [1, "alta"]],
-      [[2, "alta"], [3, "corta"]],
-      [[4, "corta"], [5, "alta"]],
-    ],
-  },
-  {
-    // De 640 a 899px: dos columnas. Con tres cajas por columna no se puede
-    // alternar perfecto y cerrar el rectángulo a la vez, así que cada
-    // columna lleva dos cortas y una alta, ubicadas para que las altas
-    // queden desfasadas y cada portada caiga en la caja que mejor le queda.
-    desde: 640,
-    columnas: [
-      [[0, "corta"], [2, "alta"], [4, "corta"]],
-      [[1, "corta"], [3, "corta"], [5, "alta"]],
-    ],
-  },
-  {
-    // Menos de 640px: una columna, los seis en orden.
-    desde: 0,
-    columnas: [
-      [[0, "corta"], [1, "corta"], [2, "alta"], [3, "corta"], [4, "corta"], [5, "alta"]],
-    ],
-  },
-];
-
-function distribucionActual() {
-  return DISTRIBUCION_GRILLA.find((d) => window.matchMedia(`(min-width: ${d.desde}px)`).matches);
+// "3" -> "03". El número va siempre con dos dígitos.
+function numeroConDosDigitos(numero) {
+  return String(numero).padStart(2, "0");
 }
 
+// Cada proyecto de la home es UN solo link que contiene su título arriba y
+// su portada abajo: clickear cualquiera de los dos lleva al proyecto, y el
+// foco del teclado rodea el bloque entero.
 function crearBloqueProyecto(proyecto) {
   const nombreTransicion = `imagen-${proyecto.id}`;
+  const numero = numeroConDosDigitos(proyecto.numero);
 
   const enlace = document.createElement("a");
   enlace.className = "bloque-proyecto";
   enlace.dataset.proyectoId = proyecto.id;
   enlace.dataset.transicion = nombreTransicion;
+  // El link sale del id y no de la posición: por más que se reordene la
+  // grilla, cada portada abre siempre su propia página.
   enlace.href = `proyectos/${proyecto.id}.html`;
+
+  // Lo que anuncia un lector de pantalla al llegar al bloque: "01,
+  // Moluscos". Se fija explícito porque, si no, leería también los
+  // paréntesis y toda la descripción de la portada.
+  enlace.setAttribute("aria-label", `${numero}, ${proyecto.titulo}`);
+
+  // Título visible: "(01) Moluscos".
+  const titulo = document.createElement("span");
+  titulo.className = "bloque-proyecto__titulo";
+
+  const numeroVisible = document.createElement("span");
+  numeroVisible.className = "bloque-proyecto__numero";
+  numeroVisible.textContent = `(${numero})`;
+
+  const nombre = document.createElement("span");
+  nombre.className = "bloque-proyecto__nombre";
+  nombre.textContent = proyecto.titulo;
+
+  titulo.append(numeroVisible, nombre);
+
+  // Caja de la portada: es la que tiene la proporción (corta o alta) y la
+  // que se atenúa al apuntar otro proyecto. El título queda afuera, así
+  // siempre se lee.
+  const caja = document.createElement("span");
+  caja.className = "bloque-proyecto__caja";
 
   const imagen = document.createElement("img");
   imagen.className = "bloque-proyecto__imagen";
@@ -73,11 +64,8 @@ function crearBloqueProyecto(proyecto) {
   // "_ayudaEncuadre" ahí). Sin valor, manda el "center" del CSS.
   if (proyecto.encuadre) imagen.style.objectPosition = proyecto.encuadre;
 
-  const titulo = document.createElement("span");
-  titulo.className = "bloque-proyecto__titulo";
-  titulo.textContent = proyecto.titulo;
-
-  enlace.append(imagen, titulo);
+  caja.appendChild(imagen);
+  enlace.append(titulo, caja);
   return enlace;
 }
 
@@ -85,29 +73,21 @@ function renderHome(contenido, idioma) {
   const grilla = document.querySelector("[data-grilla-proyectos]");
   if (!grilla) return;
 
-  const proyectos = contenido[idioma].home.proyectos;
+  // El orden lo decide "numero" en el JSON, no el orden en que están
+  // escritos en la lista.
+  const proyectos = [...contenido[idioma].home.proyectos].sort(
+    (a, b) => a.numero - b.numero
+  );
 
   if (!grilla.dataset.construida) {
-    // Primer render: crea los seis bloques una sola vez y los reparte en
-    // columnas según el ancho de la pantalla.
-    grilla.innerHTML = "";
-    const bloques = proyectos.map((proyecto) => crearBloqueProyecto(proyecto));
-    repartirGrilla(grilla, bloques);
+    // Primer render: crea los seis bloques una sola vez, en el orden de
+    // "numero". Dónde cae cada uno (columna, caja corta o alta) lo resuelve
+    // el CSS de la grilla en layout.css, así el orden del HTML es siempre el
+    // orden de lectura: el que se recorre con el teclado y el que lee un
+    // lector de pantalla.
+    grilla.replaceChildren(...proyectos.map((proyecto) => crearBloqueProyecto(proyecto)));
     grilla.dataset.construida = "true";
     grilla.classList.add("js-lista-para-animar");
-
-    // Si cambia el ancho y se cruza un punto de corte (girar la tablet,
-    // achicar la ventana), se vuelven a repartir LOS MISMOS bloques: no se
-    // recrean, así las imágenes no se vuelven a descargar.
-    DISTRIBUCION_GRILLA.forEach(({ desde }) => {
-      if (desde === 0) return;
-      window.matchMedia(`(min-width: ${desde}px)`).addEventListener("change", () => {
-        // La animación de entrada es solo para la primera vez: mover un
-        // bloque de columna la dispararía de nuevo.
-        grilla.classList.remove("js-lista-para-animar");
-        repartirGrilla(grilla, bloques);
-      });
-    });
     return;
   }
 
@@ -116,30 +96,17 @@ function renderHome(contenido, idioma) {
   proyectos.forEach((proyecto) => {
     const bloque = grilla.querySelector(`[data-proyecto-id="${proyecto.id}"]`);
     if (!bloque) return;
-    bloque.querySelector(".bloque-proyecto__titulo").textContent = proyecto.titulo;
+    // Solo cambia el nombre: el número no se traduce.
+    bloque.querySelector(".bloque-proyecto__nombre").textContent = proyecto.titulo;
+    bloque.setAttribute(
+      "aria-label",
+      `${numeroConDosDigitos(proyecto.numero)}, ${proyecto.titulo}`
+    );
     const img = bloque.querySelector(".bloque-proyecto__imagen");
     img.alt = proyecto.altImagen;
     img.src = resolverRuta(proyecto.imagen);
     if (proyecto.encuadre) img.style.objectPosition = proyecto.encuadre;
   });
-}
-
-// Arma las columnas de la grilla con la distribución que corresponde al
-// ancho actual y le marca a cada bloque qué tipo de caja le toca.
-function repartirGrilla(grilla, bloques) {
-  const { columnas } = distribucionActual();
-  const nuevas = columnas.map((lugares) => {
-    const columna = document.createElement("div");
-    columna.className = "grilla-proyectos__columna";
-    lugares.forEach(([posicion, caja]) => {
-      const bloque = bloques[posicion];
-      if (!bloque) return;
-      bloque.dataset.caja = caja;
-      columna.appendChild(bloque);
-    });
-    return columna;
-  });
-  grilla.replaceChildren(...nuevas);
 }
 
 function renderListaSimple(selector, items) {

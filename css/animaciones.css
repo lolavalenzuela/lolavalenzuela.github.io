@@ -54,28 +54,29 @@
    HOVER EN BLOQUES DE LA GRILLA (solo dispositivos con hover real)
    ----------------------------------------------------------- */
 @media (hover: hover) and (pointer: fine) {
+  /* El bloque entero (título + portada) se eleva apenas, así el título
+     acompaña a su imagen y la distancia entre los dos no cambia. */
   .bloque-proyecto {
-    transition: transform var(--dur-media) var(--ease-suave),
-      opacity var(--dur-media) var(--ease-suave);
+    transition: transform var(--dur-media) var(--ease-suave);
+  }
+
+  /* La atenuación, en cambio, es solo de la portada: los títulos de los
+     demás proyectos se siguen leyendo enteros mientras apuntás uno. */
+  .bloque-proyecto__caja {
+    transition: opacity var(--dur-media) var(--ease-suave);
   }
 
   .bloque-proyecto__imagen {
     transition: transform var(--dur-media) var(--ease-suave);
   }
 
-  .bloque-proyecto__titulo {
-    opacity: 0;
-    transform: translateY(6px);
-    transition: opacity var(--dur-media) var(--ease-suave),
-      transform var(--dur-media) var(--ease-suave);
-  }
-
-  /* Se atenúan los que NO están en hover. El ":not(:hover)" no es
-     decorativo: sin él, esta regla también alcanzaba al bloque apuntado
-     y le ganaba en especificidad al "opacity: 1" de más abajo, así que
-     se atenuaba todo por igual. */
-  .grilla-proyectos:has(.bloque-proyecto:hover) .bloque-proyecto:not(:hover) {
-    /* Bajar la opacidad funde el bloque con el fondo del sitio. La resta
+  /* Se atenúan las portadas de los que NO están en hover. El
+     ":not(:hover)" no es decorativo: sin él, la regla también alcanzaba al
+     bloque apuntado y se atenuaba todo por igual. */
+  .grilla-proyectos:has(.bloque-proyecto:hover)
+    .bloque-proyecto:not(:hover)
+    .bloque-proyecto__caja {
+    /* Bajar la opacidad funde la portada con el fondo del sitio. La resta
        convierte "cuánto se apaga" en "cuánta opacidad queda", para que la
        variable se lea en el sentido intuitivo. */
     opacity: calc(1 - var(--hover-atenuacion));
@@ -89,30 +90,16 @@
   .bloque-proyecto:hover .bloque-proyecto__imagen {
     transform: scale(var(--escala-hover-imagen));
   }
-
-  .bloque-proyecto:hover .bloque-proyecto__titulo {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .bloque-proyecto:focus-visible .bloque-proyecto__titulo {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* En touch: sin hover, respuesta mínima con :active */
 @media (hover: none), (pointer: coarse) {
-  .bloque-proyecto {
+  .bloque-proyecto__caja {
     transition: opacity var(--dur-rapida) ease;
   }
 
-  .bloque-proyecto:active {
+  .bloque-proyecto:active .bloque-proyecto__caja {
     opacity: 0.85;
-  }
-
-  .bloque-proyecto__titulo {
-    opacity: 1;
   }
 }
 

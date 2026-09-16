@@ -24,8 +24,10 @@
       }
     },
     "home": {
+      "_ayudaOrden": "ORDEN Y NUMERACIÓN de la home. \"numero\" decide en qué orden aparecen los proyectos y es el número que se ve arriba de cada portada: 1 se muestra como (01), 2 como (02), y así. Se lee por filas, de izquierda a derecha: en pantalla grande la fila de arriba es 01, 02, 03 y la de abajo 04, 05, 06. PARA REORDENAR, cambiá solo los números (sin repetirlos) EN LOS DOS IDIOMAS, \"es\" y \"en\": el orden en que están escritos en esta lista no importa, manda \"numero\". Cada portada sigue llevando a su propia página porque el link sale de \"id\", no de la posición. Qué caja le toca a cada posición (corta o alta) se decide en css/layout.css, en \"GRILLA DE PROYECTOS — home\".",
       "proyectos": [
         {
+          "numero": 1,
           "id": "proyecto-1",
           "titulo": "Moluscos",
           "altImagen": "Ilustración de un fondo marino: corales ramificados en tonos ocres, algas verdes y esponjas tubulares rosadas sobre un fondo violeta oscuro",
@@ -33,13 +35,7 @@
           "encuadre": "center"
         },
         {
-          "id": "proyecto-2",
-          "titulo": "Profundidad Metálica",
-          "altImagen": "Entorno industrial en 3D, en blanco y negro: torres de estructura wireframe atravesadas por un haz de luz",
-          "imagen": "assets/img/portada-2.jpg",
-          "encuadre": "60% center"
-        },
-        {
+          "numero": 2,
           "id": "proyecto-3",
           "titulo": "Fuera de Servicio",
           "altImagen": "Tapa de alcantarilla vista desde arriba, en alto contraste y trama bitmap: un círculo con una flecha triangular sobre el empedrado",
@@ -47,13 +43,7 @@
           "encuadre": "center"
         },
         {
-          "id": "proyecto-4",
-          "titulo": "Conex",
-          "altImagen": "Logo de Conex: la palabra CONEX en tipografía geométrica azul sobre un fondo verde lima",
-          "imagen": "assets/img/portada-4.jpg",
-          "encuadre": "center"
-        },
-        {
+          "numero": 3,
           "id": "proyecto-5",
           "titulo": "Frakto",
           "altImagen": "Visual del set Frakto: líneas verticales de glitch en verde y violeta sobre fondo negro",
@@ -61,6 +51,23 @@
           "encuadre": "center"
         },
         {
+          "numero": 4,
+          "id": "proyecto-2",
+          "titulo": "Profundidad Metálica",
+          "altImagen": "Entorno industrial en 3D, en blanco y negro: torres de estructura wireframe atravesadas por un haz de luz",
+          "imagen": "assets/img/portada-2.jpg",
+          "encuadre": "60% center"
+        },
+        {
+          "numero": 5,
+          "id": "proyecto-4",
+          "titulo": "Conex",
+          "altImagen": "Logo de Conex: la palabra CONEX en tipografía geométrica azul sobre un fondo verde lima",
+          "imagen": "assets/img/portada-4.jpg",
+          "encuadre": "center"
+        },
+        {
+          "numero": 6,
           "id": "proyecto-6",
           "titulo": "Quomos",
           "altImagen": "Vista aérea en blanco y negro de gente cruzando la calle, con el patrón modular de Quomos —círculos encadenados— superpuesto en crema sobre la multitud",
@@ -502,6 +509,7 @@
     "home": {
       "proyectos": [
         {
+          "numero": 1,
           "id": "proyecto-1",
           "titulo": "Moluscos",
           "altImagen": "Illustration of a seabed: branching corals in ochre tones, green algae and pink tube sponges against a deep purple background",
@@ -509,13 +517,7 @@
           "encuadre": "center"
         },
         {
-          "id": "proyecto-2",
-          "titulo": "Profundidad Metálica",
-          "altImagen": "Black and white 3D industrial environment: wireframe towers cut through by a shaft of light",
-          "imagen": "assets/img/portada-2.jpg",
-          "encuadre": "60% center"
-        },
-        {
+          "numero": 2,
           "id": "proyecto-3",
           "titulo": "Out of Service",
           "altImagen": "A manhole cover seen from above in high-contrast bitmap halftone: a circle with a triangular arrow set into tiled pavement",
@@ -523,13 +525,7 @@
           "encuadre": "center"
         },
         {
-          "id": "proyecto-4",
-          "titulo": "Conex",
-          "altImagen": "Conex logo: the word CONEX in geometric blue type on a lime green background",
-          "imagen": "assets/img/portada-4.jpg",
-          "encuadre": "center"
-        },
-        {
+          "numero": 3,
           "id": "proyecto-5",
           "titulo": "Frakto",
           "altImagen": "Frakto visual: vertical glitch lines in green and violet over a black background",
@@ -537,6 +533,23 @@
           "encuadre": "center"
         },
         {
+          "numero": 4,
+          "id": "proyecto-2",
+          "titulo": "Profundidad Metálica",
+          "altImagen": "Black and white 3D industrial environment: wireframe towers cut through by a shaft of light",
+          "imagen": "assets/img/portada-2.jpg",
+          "encuadre": "60% center"
+        },
+        {
+          "numero": 5,
+          "id": "proyecto-4",
+          "titulo": "Conex",
+          "altImagen": "Conex logo: the word CONEX in geometric blue type on a lime green background",
+          "imagen": "assets/img/portada-4.jpg",
+          "encuadre": "center"
+        },
+        {
+          "numero": 6,
           "id": "proyecto-6",
           "titulo": "Quomos",
           "altImagen": "Aerial black and white view of people crossing a street, with the Quomos modular pattern —chained circles— overlaid in cream across the crowd",
