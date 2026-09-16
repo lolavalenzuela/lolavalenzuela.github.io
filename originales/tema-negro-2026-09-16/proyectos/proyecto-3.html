@@ -3,22 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Frakto — Lola Valenzuela</title>
-  <meta name="description" content="Set de visuales en vivo en Resolume Arena: glitches, flashes y líneas diagonales en verde y violeta que responden al pulso de la música.">
+  <title>Fuera de Servicio — Lola Valenzuela</title>
+  <meta name="description" content="Manifiesto y serie de piezas gráficas sobre la dependencia del GPS y la optimización de los recorridos urbanos. Expuestas en la feria MAPA, Buenos Aires, 2026.">
 
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Frakto — Lola Valenzuela">
-  <meta property="og:description" content="Set de visuales en vivo en Resolume Arena: glitches, flashes y líneas diagonales en verde y violeta que responden al pulso de la música.">
-  <meta property="og:image" content="../assets/img/proyectos/proyecto-5.svg">
+  <meta property="og:title" content="Fuera de Servicio — Lola Valenzuela">
+  <meta property="og:description" content="Manifiesto y serie de piezas gráficas sobre la dependencia del GPS y la optimización de los recorridos urbanos. Expuestas en la feria MAPA, Buenos Aires, 2026.">
+  <meta property="og:image" content="../assets/img/proyectos/proyecto-3-portada-a.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Frakto — Lola Valenzuela">
-  <meta name="twitter:description" content="Set de visuales en vivo en Resolume Arena: glitches, flashes y líneas diagonales en verde y violeta que responden al pulso de la música.">
+  <meta name="twitter:title" content="Fuera de Servicio — Lola Valenzuela">
+  <meta name="twitter:description" content="Manifiesto y serie de piezas gráficas sobre la dependencia del GPS y la optimización de los recorridos urbanos. Expuestas en la feria MAPA, Buenos Aires, 2026.">
 
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-
-  <!-- Tipografía del logo: se pide antes que el CSS para que "Lola" no
-       aparezca un instante en otra letra. Ver base.css. -->
-  <link rel="preload" href="../assets/fonts/pinyon-script-latin.woff2" as="font" type="font/woff2" crossorigin>
 
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/layout.css">
@@ -32,12 +28,9 @@
     } catch (e) {}
   </script>
 </head>
-<body data-pagina="proyecto" data-proyecto-id="proyecto-5">
+<body data-pagina="proyecto" data-proyecto-id="proyecto-3">
   <header class="header">
-    <a href="../about.html" class="header__nombre" aria-label="Lola Valenzuela" data-i18n-attr="aria-label:marca.nombreCompleto">
-      <span class="header__logo" aria-hidden="true" data-i18n="marca.logo">Lola</span>
-      <span class="solo-lectores" data-i18n="marca.nombreCompleto">Lola Valenzuela</span>
-    </a>
+    <a href="../about.html" class="header__nombre">Lola Valenzuela</a>
     <nav class="header__nav" aria-label="Navegación principal">
       <button type="button" class="header__contacto" data-abrir-contacto data-i18n="nav.contacto">contacto</button>
       <div class="toggle-idioma" role="group" aria-label="Cambiar idioma">
@@ -50,8 +43,21 @@
 
   <main class="js-fade-idioma">
     <article class="proyecto">
-      <div class="proyecto__hero" data-proyecto-imagen-wrapper>
-        <img class="proyecto__imagen-principal" data-proyecto-imagen-principal src="../assets/img/proyectos/proyecto-5.svg" alt="Visual del set en vivo Frakto: glitches y líneas diagonales en verde y violeta">
+      <!-- Las dos portadas, sus medidas y sus textos se editan en
+           data/contenido.json (proyectos.proyecto-3.portadas). Acá van repetidas
+           solo para que se vean ya en el primer pintado, antes de que corra el
+           JS: así la página no parpadea ni salta. El JS las reconoce y no las
+           vuelve a armar, sólo les cambia el texto al cambiar de idioma.
+           Si cambiás las fotos en el JSON, actualizá también estas dos líneas
+           (ruta y medidas) o vas a ver un parpadeo al cargar. -->
+      <div class="proyecto__hero proyecto__hero--portadas" data-proyecto-imagen-wrapper
+           style="--proporcion-portada: 2000 / 1334; --factor-portada: 1.4993">
+        <img class="proyecto__portada"
+             src="../assets/img/proyectos/proyecto-3-portada-a.jpg" width="2000" height="1334"
+             alt="El mockup de la serie en una cartelera sobre un muro de hormigón: tres afiches de Fuera de Servicio en blanco y negro, con la palabra “Desvío” en rojo sobre el primero, un pasaje urbano en el del medio y la fachada de una torre en el tercero">
+        <img class="proyecto__portada"
+             src="../assets/img/proyectos/proyecto-3-portada-b.jpg" width="2000" height="1334"
+             alt="El mismo mockup con las otras tres piezas de la serie: el afiche rojo que dice “El ojo también necesita perderse”, la tapa de alcantarilla con la flecha y la maraña de cables sobre el empedrado">
       </div>
 
       <div class="proyecto__video-wrapper" data-proyecto-video-wrapper hidden>
@@ -62,13 +68,13 @@
         <audio controls style="width: 100%;"></audio>
       </div>
 
-      <h1 class="proyecto__titulo" data-proyecto-titulo>Frakto</h1>
+      <h1 class="proyecto__titulo" data-proyecto-titulo>Fuera de Servicio</h1>
 
       <dl class="proyecto__ficha" data-proyecto-ficha></dl>
 
       <p class="proyecto__descripcion" data-proyecto-descripcion>
-        Frakto es un set de visuales en vivo desarrollado en Resolume Arena, con glitches, flashes
-        y líneas diagonales que responden al pulso de la música.
+        Fuera de Servicio es un manifiesto y una serie de piezas gráficas desarrollados en colectivo
+        a partir del eje “Ciudad”.
       </p>
 
       <div class="proyecto__media" data-proyecto-media hidden></div>
@@ -79,10 +85,10 @@
       </p>
 
       <nav class="proyecto__navegacion" aria-label="Navegación entre proyectos">
-        <a href="proyecto-4.html" data-proyecto-anterior>
+        <a href="proyecto-2.html" data-proyecto-anterior>
           ← <span data-proyecto-anterior-titulo>proyecto anterior</span>
         </a>
-        <a href="proyecto-6.html" data-proyecto-siguiente>
+        <a href="proyecto-4.html" data-proyecto-siguiente>
           <span data-proyecto-siguiente-titulo>proyecto siguiente</span> →
         </a>
       </nav>

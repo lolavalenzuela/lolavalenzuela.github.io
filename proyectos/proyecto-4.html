@@ -16,6 +16,10 @@
 
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 
+  <!-- Tipografía del logo: se pide antes que el CSS para que "Lola" no
+       aparezca un instante en otra letra. Ver base.css. -->
+  <link rel="preload" href="../assets/fonts/pinyon-script-latin.woff2" as="font" type="font/woff2" crossorigin>
+
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/layout.css">
   <link rel="stylesheet" href="../css/animaciones.css">
@@ -30,7 +34,10 @@
 </head>
 <body data-pagina="proyecto" data-proyecto-id="proyecto-4">
   <header class="header">
-    <a href="../about.html" class="header__nombre">Lola Valenzuela</a>
+    <a href="../about.html" class="header__nombre" aria-label="Lola Valenzuela" data-i18n-attr="aria-label:marca.nombreCompleto">
+      <span class="header__logo" aria-hidden="true" data-i18n="marca.logo">Lola</span>
+      <span class="solo-lectores" data-i18n="marca.nombreCompleto">Lola Valenzuela</span>
+    </a>
     <nav class="header__nav" aria-label="Navegación principal">
       <button type="button" class="header__contacto" data-abrir-contacto data-i18n="nav.contacto">contacto</button>
       <div class="toggle-idioma" role="group" aria-label="Cambiar idioma">

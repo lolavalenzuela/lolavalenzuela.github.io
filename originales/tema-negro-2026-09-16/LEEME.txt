@@ -1,0 +1,6 @@
+Copia del sitio tal como estaba ANTES de pasar a fondo blanco, logo "Lola" y grilla nueva
+(16 de septiembre de 2026, commit 137d1f6).
+
+Estos archivos no los usa la web: están solo para poder consultarlos o recuperarlos.
+Para volver al diseño anterior completo, lo más seguro es pedirlo por git (commit 137d1f6),
+porque restaura todo junto y en sus rutas originales.

@@ -5,91 +5,57 @@
 /* -----------------------------------------------------------
    HEADER — igual en todas las páginas
    ----------------------------------------------------------- */
-/* El logo y la navegación se alinean ARRIBA (no por la línea de base):
-   el logo es una cursiva alta, y alineada por abajo la navegación quedaría
-   colgando al pie. Así "contacto" y "es/en" quedan a la altura de la parte
-   alta del logo, como en la referencia. */
 .header {
   display: flex;
-  align-items: flex-start;
+  align-items: baseline;
   justify-content: space-between;
   flex-wrap: wrap;
   row-gap: 0.5rem;
   padding: var(--padding-header) var(--espacio-borde);
 }
 
-/* -- LOGO "Lola" --
-   El link (.header__nombre) lleva adentro dos textos:
-   - .header__logo: lo que se VE, "Lola", en la cursiva del logo.
-   - .solo-lectores: lo que LEEN los lectores de pantalla y los buscadores,
-     el nombre completo "Lola Valenzuela".
-   Los dos salen de contenido.json (marca.logo y marca.nombreCompleto).
-
-   TAMAÑO: --tam-logo en base.css (páginas internas) y en el bloque "LOGO
-   GRANDE DE LA HOME" más abajo. INCLINACIÓN: --giro-logo, acá abajo. */
+/* El nombre es siempre grande, siempre en el mismo lugar: mismo tamaño y
+   misma posición en home, about y páginas de proyecto (no crece ni se
+   achica al navegar). El contraste de escala contra "contacto" y "es/en"
+   es intencional. Para ajustar el tamaño, tocá --tam-nombre en base.css;
+   para el grosor/distancia del subrayado, tocá text-decoration-thickness
+   y text-underline-offset acá abajo. */
 .header__nombre {
-  --giro-logo: -4deg;
-  display: block;
-  color: var(--color-acento);
-  view-transition-name: nombre;
-}
-
-.header__logo {
-  display: block;
-  font-family: var(--fuente-logo);
-  font-size: var(--tam-logo);
-  font-weight: 400;
+  font-size: var(--tam-nombre);
+  color: var(--rojo);
+  font-weight: 600;
+  letter-spacing: 0.01em;
   line-height: 1;
   white-space: nowrap;
-  /* Caja a la medida de la tinta: la cursiva asoma un poco por arriba de
-     su renglón y deja aire de sobra abajo. Estos dos márgenes corren la
-     caja para que ocupe exactamente el alto de --alto-logo (base.css), y
-     el margen derecho le deja lugar al trazo final de la "a", que se pasa
-     de su ancho. Con esto la inclinación no corta el bucle de la L. */
-  margin-top: 0.11em;
-  margin-bottom: calc((var(--alto-logo) - 1.11) * 1em);
-  margin-right: 0.08em;
-  /* Se rota el logo y no el header: la navegación y la grilla no se
-     mueven. El centro de giro es el centro del logo. */
-  transform: rotate(var(--giro-logo));
-  /* Subrayado preparado pero invisible: se ve insinuado al pasar el mouse
-     y firme en la propia página about (ver abajo). Va en el logo y no en
-     el link porque el subrayado no atraviesa elementos en bloque.
-     "skip-ink: none" hace que la línea sea continua y no se corte cada vez
-     que pasa por debajo del lazo de la L. */
   text-decoration-line: underline;
   text-decoration-color: transparent;
-  text-decoration-thickness: 0.018em;
-  text-decoration-skip-ink: none;
+  text-decoration-thickness: clamp(2px, 0.06em, 4px);
   text-underline-offset: 0.12em;
   transition: text-decoration-color var(--dur-rapida) ease;
+  view-transition-name: nombre;
 }
 
 /* Hover tenue en home/proyecto: anticipa el subrayado sin gritar. */
 @media (hover: hover) and (pointer: fine) {
-  .header__nombre:hover .header__logo {
-    text-decoration-color: var(--color-acento-suave);
+  .header__nombre:hover {
+    text-decoration-color: rgba(255, 0, 0, 0.4);
   }
 }
 
 /* Estado activo: subrayado firme solo en la propia página about. */
-.header__nombre[aria-current="page"] .header__logo {
-  text-decoration-color: var(--color-acento);
+.header__nombre[aria-current="page"] {
+  text-decoration-color: var(--rojo);
 }
 
-/* La navegación baja lo justo para quedar a la altura de la parte alta del
-   logo y no pegada al borde de la pantalla. Sale del tamaño del logo, así
-   acompaña cuando cambia (home grande, páginas internas más chico). */
 .header__nav {
   display: flex;
   align-items: center;
   gap: clamp(1rem, 0.7rem + 1vw, 2rem);
   font-size: var(--tam-nav);
-  margin-top: calc(var(--tam-logo) * 0.22);
 }
 
 .header__contacto {
-  color: var(--color-acento);
+  color: var(--rojo);
 }
 
 /* Toggle de idioma: es / en, el activo más opaco */
@@ -97,7 +63,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.15em;
-  color: var(--color-acento);
+  color: var(--rojo);
 }
 
 .toggle-idioma__opcion {
@@ -121,7 +87,7 @@
     left: 0;
     right: 0;
     z-index: 100;
-    background: var(--color-fondo);
+    background: var(--negro);
   }
 
   /* Compensa el alto del header fijo para que el contenido no quede tapado */
@@ -131,73 +97,35 @@
 }
 
 /* -----------------------------------------------------------
-   HOME — medidas propias
-   -----------------------------------------------------------
-   La home tiene más aire que el resto del sitio: logo grande, márgenes
-   laterales generosos y mucho espacio entre el logo y la grilla. Todas las
-   perillas están juntas acá y solo valen en la home. */
-body[data-pagina="home"] {
-  /* LOGO GRANDE DE LA HOME. A 1440px da 183px de letra: "Lola" ocupa unos
-     330px de ancho, la misma proporción que en la referencia. */
-  --tam-logo: clamp(3.75rem, 12.7vw, 12.5rem);
-  /* Márgenes laterales de la home: el logo, la navegación y la grilla
-     cuelgan del mismo margen, así quedan alineados entre sí. */
-  --margen-home: clamp(1.25rem, 6vw, 6.5rem);
-  /* Separación entre cajas, igual en horizontal y en vertical. */
-  --gap-home: clamp(0.75rem, 2.3vw, 2.25rem);
-  /* Aire arriba del logo. */
-  --padding-header: clamp(1rem, 3.5vw, 3.5rem);
-  /* Se vuelve a calcular acá a propósito: una variable que usa otras se
-     resuelve donde se declara. Si no se repite, la home seguiría usando el
-     alto del header de las páginas internas y, en mobile, el header fijo
-     taparía el principio de la grilla. */
-  --alto-header: calc(var(--tam-logo) * var(--alto-logo) + var(--padding-header) * 2);
-}
-
-body[data-pagina="home"] .header {
-  padding-inline: var(--margen-home);
-}
-
-/* -----------------------------------------------------------
    GRILLA DE PROYECTOS — home
-   -----------------------------------------------------------
-   Columnas del mismo ancho, cada una con sus cajas apiladas. Hay DOS
-   tipos de caja, todas del mismo ancho:
-     - corta: un poco más ancha que alta
-     - alta:  un poco más alta que ancha
-   Como cada columna lleva la misma combinación de cajas, todas suman el
-   mismo alto y la grilla cierra en un rectángulo prolijo, sin huecos.
-
-   QUÉ PROYECTO VA EN QUÉ COLUMNA, y si su caja es corta o alta, lo decide
-   main.js (busca "DISTRIBUCIÓN DE LA GRILLA"), porque cambia según el ancho:
-     - desde 900px: 3 columnas  → corta/alta · alta/corta · corta/alta
-     - de 640 a 899px: 2 columnas → corta/alta/corta · corta/corta/alta
-     - menos de 640px: 1 columna con los seis en orden
-
-   Las alturas NO son números fijos: salen de aspect-ratio, así la grilla
-   escala sola con el ancho de la pantalla. */
-body[data-pagina="home"] {
-  /* Proporción ancho / alto de cada tipo de caja. Subir el número de la
-     corta la hace más apaisada; bajar el de la alta la hace más vertical. */
-  --proporcion-caja-corta: 1.2;
-  --proporcion-caja-alta: 0.88;
-}
-
+   ----------------------------------------------------------- */
+/*
+  Nota técnica sobre el ritmo irregular de la grilla:
+  Se probó primero con CSS Grid puro (grid-row/grid-column explícitos).
+  El problema: CSS Grid iguala el alto de fila entre columnas, así que un
+  bloque bajo (aspect-ratio panorámico) en la misma fila que un bloque alto
+  (aspect-ratio vertical) quedaba con un hueco negro debajo — no es masonry
+  real. La solución sin JS es Flexbox: la grilla exterior es "flex-wrap"
+  (encolumna de a 3, 2 o 1 según el ancho disponible, sin media queries) y
+  cada ".grilla-proyectos__columna" es un flex column independiente que
+  apila sus 2 bloques con su propia altura (por aspect-ratio), sin compartir
+  fila con las otras columnas. Así se logra el desfasaje entre columnas de
+  la referencia en cualquier ancho, de forma completamente fluida.
+*/
 .grilla-proyectos {
   display: flex;
-  align-items: flex-start;
-  gap: var(--gap-home);
+  flex-wrap: wrap;
+  gap: var(--gap-grilla);
+  padding: 0 var(--espacio-borde) clamp(2rem, 1rem + 3vw, 4rem);
   max-width: var(--ancho-maximo);
   margin: 0 auto;
-  /* Arriba: el espacio grande entre el logo y la grilla. */
-  padding: clamp(1.5rem, 9vw, 9rem) var(--margen-home) clamp(2.5rem, 1rem + 5vw, 6rem);
 }
 
 .grilla-proyectos__columna {
   display: flex;
   flex-direction: column;
-  flex: 1 1 0;
-  gap: var(--gap-home);
+  flex: 1 1 clamp(16rem, 40vw, 24rem);
+  gap: var(--gap-grilla);
   min-width: 0;
 }
 
@@ -205,39 +133,39 @@ body[data-pagina="home"] {
   position: relative;
   display: block;
   overflow: hidden;
-  background: var(--color-placeholder);
+  background: var(--gris-placeholder);
   width: 100%;
 }
 
-.bloque-proyecto[data-caja="corta"] {
-  aspect-ratio: var(--proporcion-caja-corta);
-}
-
-.bloque-proyecto[data-caja="alta"] {
-  aspect-ratio: var(--proporcion-caja-alta);
-}
-
 .bloque-proyecto__imagen {
-  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* Título del proyecto, que aparece al pasar el mouse. Va sobre una
-   etiqueta del color de fondo del sitio: la portada puede ser clara,
-   oscura o de un color que pelee con el rojo (el verde de Conex, por
-   ejemplo), y con la etiqueta el título se lee igual sobre todas. */
+/* Proporciones de cada bloque (ver captura de referencia).
+   Para cambiar el "ritmo" de la grilla, ajustá estos aspect-ratio. */
+.bloque-proyecto[data-bloque="1"] { aspect-ratio: 3 / 2; }
+.bloque-proyecto[data-bloque="2"] { aspect-ratio: 1 / 1; }
+.bloque-proyecto[data-bloque="3"] { aspect-ratio: 4 / 5; }
+.bloque-proyecto[data-bloque="4"] { aspect-ratio: 5 / 4; }
+.bloque-proyecto[data-bloque="5"] { aspect-ratio: 8 / 5; }
+.bloque-proyecto[data-bloque="6"] { aspect-ratio: 3 / 4; }
+
 .bloque-proyecto__titulo {
   position: absolute;
   left: clamp(0.75rem, 0.5rem + 1vw, 1.25rem);
   bottom: clamp(0.75rem, 0.5rem + 1vw, 1.25rem);
-  padding: 0.3em 0.55em 0.35em;
-  background: var(--color-fondo);
-  color: var(--color-acento);
+  color: var(--rojo);
   font-size: var(--tam-nav);
   font-weight: 500;
-  line-height: 1.2;
+}
+
+/* Desktop: un poco más de aire arriba, como en la referencia */
+@media (min-width: 1024px) {
+  .grilla-proyectos {
+    padding-top: clamp(1rem, 0.5rem + 2vw, 2.5rem);
+  }
 }
 
 /* -----------------------------------------------------------
@@ -250,7 +178,7 @@ body[data-pagina="home"] {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-velo);
+  background: rgba(0, 0, 0, 0.92);
   padding: var(--espacio-borde);
 }
 
@@ -271,14 +199,14 @@ body[data-pagina="home"] {
   position: fixed;
   top: clamp(1rem, 0.75rem + 1vw, 2rem);
   right: clamp(1rem, 0.75rem + 1vw, 2rem);
-  color: var(--color-acento);
+  color: var(--rojo);
   font-size: 1.5rem;
   line-height: 1;
   padding: 0.5rem;
 }
 
 .overlay-contacto__titulo {
-  color: var(--color-acento);
+  color: var(--rojo);
   font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
   margin-bottom: 1.75rem;
   text-decoration: underline;
@@ -302,20 +230,20 @@ body[data-pagina="home"] {
 }
 
 .overlay-contacto__etiqueta {
-  color: var(--color-texto);
+  color: var(--blanco);
   font-weight: 600;
 }
 
 .overlay-contacto__dato {
   display: inline-block;
-  color: var(--color-texto);
+  color: var(--blanco);
   font-weight: 400;
   transition: color var(--dur-rapida) ease;
 }
 
 .overlay-contacto__dato:hover,
 .overlay-contacto__dato:focus-visible {
-  color: var(--color-acento);
+  color: var(--rojo);
 }
 
 /* -----------------------------------------------------------
@@ -368,7 +296,7 @@ body[data-pagina="about"] main {
   align-self: flex-start;
   flex: 0 0 auto;
   margin-top: clamp(1rem, 0.75rem + 1vw, 1.75rem);
-  color: var(--color-acento);
+  color: var(--rojo);
   font-size: var(--tam-nav);
 }
 
@@ -381,7 +309,7 @@ body[data-pagina="about"] main {
   width: 100%;
   aspect-ratio: 3 / 4;
   object-fit: cover;
-  background: var(--color-placeholder);
+  background: var(--gris-placeholder);
   order: -1;
 }
 
@@ -493,7 +421,7 @@ body[data-pagina="about"] main {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  background: var(--color-placeholder);
+  background: var(--gris-placeholder);
 }
 
 /* -----------------------------------------------------------
@@ -503,7 +431,7 @@ body[data-pagina="about"] main {
    Sirve para mostrar dos (o mas) versiones del mismo mockup y que se
    puedan comparar: por eso todas miden EXACTAMENTE lo mismo y quedan
    alineadas. Cada una entra entera, sin recortarse ni deformarse; lo que
-   sobra alrededor es el color de fondo del sitio, que se lee como aire.
+   sobra alrededor es el negro del sitio, que se lee como aire.
 
    Armado: desde 900px van una al lado de la otra, que es donde quedan mas
    grandes; por debajo se apilan, porque lado a lado quedarian diminutas.
@@ -530,7 +458,7 @@ body[data-pagina="about"] main {
   height: auto;
   aspect-ratio: var(--proporcion-portada, 3 / 2);
   object-fit: contain;
-  background: var(--color-fondo);
+  background: var(--negro);
   /* Apiladas: el alto disponible se reparte entre las dos. */
   max-width: calc(
     (100vh - var(--descuento-hero) - var(--gap-grilla)) / 2 *
@@ -559,9 +487,9 @@ body[data-pagina="about"] main {
    pide "ajuste": "contain" en el JSON). Se usa cuando la proporción del
    video no se parece a la del recuadro y recortarlo se comería contenido:
    entonces el video entra entero y las franjas que sobran se rellenan con
-   el color de fondo del sitio, como barras. */
+   el negro del sitio, como barras. */
 .proyecto__video-portada--completo {
-  background: var(--color-fondo);
+  background: var(--negro);
 }
 
 /* Control de sonido del video de portada. Va sobre el video, en la
@@ -578,8 +506,8 @@ body[data-pagina="about"] main {
   justify-content: center;
   width: 2.75rem;
   height: 2.75rem;
-  color: var(--color-acento);
-  background: var(--color-control);
+  color: var(--rojo);
+  background: rgba(0, 0, 0, 0.55);
   transition: background var(--dur-rapida) ease, opacity var(--dur-rapida) ease;
 }
 
@@ -596,7 +524,7 @@ body[data-pagina="about"] main {
 
 @media (hover: hover) and (pointer: fine) {
   .proyecto__sonido:hover {
-    background: var(--color-control-hover);
+    background: rgba(0, 0, 0, 0.8);
   }
 }
 
@@ -612,7 +540,7 @@ body[data-pagina="about"] main {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  background: var(--color-placeholder);
+  background: var(--gris-placeholder);
   margin-bottom: clamp(1.5rem, 1rem + 2vw, 2.5rem);
 }
 
@@ -625,7 +553,7 @@ body[data-pagina="about"] main {
 }
 
 .proyecto__titulo {
-  color: var(--color-acento);
+  color: var(--rojo);
   font-size: var(--tam-titulo-proyecto);
   font-weight: 600;
   /* Mismo valor que entra en --descuento-hero: si se cambia acá, hay que
@@ -644,16 +572,16 @@ body[data-pagina="about"] main {
   font-size: var(--tam-texto-chico);
   margin-bottom: clamp(1.25rem, 0.9rem + 1.5vw, 2rem);
   padding-bottom: clamp(1.25rem, 0.9rem + 1.5vw, 2rem);
-  border-bottom: 1px solid var(--color-linea);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .proyecto__ficha dt {
-  color: var(--color-texto-tenue);
+  color: var(--gris-tenue);
   margin-bottom: 0.25rem;
 }
 
 .proyecto__ficha dd {
-  color: var(--color-texto);
+  color: var(--blanco);
   /* Herramientas puede traer varios items separados por "·": que corten
      prolijo en varias líneas en vez de desbordar la columna. */
   overflow-wrap: break-word;
@@ -707,7 +635,7 @@ body[data-pagina="about"] main {
 .proyecto__media-pieza {
   margin: 0;
   aspect-ratio: var(--proporcion);
-  background: var(--color-placeholder);
+  background: var(--gris-placeholder);
   overflow: hidden;
 }
 
@@ -720,11 +648,11 @@ body[data-pagina="about"] main {
 }
 
 /* Pieza que entra completa dentro de su caja (lo pide "ajuste": "contain"
-   en la fila del JSON). Lo que sobra se rellena con el fondo del sitio en lugar del gris
+   en la fila del JSON). Lo que sobra se rellena de negro en lugar del gris
    de placeholder, así dos piezas de proporciones distintas pueden ocupar
    cajas idénticas sin que se les recorte nada. */
 .proyecto__media-pieza--completa {
-  background: var(--color-fondo);
+  background: var(--negro);
 }
 
 .proyecto__media-imagen,
@@ -748,9 +676,9 @@ body[data-pagina="about"] main {
    -----------------------------------------------------------
    Va al final de la página, después de toda la media, y la cierra. Es un
    botón de verdad: recuadro rojo, padding generoso, centrado y con aire
-   arriba y abajo. Al pasar por encima se invierte: relleno rojo con el texto
-   en el color de fondo (blanco). Es la inversión completa y no una
-   atenuación, porque es un llamado a la acción, no un bloque de la grilla.
+   arriba y abajo. Al pasar por encima se rellena de rojo con el texto en
+   negro (la inversión completa, no un oscurecimiento: es un llamado a la
+   acción, no un bloque de la grilla).
    Aparece solo en los proyectos que tengan "enlace" en el JSON; el resto
    lo dejan oculto. */
 .proyecto__enlace-externo {
@@ -766,8 +694,8 @@ body[data-pagina="about"] main {
   display: inline-block;
   padding: clamp(0.9rem, 0.7rem + 0.8vw, 1.35rem)
     clamp(1.75rem, 1.1rem + 2.6vw, 3.5rem);
-  border: 2px solid var(--color-acento);
-  color: var(--color-acento);
+  border: 2px solid var(--rojo);
+  color: var(--rojo);
   font-size: clamp(1rem, 0.9rem + 0.45vw, 1.25rem);
   letter-spacing: 0.02em;
   transition: background-color var(--dur-rapida) ease,
@@ -776,16 +704,16 @@ body[data-pagina="about"] main {
 
 @media (hover: hover) and (pointer: fine) {
   .proyecto__enlace-externo a:hover {
-    background: var(--color-acento);
-    color: var(--color-fondo);
+    background: var(--rojo);
+    color: var(--negro);
   }
 }
 
 /* Con teclado se ve lo mismo que con el mouse, más el contorno de foco
    que ya pone :focus-visible en base.css. */
 .proyecto__enlace-externo a:focus-visible {
-  background: var(--color-acento);
-  color: var(--color-fondo);
+  background: var(--rojo);
+  color: var(--negro);
 }
 
 .proyecto__galeria {
@@ -827,17 +755,17 @@ body[data-pagina="about"] main {
   aspect-ratio: var(--galeria-proporcion, 4 / 3);
   object-fit: cover;
   object-position: center;
-  background: var(--color-placeholder);
+  background: var(--gris-placeholder);
 }
 
 /* Piezas que no se pueden recortar (afiches, tapas, cualquier cosa donde
    perder un borde arruine la composición). Con "galeriaAjuste": "contain"
-   en el JSON, la pieza entra entera y lo que sobra del recuadro queda del
-   color de fondo, o sea invisible contra el fondo del sitio. Los recuadros siguen
+   en el JSON, la pieza entra entera y lo que sobra del recuadro queda en
+   negro, o sea invisible contra el fondo del sitio. Los recuadros siguen
    midiendo todos igual, así que la grilla no se despareja. */
 .proyecto__galeria[data-ajuste="contain"] img {
   object-fit: contain;
-  background: var(--color-fondo);
+  background: var(--negro);
 }
 
 /* Pieza clickeable: abre el archivo grande en una pestaña nueva. El enlace
@@ -857,7 +785,7 @@ body[data-pagina="about"] main {
   }
 
   .proyecto__galeria-enlace:hover img {
-    outline-color: var(--color-acento);
+    outline-color: var(--rojo);
   }
 }
 
@@ -895,12 +823,12 @@ body[data-pagina="about"] main {
   justify-content: space-between;
   gap: 1rem;
   padding-top: clamp(1.5rem, 1rem + 2vw, 2.5rem);
-  border-top: 1px solid var(--color-linea);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
   font-size: var(--tam-nav);
 }
 
 .proyecto__navegacion a {
-  color: var(--color-acento);
+  color: var(--rojo);
 }
 
 .proyecto__navegacion a:hover,
@@ -914,12 +842,12 @@ body[data-pagina="about"] main {
 }
 
 .proyecto__volver a {
-  color: var(--color-texto);
+  color: var(--gris-texto);
 }
 
 .proyecto__volver a:hover,
 .proyecto__volver a:focus-visible {
-  color: var(--color-acento);
+  color: var(--rojo);
 }
 
 /* -----------------------------------------------------------
@@ -930,5 +858,5 @@ body[data-pagina="about"] main {
   max-width: var(--ancho-maximo);
   margin: 0 auto;
   font-size: var(--tam-texto-chico);
-  color: var(--color-texto-tenue);
+  color: var(--gris-tenue);
 }

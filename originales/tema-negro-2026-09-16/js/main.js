@@ -8,56 +8,15 @@ import { inicializarContacto } from "./contacto.js";
 import { inicializarTransiciones } from "./transiciones.js";
 import * as gestorAudio from "./audio.js";
 
-// DISTRIBUCIÓN DE LA GRILLA DE LA HOME
-// Qué proyecto va en cada columna y si su caja es "corta" (un poco más
-// ancha que alta) o "alta" (un poco más alta que ancha). Los números son la
-// posición del proyecto en home.proyectos de contenido.json, contando desde
-// 0: el 0 es el primero de la lista, el 5 el sexto. Así, si reordenás los
-// proyectos en el JSON, el patrón de cajas se mantiene.
-//
-// Para que la grilla cierre en un rectángulo, todas las columnas de un
-// mismo ancho tienen que llevar la misma combinación de cajas (en tablet:
-// dos cortas y una alta cada una). Las proporciones de cada tipo de caja
-// se tocan en layout.css (--proporcion-caja-corta y --proporcion-caja-alta).
-const DISTRIBUCION_GRILLA = [
-  {
-    // Desde 900px: tres columnas, como la referencia.
-    desde: 900,
-    columnas: [
-      [[0, "corta"], [1, "alta"]],
-      [[2, "alta"], [3, "corta"]],
-      [[4, "corta"], [5, "alta"]],
-    ],
-  },
-  {
-    // De 640 a 899px: dos columnas. Con tres cajas por columna no se puede
-    // alternar perfecto y cerrar el rectángulo a la vez, así que cada
-    // columna lleva dos cortas y una alta, ubicadas para que las altas
-    // queden desfasadas y cada portada caiga en la caja que mejor le queda.
-    desde: 640,
-    columnas: [
-      [[0, "corta"], [2, "alta"], [4, "corta"]],
-      [[1, "corta"], [3, "corta"], [5, "alta"]],
-    ],
-  },
-  {
-    // Menos de 640px: una columna, los seis en orden.
-    desde: 0,
-    columnas: [
-      [[0, "corta"], [1, "corta"], [2, "alta"], [3, "corta"], [4, "corta"], [5, "alta"]],
-    ],
-  },
-];
+const NUMERO_DE_BLOQUE = { 0: "1", 1: "2", 2: "3", 3: "4", 4: "5", 5: "6" };
 
-function distribucionActual() {
-  return DISTRIBUCION_GRILLA.find((d) => window.matchMedia(`(min-width: ${d.desde}px)`).matches);
-}
-
-function crearBloqueProyecto(proyecto) {
+function crearBloqueProyecto(proyecto, indice) {
+  const numeroBloque = NUMERO_DE_BLOQUE[indice];
   const nombreTransicion = `imagen-${proyecto.id}`;
 
   const enlace = document.createElement("a");
   enlace.className = "bloque-proyecto";
+  enlace.dataset.bloque = numeroBloque;
   enlace.dataset.proyectoId = proyecto.id;
   enlace.dataset.transicion = nombreTransicion;
   enlace.href = `proyectos/${proyecto.id}.html`;
@@ -88,26 +47,21 @@ function renderHome(contenido, idioma) {
   const proyectos = contenido[idioma].home.proyectos;
 
   if (!grilla.dataset.construida) {
-    // Primer render: crea los seis bloques una sola vez y los reparte en
-    // columnas según el ancho de la pantalla.
+    // Primer render: arma la estructura completa (3 columnas de 2 bloques).
     grilla.innerHTML = "";
-    const bloques = proyectos.map((proyecto) => crearBloqueProyecto(proyecto));
-    repartirGrilla(grilla, bloques);
+    for (let col = 0; col < 3; col++) {
+      const columna = document.createElement("div");
+      columna.className = "grilla-proyectos__columna";
+      const item1 = proyectos[col * 2];
+      const item2 = proyectos[col * 2 + 1];
+      columna.append(
+        crearBloqueProyecto(item1, col * 2),
+        crearBloqueProyecto(item2, col * 2 + 1)
+      );
+      grilla.appendChild(columna);
+    }
     grilla.dataset.construida = "true";
     grilla.classList.add("js-lista-para-animar");
-
-    // Si cambia el ancho y se cruza un punto de corte (girar la tablet,
-    // achicar la ventana), se vuelven a repartir LOS MISMOS bloques: no se
-    // recrean, así las imágenes no se vuelven a descargar.
-    DISTRIBUCION_GRILLA.forEach(({ desde }) => {
-      if (desde === 0) return;
-      window.matchMedia(`(min-width: ${desde}px)`).addEventListener("change", () => {
-        // La animación de entrada es solo para la primera vez: mover un
-        // bloque de columna la dispararía de nuevo.
-        grilla.classList.remove("js-lista-para-animar");
-        repartirGrilla(grilla, bloques);
-      });
-    });
     return;
   }
 
@@ -122,24 +76,6 @@ function renderHome(contenido, idioma) {
     img.src = resolverRuta(proyecto.imagen);
     if (proyecto.encuadre) img.style.objectPosition = proyecto.encuadre;
   });
-}
-
-// Arma las columnas de la grilla con la distribución que corresponde al
-// ancho actual y le marca a cada bloque qué tipo de caja le toca.
-function repartirGrilla(grilla, bloques) {
-  const { columnas } = distribucionActual();
-  const nuevas = columnas.map((lugares) => {
-    const columna = document.createElement("div");
-    columna.className = "grilla-proyectos__columna";
-    lugares.forEach(([posicion, caja]) => {
-      const bloque = bloques[posicion];
-      if (!bloque) return;
-      bloque.dataset.caja = caja;
-      columna.appendChild(bloque);
-    });
-    return columna;
-  });
-  grilla.replaceChildren(...nuevas);
 }
 
 function renderListaSimple(selector, items) {

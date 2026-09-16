@@ -1,10 +1,5 @@
 {
   "es": {
-    "marca": {
-      "logo": "Lola",
-      "nombreCompleto": "Lola Valenzuela",
-      "_ayudaMarca": "LOGO del header. \"logo\" es lo que se VE, en la cursiva del logo, arriba a la izquierda en todas las páginas. \"nombreCompleto\" es lo que leen los lectores de pantalla y los buscadores cuando llegan a ese logo: por eso sigue siendo el nombre entero aunque se vea solo \"Lola\". El título de la pestaña del navegador se edita aparte, en \"meta\"."
-    },
     "nav": {
       "contacto": "contacto",
       "cerrar": "cerrar",
@@ -37,7 +32,7 @@
           "titulo": "Profundidad Metálica",
           "altImagen": "Entorno industrial en 3D, en blanco y negro: torres de estructura wireframe atravesadas por un haz de luz",
           "imagen": "assets/img/portada-2.jpg",
-          "encuadre": "60% center"
+          "encuadre": "center"
         },
         {
           "id": "proyecto-3",
@@ -65,10 +60,10 @@
           "titulo": "Quomos",
           "altImagen": "Vista aérea en blanco y negro de gente cruzando la calle, con el patrón modular de Quomos —círculos encadenados— superpuesto en crema sobre la multitud",
           "imagen": "assets/img/portada-6.jpg",
-          "encuadre": "center 80%"
+          "encuadre": "center"
         }
       ],
-      "_ayudaEncuadre": "ENCUADRE de esta portada en la grilla de la home. Las cajas son de dos tipos, \"corta\" (un poco más ancha que alta) y \"alta\" (un poco más alta que ancha), y cada foto se recorta para llenar la suya. \"encuadre\" decide qué parte se conserva. Por defecto es \"center\" (el centro). Si a alguna foto le corta algo importante, cambiá este valor por: \"top\" (conserva la parte de arriba), \"bottom\", \"left\", \"right\", o una combinación como \"center top\" o \"left bottom\". También acepta porcentajes, primero el horizontal y después el vertical, ej: \"60% center\" (0% = izquierda/arriba, 100% = derecha/abajo). Hoy Profundidad Metálica usa \"60% center\" para no perder el haz de luz y Quomos usa \"center 80%\" para conservar el patrón de círculos. OJO: la misma foto cae en caja alta en pantallas grandes y en caja corta en tablet, así que un encuadre muy extremo puede quedar bien en una y mal en otra. Solo afecta a la portada de la home, no a la imagen de la página del proyecto."
+      "_ayudaEncuadre": "ENCUADRE de esta portada en la grilla de la home. Como cada foto tiene su propia proporción y el bloque tiene la suya, la imagen se recorta para llenarlo. \"encuadre\" decide qué parte se conserva. Por defecto es \"center\" (el centro). Si a alguna foto le corta algo importante, cambiá este valor por: \"top\" (conserva la parte de arriba), \"bottom\", \"left\", \"right\", o una combinación como \"center top\" o \"left bottom\". También acepta porcentajes, ej: \"50% 30%\" (0% = arriba/izquierda, 100% = abajo/derecha). Solo afecta a la portada de la home, no a la imagen de la página del proyecto."
     },
     "about": {
       "nombre": "Lola Valenzuela",
@@ -477,10 +472,6 @@
     }
   },
   "en": {
-    "marca": {
-      "logo": "Lola",
-      "nombreCompleto": "Lola Valenzuela"
-    },
     "nav": {
       "contacto": "contact",
       "cerrar": "close",
@@ -513,7 +504,7 @@
           "titulo": "Profundidad Metálica",
           "altImagen": "Black and white 3D industrial environment: wireframe towers cut through by a shaft of light",
           "imagen": "assets/img/portada-2.jpg",
-          "encuadre": "60% center"
+          "encuadre": "center"
         },
         {
           "id": "proyecto-3",
@@ -541,7 +532,7 @@
           "titulo": "Quomos",
           "altImagen": "Aerial black and white view of people crossing a street, with the Quomos modular pattern —chained circles— overlaid in cream across the crowd",
           "imagen": "assets/img/portada-6.jpg",
-          "encuadre": "center 80%"
+          "encuadre": "center"
         }
       ]
     },

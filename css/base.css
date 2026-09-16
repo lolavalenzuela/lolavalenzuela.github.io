@@ -2,6 +2,22 @@
    BASE.CSS — reset, variables globales y tipografía
    ========================================================= */
 
+/* -- LUGAR PARA ALTESSE STD (Adobe Fonts) --
+   El logo "Lola" hoy usa un reemplazo (Pinyon Script, ver abajo de todo).
+   Para pasar a Altesse Std, la tipografía original:
+
+   1. En fonts.adobe.com, creá un "proyecto web" con Altesse Std Regular y
+      agregá lolavalenzuela.github.io en los dominios permitidos.
+   2. Adobe te da un ID de 7 caracteres (algo como "abc1def"). Reemplazá
+      ID-DEL-PROYECTO por ese ID en la línea de abajo.
+   3. Borrá las dos barras-asterisco que la envuelven, para activarla.
+
+   Tiene que quedar acá, en la primera línea con código del archivo: el
+   navegador ignora un @import que aparezca después de cualquier regla.
+   No hay que tocar nada más: --fuente-logo ya pide "altesse-std" primero. */
+
+/* @import url("https://use.typekit.net/ID-DEL-PROYECTO.css"); */
+
 /* -- Reset mínimo -- */
 *,
 *::before,
@@ -41,24 +57,75 @@ ul {
 /* -- Variables globales --
    Para cambiar la paleta o la tipografía de todo el sitio, tocá solo esto. */
 :root {
-  /* Colores */
+  /* -- COLORES --
+     Dos niveles, para que un cambio de tema se haga desde UN solo lugar:
+
+     1) PALETA: los valores crudos. No se usan directo en el resto del CSS.
+     2) ROLES: qué color cumple cada función (fondo, texto, acento...).
+        Todo el sitio usa solo estos. Para pasar de fondo blanco a negro,
+        por ejemplo, alcanza con invertir --color-fondo y --color-texto (y
+        los tres velos de abajo, que son el fondo con transparencia). */
+
+  /* Paleta */
+  --blanco: #ffffff;
   --negro: #000000;
   --rojo: #ff0000;
-  --blanco: #ffffff;
-  --gris-texto: #e6e6e6;
-  --gris-placeholder: #d9d9d9;
-  --gris-tenue: #8a8a8a;
+  --gris-oscuro: #666666;
+  --gris-claro: #d9d9d9;
+
+  /* Roles */
+  --color-fondo: var(--blanco);
+  --color-texto: var(--negro);
+  /* Texto secundario (etiquetas de la ficha, pie). #666 sobre blanco da
+     5,7:1 de contraste: se lee bien. No aclararlo más de #767676, que es
+     el mínimo legible para texto chico. */
+  --color-texto-tenue: var(--gris-oscuro);
+  --color-acento: var(--rojo);
+  /* El mismo rojo con transparencia: subrayado insinuado del logo. */
+  --color-acento-suave: rgba(255, 0, 0, 0.4);
+  /* Filetes que separan secciones en las páginas de proyecto. */
+  --color-linea: rgba(0, 0, 0, 0.15);
+  /* Caja gris que se ve mientras carga una imagen o un video. */
+  --color-placeholder: var(--gris-claro);
+  /* Fondo del panel de contacto. Es blanco pleno a propósito: con algo de
+     transparencia, sobre fondo blanco la página de atrás se transparenta
+     como un fantasma gris (logo, fotos, renglones) y se lee como mancha.
+     El panel igual aparece con un fundido, así que no entra de golpe. */
+  --color-velo: var(--blanco);
+  /* Fondo del botón de sonido que va encima del video. */
+  --color-control: rgba(255, 255, 255, 0.8);
+  --color-control-hover: rgba(255, 255, 255, 0.95);
+
+  /* Le avisa al navegador que el sitio es claro: barras de scroll, campos
+     y controles nativos se dibujan en su versión clara. */
+  color-scheme: light;
 
   /* Tipografía: fallback a fuentes del sistema. Si sumás una tipografía
      propia, agregá el @font-face al final de este archivo y sumala acá. */
   --fuente: "Helvetica Neue", "Inter", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Arial, sans-serif;
 
+  /* Tipografía del logo "Lola". La buscada es Altesse Std (Adobe Fonts).
+     Mientras no esté cargada, se usa Pinyon Script, la cursiva libre más
+     parecida (ver el @font-face al final de este archivo). El orden de la
+     lista hace el trabajo solo: el día que se cargue el kit de Adobe, el
+     navegador encuentra "altesse-std" primero y la usa, sin tocar nada más. */
+  --fuente-logo: "altesse-std", "Pinyon Script", cursive;
+
   /* Tamaños fluidos: clamp(mínimo, preferido, máximo) */
-  /* --tam-nombre: tamaño de "Lola Valenzuela" en el header — es el mismo
-     en todas las páginas y en todos los anchos, así que para agrandar o
-     achicar el nombre en todo el sitio, tocá solo este clamp. */
-  --tam-nombre: clamp(1.9rem, 1.1rem + 3.5vw, 4.25rem);
+  /* --tam-logo: tamaño del logo "Lola" en el header de las páginas de
+     proyecto y del about. En la home es mucho más grande: se pisa en
+     layout.css (busca "LOGO GRANDE DE LA HOME").
+     Está calibrado para que el header mida casi lo mismo que medía con
+     "Lola Valenzuela", así la primera pantalla de los proyectos no pierde
+     alto de imagen. */
+  --tam-logo: clamp(3rem, 2.1rem + 3.8vw, 5.5rem);
+
+  /* Cuánto alto ocupa el logo en el layout, en múltiplos de su tamaño.
+     No es 1 porque una cursiva caligráfica no llena su caja: la tinta de
+     "Lola" mide 0,79 veces el tamaño de letra, más lo que suma la
+     inclinación. 0,93 cubre todo eso sin cortar el bucle de la L. */
+  --alto-logo: 0.93;
   --tam-titulo-proyecto: clamp(1.8rem, 1.4rem + 2vw, 3rem);
   --tam-texto: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
   --tam-texto-chico: clamp(0.85rem, 0.8rem + 0.15vw, 0.95rem);
@@ -72,12 +139,12 @@ ul {
   --ancho-maximo: 1600px;
 
   /* Padding vertical del header y alto resultante. El alto NO es un número
-     suelto: se deduce del tamaño del nombre (que tiene line-height: 1) más
-     su padding arriba y abajo, así que si movés --tam-nombre o
-     --padding-header, se reajusta solo. Lo usan el header fijo de mobile y
+     suelto: se deduce del alto que ocupa el logo (--tam-logo por
+     --alto-logo) más su padding arriba y abajo, así que si movés
+     --tam-logo o --padding-header, se reajusta solo. Lo usan el header fijo de mobile y
      el cálculo de la primera pantalla de las páginas de proyecto. */
   --padding-header: clamp(0.75rem, 0.5rem + 1vw, 1.25rem);
-  --alto-header: calc(var(--tam-nombre) + var(--padding-header) * 2);
+  --alto-header: calc(var(--tam-logo) * var(--alto-logo) + var(--padding-header) * 2);
 
   /* -- Primera pantalla de las páginas de proyecto --
      El bloque de media (video o imagen) toma el alto que sobra de la
@@ -117,8 +184,8 @@ ul {
 }
 
 body {
-  background: var(--negro);
-  color: var(--gris-texto);
+  background: var(--color-fondo);
+  color: var(--color-texto);
   font-family: var(--fuente);
   font-size: var(--tam-texto);
   line-height: 1.5;
@@ -128,8 +195,15 @@ body {
 
 /* -- Utilidades de foco: visibles siempre, en rojo -- */
 :focus-visible {
-  outline: 2px solid var(--rojo);
+  outline: 2px solid var(--color-acento);
   outline-offset: 3px;
+}
+
+/* -- Texto seleccionado: el rojo del sitio, con el texto en el color del
+   fondo, en vez del azul del sistema. -- */
+::selection {
+  background: var(--color-acento);
+  color: var(--color-fondo);
 }
 
 /* -- Subrayados de sección (Educación:, Herramientas:, etc.) -- */
@@ -152,16 +226,24 @@ body {
   border: 0;
 }
 
-/* -- Tipografía propia (opcional) --
-   Si sumás una fuente descargada, ponela en assets/fonts/ y descomentá:
+/* -- TIPOGRAFÍA DEL LOGO --
 
+   HOY: Pinyon Script (licencia libre SIL OFL, el texto de la licencia está
+   en assets/fonts/). Es un REEMPLAZO de Altesse Std, no la original: la
+   cursiva gratuita más parecida. El archivo está recortado a los
+   caracteres latinos (pesa 35 KB) y se precarga desde el <head> de cada
+   página, para que el logo no aparezca un instante en otra letra.
+
+   "font-display: block" hace que, si tarda, el logo espere invisible una
+   fracción de segundo en vez de mostrarse primero en una letra cualquiera
+   y después saltar.
+
+   PARA PONER ALTESSE STD (la original): ver el primer bloque de este
+   archivo, arriba de todo. */
 @font-face {
-  font-family: "MiFuente";
-  src: url("../assets/fonts/MiFuente.woff2") format("woff2");
+  font-family: "Pinyon Script";
+  src: url("../assets/fonts/pinyon-script-latin.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
-
-   Y agregá "MiFuente" al principio de --fuente más arriba.
-*/

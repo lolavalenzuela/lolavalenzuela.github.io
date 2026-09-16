@@ -1,0 +1,167 @@
+/* =========================================================
+   BASE.CSS — reset, variables globales y tipografía
+   ========================================================= */
+
+/* -- Reset mínimo -- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+/* -- Variables globales --
+   Para cambiar la paleta o la tipografía de todo el sitio, tocá solo esto. */
+:root {
+  /* Colores */
+  --negro: #000000;
+  --rojo: #ff0000;
+  --blanco: #ffffff;
+  --gris-texto: #e6e6e6;
+  --gris-placeholder: #d9d9d9;
+  --gris-tenue: #8a8a8a;
+
+  /* Tipografía: fallback a fuentes del sistema. Si sumás una tipografía
+     propia, agregá el @font-face al final de este archivo y sumala acá. */
+  --fuente: "Helvetica Neue", "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* Tamaños fluidos: clamp(mínimo, preferido, máximo) */
+  /* --tam-nombre: tamaño de "Lola Valenzuela" en el header — es el mismo
+     en todas las páginas y en todos los anchos, así que para agrandar o
+     achicar el nombre en todo el sitio, tocá solo este clamp. */
+  --tam-nombre: clamp(1.9rem, 1.1rem + 3.5vw, 4.25rem);
+  --tam-titulo-proyecto: clamp(1.8rem, 1.4rem + 2vw, 3rem);
+  --tam-texto: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+  --tam-texto-chico: clamp(0.85rem, 0.8rem + 0.15vw, 0.95rem);
+  --tam-nav: clamp(0.85rem, 0.8rem + 0.15vw, 1rem);
+
+  /* Espaciados */
+  --espacio-borde: clamp(1rem, 0.6rem + 2vw, 2.5rem);
+  --gap-grilla: clamp(0.5rem, 0.3rem + 1vw, 1.25rem);
+
+  /* Layout */
+  --ancho-maximo: 1600px;
+
+  /* Padding vertical del header y alto resultante. El alto NO es un número
+     suelto: se deduce del tamaño del nombre (que tiene line-height: 1) más
+     su padding arriba y abajo, así que si movés --tam-nombre o
+     --padding-header, se reajusta solo. Lo usan el header fijo de mobile y
+     el cálculo de la primera pantalla de las páginas de proyecto. */
+  --padding-header: clamp(0.75rem, 0.5rem + 1vw, 1.25rem);
+  --alto-header: calc(var(--tam-nombre) + var(--padding-header) * 2);
+
+  /* -- Primera pantalla de las páginas de proyecto --
+     El bloque de media (video o imagen) toma el alto que sobra de la
+     ventana una vez descontado todo lo que tiene que entrar con él:
+     el header, el aire de arriba, el espacio hasta el título, el propio
+     título y un asomo de la metadata que viene abajo.
+
+     LA PERILLA es --asomo-metadata: cuánto se deja ver de lo que sigue
+     después del título. Subirla achica el media y muestra más metadata;
+     bajarla agranda el media. Rango cómodo: 2rem (apenas se insinúa) a
+     6rem (se lee la primera fila entera). En 0 el título queda justo
+     contra el borde y no se intuye que la página sigue.
+
+     --alto-minimo-hero evita que el media quede como una franja
+     aplastada en ventanas muy bajas: si la cuenta da menos, gana el
+     mínimo y el título pasa abajo del corte (es preferible a un video
+     de 100px). */
+  --padding-superior-proyecto: clamp(1rem, 0.6rem + 1.2vw, 1.75rem);
+  --gap-hero-titulo: clamp(1rem, 0.7rem + 1vw, 1.5rem);
+  --margen-titulo-proyecto: clamp(1rem, 0.7rem + 1vw, 1.75rem);
+  --asomo-metadata: clamp(2.5rem, 2rem + 1.5vw, 4rem);
+  --alto-minimo-hero: 18rem;
+
+  /* Alto reservado para el título: su tamaño por el interlineado del
+     cuerpo (1.5). Se calcula, no se escribe a mano, para que siga a
+     --tam-titulo-proyecto si lo cambiás. */
+  --alto-titulo-proyecto: calc(var(--tam-titulo-proyecto) * 1.5);
+
+  /* Todo lo que NO es el media dentro de la primera pantalla. Se define
+     una sola vez para no repetir la cuenta en las dos declaraciones de
+     alto (la de vh y la de dvh) de .proyecto__hero. */
+  --descuento-hero: calc(
+    var(--alto-header) + var(--padding-superior-proyecto) +
+    var(--gap-hero-titulo) + var(--alto-titulo-proyecto) +
+    var(--margen-titulo-proyecto) + var(--asomo-metadata)
+  );
+}
+
+body {
+  background: var(--negro);
+  color: var(--gris-texto);
+  font-family: var(--fuente);
+  font-size: var(--tam-texto);
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* -- Utilidades de foco: visibles siempre, en rojo -- */
+:focus-visible {
+  outline: 2px solid var(--rojo);
+  outline-offset: 3px;
+}
+
+/* -- Subrayados de sección (Educación:, Herramientas:, etc.) -- */
+.subtitulo-subrayado {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-weight: 600;
+}
+
+/* -- Clase utilitaria para ocultar visualmente pero mantener accesible -- */
+.solo-lectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* -- Tipografía propia (opcional) --
+   Si sumás una fuente descargada, ponela en assets/fonts/ y descomentá:
+
+@font-face {
+  font-family: "MiFuente";
+  src: url("../assets/fonts/MiFuente.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+   Y agregá "MiFuente" al principio de --fuente más arriba.
+*/
