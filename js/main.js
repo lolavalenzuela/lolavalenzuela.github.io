@@ -1,12 +1,21 @@
 // main.js — punto de entrada. Carga contenido.json, arma el contenido
 // dinámico de cada tipo de página (home / about / proyecto) y conecta
 // idioma, contacto y transiciones.
+//
+// EL "?v=" DE LOS IMPORTS Y DE LOS <link> DEL HTML es un número de versión
+// para el caché. GitHub Pages le pide al navegador que guarde el CSS y el JS
+// durante 10 minutos, y en la práctica Safari los conserva bastante más: sin
+// esto, después de publicar un cambio seguías viendo el sitio viejo hasta
+// recargar a mano. Al cambiar el número, la dirección del archivo cambia y el
+// navegador está obligado a bajarlo de nuevo.
+// AL PUBLICAR UN CAMBIO DE CSS O JS hay que subir ese número (la fecha del
+// día, AAAAMMDD) en los imports de acá arriba y en los ocho HTML.
 
-import { cargarContenido, resolverRuta } from "./contenido.js";
-import { obtenerIdioma, aplicarTextosEstaticos, inicializarToggleIdioma } from "./idioma.js";
-import { inicializarContacto } from "./contacto.js";
-import { inicializarTransiciones } from "./transiciones.js";
-import * as gestorAudio from "./audio.js";
+import { cargarContenido, resolverRuta } from "./contenido.js?v=20260928";
+import { obtenerIdioma, aplicarTextosEstaticos, inicializarToggleIdioma } from "./idioma.js?v=20260928";
+import { inicializarContacto } from "./contacto.js?v=20260928";
+import { inicializarTransiciones } from "./transiciones.js?v=20260928";
+import * as gestorAudio from "./audio.js?v=20260928";
 
 // "3" -> "03". El número va siempre con dos dígitos.
 function numeroConDosDigitos(numero) {
