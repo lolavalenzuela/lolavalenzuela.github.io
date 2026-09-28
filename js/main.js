@@ -11,11 +11,12 @@
 // AL PUBLICAR UN CAMBIO DE CSS O JS hay que subir ese número (la fecha del
 // día, AAAAMMDD) en los imports de acá arriba y en los ocho HTML.
 
-import { cargarContenido, resolverRuta } from "./contenido.js?v=20260928";
-import { obtenerIdioma, aplicarTextosEstaticos, inicializarToggleIdioma } from "./idioma.js?v=20260928";
-import { inicializarContacto } from "./contacto.js?v=20260928";
-import { inicializarTransiciones } from "./transiciones.js?v=20260928";
-import * as gestorAudio from "./audio.js?v=20260928";
+import { cargarContenido, resolverRuta } from "./contenido.js?v=20260928b";
+import { obtenerIdioma, aplicarTextosEstaticos, inicializarToggleIdioma } from "./idioma.js?v=20260928b";
+import { inicializarContacto } from "./contacto.js?v=20260928b";
+import { inicializarTransiciones } from "./transiciones.js?v=20260928b";
+import * as gestorAudio from "./audio.js?v=20260928b";
+import * as movimiento from "./movimiento.js?v=20260928b";
 
 // "3" -> "03". El número va siempre con dos dígitos.
 function numeroConDosDigitos(numero) {
@@ -78,6 +79,12 @@ function crearBloqueProyecto(proyecto) {
   return enlace;
 }
 
+// Franja de texto en loop que cierra la home. El texto se edita en
+// data/contenido.json ("home.franja"), y tiene su versión en cada idioma.
+function montarFranjaDeLaHome(contenido, idioma) {
+  movimiento.montarFranja(contenido[idioma].home.franja);
+}
+
 function renderHome(contenido, idioma) {
   const grilla = document.querySelector("[data-grilla-proyectos]");
   if (!grilla) return;
@@ -96,9 +103,13 @@ function renderHome(contenido, idioma) {
     // lector de pantalla.
     grilla.replaceChildren(...proyectos.map((proyecto) => crearBloqueProyecto(proyecto)));
     grilla.dataset.construida = "true";
-    grilla.classList.add("js-lista-para-animar");
+    // La entrada de los bloques la maneja js/movimiento.js, junto con el
+    // resto del movimiento del sitio.
+    montarFranjaDeLaHome(contenido, idioma);
     return;
   }
+
+  montarFranjaDeLaHome(contenido, idioma);
 
   // Idioma cambiado: solo actualiza textos e imágenes, no reconstruye el DOM
   // (así no se repite la animación de entrada ni se pierde el estado de hover).
@@ -788,12 +799,16 @@ async function iniciar() {
   }
 
   render(idiomaActual);
+  // El movimiento se enciende después del primer render, cuando el
+  // contenido dinámico ya está en la página.
+  movimiento.iniciarMovimiento();
 
   inicializarToggleIdioma((nuevoIdioma) => {
     const main = document.querySelector("main.js-fade-idioma");
     if (!main) {
       render(nuevoIdioma);
       idiomaActual = nuevoIdioma;
+      movimiento.reescanear();
       return;
     }
     main.classList.add("js-idioma-cambiando");
@@ -814,6 +829,8 @@ async function iniciar() {
       main.removeEventListener("transitionend", alTerminarFundido);
       render(nuevoIdioma);
       idiomaActual = nuevoIdioma;
+      // Parte del contenido se rearmó: hay elementos nuevos que preparar.
+      movimiento.reescanear();
       requestAnimationFrame(() => main.classList.remove("js-idioma-cambiando"));
     }
 

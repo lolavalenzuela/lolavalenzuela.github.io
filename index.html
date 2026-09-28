@@ -20,16 +20,32 @@
        aparezca un instante en otra letra. Ver base.css. -->
   <link rel="preload" href="assets/fonts/pinyon-script-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="css/base.css?v=20260928">
-  <link rel="stylesheet" href="css/layout.css?v=20260928">
-  <link rel="stylesheet" href="css/animaciones.css?v=20260928">
+  <link rel="stylesheet" href="css/base.css?v=20260928b">
+  <link rel="stylesheet" href="css/layout.css?v=20260928b">
+  <link rel="stylesheet" href="css/animaciones.css?v=20260928b">
 
   <!-- Anti-flash del fallback FLIP: si hay una transición pendiente
        guardada por transiciones.js, oculta <main> antes del primer
        pintado para que no haya parpadeo. No hace nada si no hay soporte
        de sessionStorage o no hay nada pendiente. -->
   <script>
+    // Este script corre ANTES de que se pinte la página, por eso está acá
+    // suelto y no en un archivo aparte.
+    // 1) "js-movimiento" hace que el contenido nazca invisible, para que
+    //    las animaciones de entrada no se vean empezar a mitad de camino.
+    // 2) La red de seguridad: si el JS del sitio no llegara a cargar, a los
+    //    3 segundos se saca la clase y el contenido se muestra igual. Nunca
+    //    se queda una página en blanco por culpa de una animación.
+    // 3) "js-flip-pendiente" es lo de siempre: evita el parpadeo de la
+    //    transición entre páginas.
     try {
+      document.documentElement.classList.add("js-movimiento");
+      // El temporizador queda guardado en window para que js/movimiento.js
+      // lo cancele apenas carga. Si el JS no llega a cargar, nadie lo
+      // cancela, salta a los 3 segundos y el contenido se muestra igual.
+      window.redDeSeguridadMovimiento = setTimeout(function () {
+        document.documentElement.classList.remove("js-movimiento");
+      }, 3000);
       if (sessionStorage.getItem("flip-pendiente")) {
         document.documentElement.classList.add("js-flip-pendiente");
       }
@@ -65,6 +81,6 @@
     </div>
   </div>
 
-  <script type="module" src="js/main.js?v=20260928"></script>
+  <script type="module" src="js/main.js?v=20260928b"></script>
 </body>
 </html>

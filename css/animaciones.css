@@ -46,8 +46,46 @@
      blanco ya no oscurece.) */
   --hover-atenuacion: 0.18;
 
-  /* Stagger de entrada */
+  /* Stagger de entrada: cuánto espera cada elemento respecto del anterior
+     dentro de una misma sección. */
   --paso-stagger: 60ms;
+
+  /* =========================================================
+     MOVIMIENTO — LA PERILLA GENERAL
+     =========================================================
+     --movimiento multiplica TODAS las distancias y duraciones de las
+     animaciones de entrada y de scroll:
+        1    = como está entregado
+        0.5  = la mitad de movimiento, más sobrio
+        0    = sin movimiento (todo aparece directo, sin desplazarse)
+     Para apagar TODO de una sin tocar números, se le puede poner la clase
+     "sin-movimiento" al <body> en el HTML. Y si en el sistema operativo
+     está activado "reducir movimiento", el sitio se apaga solo (ver el
+     bloque de prefers-reduced-motion al final del archivo). */
+  --movimiento: 1;
+
+  /* Cuánto sube cada bloque al aparecer. Rango cómodo: 8px (apenas) a
+     24px (bien notorio). */
+  --reveal-distancia: 14px;
+  /* Cuánto tarda en aparecer. */
+  --reveal-dur: 700ms;
+
+  /* Parallax de las imágenes de los proyectos: cuánto se despegan del
+     scroll. Es una fracción, no píxeles. 0 lo apaga; 0.06 es sutil;
+     arriba de 0.12 se empieza a notar demasiado. */
+  --parallax-fuerza: 0.06;
+
+  /* Franja de texto en loop de la home: segundos que tarda en dar una
+     vuelta completa. MÁS SEGUNDOS = MÁS LENTA. */
+  --marquee-velocidad: 42s;
+
+  /* Imán de los botones: cuánto se corren hacia el puntero, como fracción
+     de la distancia del mouse. 0 lo apaga; 0.3 ya es mucho. */
+  --iman-fuerza: 0.15;
+
+  /* Revelado del título de proyecto (sube desde abajo detrás de un
+     recorte). */
+  --reveal-titulo-dur: 900ms;
 }
 
 /* -----------------------------------------------------------
@@ -104,36 +142,119 @@
 }
 
 /* -----------------------------------------------------------
-   FADE-IN ESCALONADO AL ENTRAR A LA HOME (una sola vez)
-   ----------------------------------------------------------- */
-@keyframes aparecer {
+   REVELADO AL APARECER EN PANTALLA
+   -----------------------------------------------------------
+   Los bloques entran con un fundido y un desplazamiento corto hacia
+   arriba, una sola vez cada uno. Quién entra y en qué orden lo decide
+   js/movimiento.js; acá está solamente el aspecto del movimiento.
+
+   La clase "js-movimiento" la pone un script chiquito en el <head> de cada
+   página, antes de que se pinte nada: así los bloques ya nacen invisibles
+   y no se ven aparecer y desaparecer. Ese mismo script tiene una red de
+   seguridad: si el JS no llegara a cargar, a los 3 segundos saca la clase
+   y todo el contenido se muestra igual.
+
+   --mov-retraso lo escribe el JS en cada elemento para escalonarlos. */
+.js-movimiento .mov-revelar {
+  opacity: 0;
+  transform: translateY(calc(var(--reveal-distancia) * var(--movimiento)));
+  /* Le avisa al navegador que estas dos cosas van a cambiar, para que las
+     resuelva en la placa de video y no trabe el scroll. */
+  will-change: opacity, transform;
+  /* OJO: acá NO va la transición, y es a propósito. Si estuviera, en el
+     instante en que el JS marca un bloque que ya estaba pintado, el
+     navegador lo haría DESVANECERSE de visible a invisible antes de
+     revelarlo: se vería el contenido irse y volver. Declarándola solo en
+     el estado revelado (abajo), esconder es instantáneo y lo único que se
+     anima es la entrada, que es lo que queremos. */
+}
+
+.js-movimiento .mov-revelar.mov-visible {
+  opacity: 1;
+  transform: none;
+  transition: opacity calc(var(--reveal-dur) * var(--movimiento))
+      var(--ease-suave) var(--mov-retraso, 0ms),
+    transform calc(var(--reveal-dur) * var(--movimiento)) var(--ease-suave)
+      var(--mov-retraso, 0ms);
+  will-change: auto;
+}
+
+/* -----------------------------------------------------------
+   TÍTULO DE PROYECTO — sube desde abajo detrás de un recorte
+   -----------------------------------------------------------
+   El JS envuelve el texto del título en un <span>. El <h1> recorta lo que
+   sobresale, así el texto asoma de abajo hacia arriba en vez de aparecer
+   de la nada. */
+.js-movimiento .proyecto__titulo {
+  overflow: hidden;
+}
+
+.js-movimiento .mov-titulo-interior {
+  display: inline-block;
+  transform: translateY(calc(105% * var(--movimiento)));
+}
+
+/* La transición va solo acá, por el mismo motivo que arriba. */
+.js-movimiento .mov-visible .mov-titulo-interior {
+  transform: none;
+  transition: transform calc(var(--reveal-titulo-dur) * var(--movimiento))
+    var(--ease-suave);
+}
+
+/* -----------------------------------------------------------
+   FRANJA DE TEXTO EN LOOP — cierra la home
+   -----------------------------------------------------------
+   Una banda fina con una frase que se repite y se desplaza sin fin. El
+   truco del loop: adentro hay DOS copias idénticas del texto y la pista se
+   corre exactamente la mitad de su ancho; cuando termina, vuelve al
+   principio y el corte no se ve.
+   La velocidad se toca con --marquee-velocidad (arriba). El texto se edita
+   en data/contenido.json, en "home.franja". */
+.franja-movil {
+  overflow: hidden;
+  margin-top: clamp(2rem, 1rem + 4vw, 5rem);
+  padding-block: clamp(0.6rem, 0.4rem + 0.5vw, 1rem);
+  border-block: 1px solid var(--color-acento-suave);
+  /* Nunca genera scroll horizontal: lo que se sale, se recorta. */
+  max-width: 100%;
+}
+
+.franja-movil__pista {
+  display: flex;
+  width: max-content;
+  animation: franja-correr var(--marquee-velocidad) linear infinite;
+}
+
+.franja-movil__texto {
+  padding-right: clamp(1.5rem, 1rem + 2vw, 3.5rem);
+  color: var(--color-acento);
+  font-size: var(--tam-texto-chico);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@keyframes franja-correr {
   from {
-    opacity: 0;
-    transform: translateY(10px);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
-/* "backwards" y no "both": con "both" la animación conserva su fotograma
-   final para siempre, y como las animaciones le ganan a las reglas
-   normales en la cascada, terminaba pisando el hover — el bloque no
-   escalaba y los otros no se atenuaban. Con "backwards" el fotograma
-   inicial se aplica durante el retraso (así no hay destello antes de
-   entrar) y, apenas termina, el elemento vuelve a sus estilos normales y
-   el hover funciona. */
-.grilla-proyectos.js-lista-para-animar .bloque-proyecto {
-  animation: aparecer var(--dur-lenta) var(--ease-suave) backwards;
+/* -----------------------------------------------------------
+   APAGAR TODO EL MOVIMIENTO
+   -----------------------------------------------------------
+   Poniéndole la clase "sin-movimiento" al <body>. Sirve para probar el
+   sitio quieto sin tocar ninguna variable. */
+body.sin-movimiento {
+  --movimiento: 0;
 }
 
-.grilla-proyectos.js-lista-para-animar .bloque-proyecto:nth-child(1) { animation-delay: calc(var(--paso-stagger) * 0); }
-.grilla-proyectos.js-lista-para-animar .bloque-proyecto:nth-child(2) { animation-delay: calc(var(--paso-stagger) * 1); }
-.grilla-proyectos.js-lista-para-animar .bloque-proyecto:nth-child(3) { animation-delay: calc(var(--paso-stagger) * 2); }
-.grilla-proyectos.js-lista-para-animar .bloque-proyecto:nth-child(4) { animation-delay: calc(var(--paso-stagger) * 3); }
-.grilla-proyectos.js-lista-para-animar .bloque-proyecto:nth-child(5) { animation-delay: calc(var(--paso-stagger) * 4); }
-.grilla-proyectos.js-lista-para-animar .bloque-proyecto:nth-child(6) { animation-delay: calc(var(--paso-stagger) * 5); }
+body.sin-movimiento .franja-movil__pista {
+  animation-play-state: paused;
+}
 
 /* -----------------------------------------------------------
    OVERLAY DE CONTACTO
@@ -250,6 +371,17 @@
     --escala-hover-bloque: 1;
     --escala-hover-imagen: 1;
     --desplazamiento-hover: 0px;
+    /* Apaga de una todo el movimiento nuevo: los bloques aparecen sin
+       desplazarse y sin esperar, el título no sube y el parallax y el imán
+       quedan en cero (el JS también lee esta preferencia). */
+    --movimiento: 0;
+    --parallax-fuerza: 0;
+    --iman-fuerza: 0;
+  }
+
+  /* La franja de texto se frena, no desaparece: el texto sigue ahí. */
+  .franja-movil__pista {
+    animation-play-state: paused;
   }
 
   html {

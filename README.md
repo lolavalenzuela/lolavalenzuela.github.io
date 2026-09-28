@@ -86,23 +86,64 @@ Todo en `css/base.css`, dentro de `:root`:
 - Los tamaños de texto (`--tam-*`) usan `clamp()`, así que ya son fluidos
   entre mobile y desktop sin que tengas que tocar nada más.
 
-## Cómo calibrar la intensidad de las animaciones
+## El movimiento del sitio
 
-Todo centralizado en `css/animaciones.css`, dentro de `:root` (al principio
-del archivo, con comentarios explicando cada variable):
+Todo el movimiento se calibra en `css/animaciones.css`, dentro de `:root`, al
+principio del archivo. No hay números sueltos repartidos por el código.
 
-- `--dur-rapida`, `--dur-media`, `--dur-lenta` → velocidad de las
-  animaciones (hover, transición entre páginas, cambio de idioma).
+### La perilla general
+
+**`--movimiento`** multiplica todas las distancias y duraciones de las
+animaciones de entrada:
+
+- `1` → como está entregado
+- `0.5` → la mitad, más sobrio
+- `0` → sin movimiento: todo aparece directo, sin desplazarse
+
+**Para apagar TODO de una**, sin tocar variables: agregale la clase
+`sin-movimiento` al `<body>` del HTML que quieras probar:
+
+```html
+<body data-pagina="home" class="sin-movimiento">
+```
+
+Y si en el sistema operativo está activado "reducir movimiento", el sitio se
+apaga solo: no hay que hacer nada.
+
+### Qué se mueve, y con qué se calibra cada cosa
+
+| Qué | Dónde se ve | Variable |
+|---|---|---|
+| **Entrada al aparecer en pantalla.** Cada bloque entra con un fundido y un desplazamiento corto hacia arriba, una sola vez. | Toda la grilla de la home, y en los proyectos la ficha, la descripción, cada fila de media y el pie | `--reveal-distancia` (cuánto sube: 8px apenas, 24px notorio) y `--reveal-dur` (cuánto tarda) |
+| **Escalonado.** Los elementos de una misma sección entran uno atrás del otro. | Grilla de la home, filas de media | `--paso-stagger` (más ms = más separados) |
+| **Título del proyecto.** Sube desde abajo detrás de un recorte. | El título grande rojo de cada proyecto | `--reveal-titulo-dur` |
+| **Parallax.** Las fotos se desplazan unos píxeles menos que el scroll, para dar profundidad. | Páginas de proyecto, solo con mouse | `--parallax-fuerza` (0 lo apaga; 0.06 sutil; arriba de 0.12 se nota demasiado) |
+| **Franja de texto en loop.** Una banda fina con una frase que se repite, al pie de la home. | Home, abajo de la grilla | `--marquee-velocidad` (MÁS segundos = MÁS lenta). El texto se edita en `data/contenido.json`, en `home.franja` |
+| **Imán de los botones.** El botón se corre unos píxeles hacia el puntero. | "contacto" y el botón de la web de Quomos | `--iman-fuerza` (0 lo apaga; 0.3 ya es mucho) |
+| **Intro de la home.** Logo, navegación y grilla entran encadenados. | Solo la primera vez que entrás a la home en cada visita | `--paso-stagger` |
+
+### Lo que ya existía y sigue igual
+
+- `--dur-rapida`, `--dur-media`, `--dur-lenta` → velocidad del hover, la
+  transición entre páginas y el cambio de idioma.
 - `--escala-hover-bloque` / `--escala-hover-imagen` → cuánto "crece" un
   bloque de la grilla al pasar el mouse. Más cerca de `1` = más sutil.
-- `--desplazamiento-hover` → cuántos píxeles se desplaza el bloque hacia
-  arriba en hover.
-- `--paso-stagger` → el delay entre bloque y bloque en la animación de
-  entrada a la home.
+- `--desplazamiento-hover` → cuántos píxeles se desplaza el bloque en hover.
+- `--hover-atenuacion` → cuánto se apagan las otras portadas.
 
-Si el usuario tiene activado "reducir movimiento" en su sistema operativo,
-todas estas variables se redefinen automáticamente a valores casi nulos —
-no hace falta hacer nada para eso, ya está resuelto.
+### Detalles que conviene saber
+
+- **En celulares y tablets no hay parallax ni imán**: el scroll con el dedo
+  es mucho más sensible y el movimiento se siente inestable. Las entradas
+  por scroll sí funcionan igual.
+- **Hay dos redes de seguridad** para que nunca quede contenido invisible: un
+  script en el `<head>` que muestra todo a los 3 segundos si el JavaScript no
+  llegara a cargar, y otra dentro de `js/movimiento.js` que a los 2,5
+  segundos revela lo que esté a la vista por si el navegador no avisara.
+- **Las fotos que entran completas no llevan parallax** (las dos portadas de
+  Fuera de Servicio, el teaser de Quomos y sus dos videos verticales):
+  moverlas las despegaría de su caja.
+- El código del movimiento está en `js/movimiento.js`, comentado paso a paso.
 
 ## Estructura del sitio
 

@@ -24,6 +24,8 @@
       }
     },
     "home": {
+      "franja": "Diseño audiovisual, sonoro y gráfico — Buenos Aires",
+      "_ayudaFranja": "FRANJA de texto que se desplaza al pie de la home. Es la frase que se repite: escribí una sola vez, el sitio la repite sola y le pone los puntos de separación. Dejala corta. La velocidad se toca en css/animaciones.css con --marquee-velocidad (más segundos = más lenta), y con \"reducir movimiento\" activado en el sistema la franja se frena sola, pero el texto se sigue leyendo.",
       "_ayudaOrden": "ORDEN Y NUMERACIÓN de la home. \"numero\" decide en qué orden aparecen los proyectos y es el número que se ve arriba de cada portada: 1 se muestra como (01), 2 como (02), y así. Se lee por filas, de izquierda a derecha: en pantalla grande la fila de arriba es 01, 02, 03 y la de abajo 04, 05, 06. PARA REORDENAR, cambiá solo los números (sin repetirlos) EN LOS DOS IDIOMAS, \"es\" y \"en\": el orden en que están escritos en esta lista no importa, manda \"numero\". Cada portada sigue llevando a su propia página porque el link sale de \"id\", no de la posición. Qué caja le toca a cada posición (corta o alta) se decide en css/layout.css, en \"GRILLA DE PROYECTOS — home\".",
       "proyectos": [
         {
@@ -507,6 +509,7 @@
       }
     },
     "home": {
+      "franja": "Audiovisual, sound and graphic design — Buenos Aires",
       "proyectos": [
         {
           "numero": 1,
