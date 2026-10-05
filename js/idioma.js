@@ -2,7 +2,7 @@
 // marcados con data-i18n y avisa a quien se suscriba para que re-renderice
 // el contenido dinámico de la página (grilla, about, ficha de proyecto).
 
-import { obtenerValor } from "./contenido.js?v=20260928b";
+import { obtenerValor } from "./contenido.js?v=20261005";
 
 const CLAVE_STORAGE = "idioma";
 const IDIOMA_POR_DEFECTO = "es";

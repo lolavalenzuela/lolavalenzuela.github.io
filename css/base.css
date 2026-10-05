@@ -2,11 +2,11 @@
    BASE.CSS — reset, variables globales y tipografía
    ========================================================= */
 
-/* -- LUGAR PARA ALTESSE STD (Adobe Fonts) --
-   El logo "Lola" hoy usa un reemplazo (Pinyon Script, ver abajo de todo).
-   Para pasar a Altesse Std, la tipografía original:
+/* -- LUGAR PARA CLASSIC SCRIPT MN (Adobe Fonts) --
+   El nombre "Lola" hoy usa un reemplazo (Pinyon Script, ver abajo de todo).
+   Para pasar a Classic Script MN, la tipografía pedida:
 
-   1. En fonts.adobe.com, creá un "proyecto web" con Altesse Std Regular y
+   1. En fonts.adobe.com, creá un "proyecto web" con Classic Script MN y
       agregá lolavalenzuela.github.io en los dominios permitidos.
    2. Adobe te da un ID de 7 caracteres (algo como "abc1def"). Reemplazá
       ID-DEL-PROYECTO por ese ID en la línea de abajo.
@@ -14,7 +14,10 @@
 
    Tiene que quedar acá, en la primera línea con código del archivo: el
    navegador ignora un @import que aparezca después de cualquier regla.
-   No hay que tocar nada más: --fuente-logo ya pide "altesse-std" primero. */
+   No hay que tocar nada más: --fuente-logo ya pide "classic-script-mn"
+   primero. Si Adobe le pusiera otro nombre a la familia (lo dice el propio
+   proyecto web, en el ejemplo de CSS que te muestra), corregí ese nombre en
+   --fuente-logo más abajo. */
 
 /* @import url("https://use.typekit.net/ID-DEL-PROYECTO.css"); */
 
@@ -29,6 +32,10 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  /* Para que "PROYECTOS" baje suave hasta la sección en vez de saltar.
+     Con "reducir movimiento" activado vuelve a ser instantáneo (ver
+     animaciones.css). */
+  scroll-behavior: smooth;
 }
 
 img,
@@ -105,12 +112,12 @@ ul {
   --fuente: "Helvetica Neue", "Inter", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Arial, sans-serif;
 
-  /* Tipografía del logo "Lola". La buscada es Altesse Std (Adobe Fonts).
-     Mientras no esté cargada, se usa Pinyon Script, la cursiva libre más
-     parecida (ver el @font-face al final de este archivo). El orden de la
+  /* Tipografía del nombre "Lola". La pedida es Classic Script MN (Adobe
+     Fonts). Mientras no esté cargada, se usa Pinyon Script, la cursiva libre
+     más parecida (ver el @font-face al final de este archivo). El orden de la
      lista hace el trabajo solo: el día que se cargue el kit de Adobe, el
-     navegador encuentra "altesse-std" primero y la usa, sin tocar nada más. */
-  --fuente-logo: "altesse-std", "Pinyon Script", cursive;
+     navegador encuentra "classic-script-mn" primero y la usa. */
+  --fuente-logo: "classic-script-mn", "Pinyon Script", cursive;
 
   /* Tamaños fluidos: clamp(mínimo, preferido, máximo) */
   /* --tam-logo: tamaño del logo "Lola" en el header de las páginas de

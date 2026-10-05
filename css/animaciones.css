@@ -94,49 +94,47 @@
 @media (hover: hover) and (pointer: fine) {
   /* El bloque entero (título + portada) se eleva apenas, así el título
      acompaña a su imagen y la distancia entre los dos no cambia. */
-  .bloque-proyecto {
+  .tarjeta {
     transition: transform var(--dur-media) var(--ease-suave);
   }
 
   /* La atenuación, en cambio, es solo de la portada: los títulos de los
      demás proyectos se siguen leyendo enteros mientras apuntás uno. */
-  .bloque-proyecto__caja {
+  .tarjeta__marco {
     transition: opacity var(--dur-media) var(--ease-suave);
   }
 
-  .bloque-proyecto__imagen {
+  .tarjeta__imagen {
     transition: transform var(--dur-media) var(--ease-suave);
   }
 
-  /* Se atenúan las portadas de los que NO están en hover. El
+  /* Se atenúan las portadas de las tarjetas que NO están en hover. El
      ":not(:hover)" no es decorativo: sin él, la regla también alcanzaba al
      bloque apuntado y se atenuaba todo por igual. */
-  .grilla-proyectos:has(.bloque-proyecto:hover)
-    .bloque-proyecto:not(:hover)
-    .bloque-proyecto__caja {
+  .proyectos:has(.tarjeta:hover) .tarjeta:not(:hover) .tarjeta__marco {
     /* Bajar la opacidad funde la portada con el fondo del sitio. La resta
        convierte "cuánto se apaga" en "cuánta opacidad queda", para que la
        variable se lea en el sentido intuitivo. */
     opacity: calc(1 - var(--hover-atenuacion));
   }
 
-  .bloque-proyecto:hover {
+  .tarjeta:hover {
     transform: translateY(calc(var(--desplazamiento-hover) * -1))
       scale(var(--escala-hover-bloque));
   }
 
-  .bloque-proyecto:hover .bloque-proyecto__imagen {
+  .tarjeta:hover .tarjeta__imagen {
     transform: scale(var(--escala-hover-imagen));
   }
 }
 
 /* En touch: sin hover, respuesta mínima con :active */
 @media (hover: none), (pointer: coarse) {
-  .bloque-proyecto__caja {
+  .tarjeta__marco {
     transition: opacity var(--dur-rapida) ease;
   }
 
-  .bloque-proyecto:active .bloque-proyecto__caja {
+  .tarjeta:active .tarjeta__marco {
     opacity: 0.85;
   }
 }

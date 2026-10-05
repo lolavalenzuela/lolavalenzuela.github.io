@@ -6,6 +6,9 @@
       "_ayudaMarca": "LOGO del header. \"logo\" es lo que se VE, en la cursiva del logo, arriba a la izquierda en todas las páginas. \"nombreCompleto\" es lo que leen los lectores de pantalla y los buscadores cuando llegan a ese logo: por eso sigue siendo el nombre entero aunque se vea solo \"Lola\". El título de la pestaña del navegador se edita aparte, en \"meta\"."
     },
     "nav": {
+      "proyectos": "Proyectos",
+      "sobreMi": "Sobre mí",
+      "bajar": "Bajar a proyectos",
       "contacto": "contacto",
       "cerrar": "cerrar",
       "volver": "volver al inicio",
@@ -26,18 +29,25 @@
     "home": {
       "franja": "Diseño audiovisual, sonoro y gráfico — Buenos Aires",
       "_ayudaFranja": "FRANJA de texto que se desplaza al pie de la home. Es la frase que se repite: escribí una sola vez, el sitio la repite sola y le pone los puntos de separación. Dejala corta. La velocidad se toca en css/animaciones.css con --marquee-velocidad (más segundos = más lenta), y con \"reducir movimiento\" activado en el sistema la franja se frena sola, pero el texto se sigue leyendo.",
-      "_ayudaOrden": "ORDEN Y NUMERACIÓN de la home. \"numero\" decide en qué orden aparecen los proyectos y es el número que se ve arriba de cada portada: 1 se muestra como (01), 2 como (02), y así. Se lee por filas, de izquierda a derecha: en pantalla grande la fila de arriba es 01, 02, 03 y la de abajo 04, 05, 06. PARA REORDENAR, cambiá solo los números (sin repetirlos) EN LOS DOS IDIOMAS, \"es\" y \"en\": el orden en que están escritos en esta lista no importa, manda \"numero\". Cada portada sigue llevando a su propia página porque el link sale de \"id\", no de la posición. Qué caja le toca a cada posición (corta o alta) se decide en css/layout.css, en \"GRILLA DE PROYECTOS — home\".",
+      "_ayudaOrden": "ORDEN, NUMERACIÓN Y CATEGORÍAS de la home. Cada proyecto tiene \"numero\" (el que se ve, (01) a (06)) y \"categoria\", que lo mete abajo de uno de los títulos rojos. Las categorías y su orden salen de la lista \"categorias\" de acá al lado: se muestran en ese orden, y dentro de cada una los proyectos van ordenados por \"numero\". PARA REORDENAR, cambiá los números sin repetirlos; PARA MOVER UN PROYECTO DE CATEGORÍA, cambiale \"categoria\" por el \"id\" de otra. Hacelo EN LOS DOS IDIOMAS, \"es\" y \"en\". Cada portada sigue llevando a su propia página porque el link sale de \"id\", no de la posición ni del número.",
+      "categorias": [
+        {
+          "id": "grafico",
+          "titulo": "Diseño gráfico"
+        },
+        {
+          "id": "inmersivo",
+          "titulo": "Inmersivo"
+        },
+        {
+          "id": "marketing",
+          "titulo": "Marketing"
+        }
+      ],
       "proyectos": [
         {
           "numero": 1,
-          "id": "proyecto-1",
-          "titulo": "Moluscos",
-          "altImagen": "Ilustración de un fondo marino: corales ramificados en tonos ocres, algas verdes y esponjas tubulares rosadas sobre un fondo violeta oscuro",
-          "imagen": "assets/img/portada-1.jpg",
-          "encuadre": "center"
-        },
-        {
-          "numero": 2,
+          "categoria": "grafico",
           "id": "proyecto-3",
           "titulo": "Fuera de Servicio",
           "altImagen": "Tapa de alcantarilla vista desde arriba, en alto contraste y trama bitmap: un círculo con una flecha triangular sobre el empedrado",
@@ -45,15 +55,17 @@
           "encuadre": "center"
         },
         {
-          "numero": 3,
-          "id": "proyecto-5",
-          "titulo": "Frakto",
-          "altImagen": "Visual del set Frakto: líneas verticales de glitch en verde y violeta sobre fondo negro",
-          "imagen": "assets/img/portada-5.jpg",
-          "encuadre": "center"
+          "numero": 2,
+          "categoria": "grafico",
+          "id": "proyecto-6",
+          "titulo": "Quomos",
+          "altImagen": "Vista aérea en blanco y negro de gente cruzando la calle, con el patrón modular de Quomos —círculos encadenados— superpuesto en crema sobre la multitud",
+          "imagen": "assets/img/portada-6.jpg",
+          "encuadre": "center 80%"
         },
         {
-          "numero": 4,
+          "numero": 3,
+          "categoria": "inmersivo",
           "id": "proyecto-2",
           "titulo": "Profundidad Metálica",
           "altImagen": "Entorno industrial en 3D, en blanco y negro: torres de estructura wireframe atravesadas por un haz de luz",
@@ -61,23 +73,36 @@
           "encuadre": "60% center"
         },
         {
+          "numero": 4,
+          "categoria": "inmersivo",
+          "id": "proyecto-5",
+          "titulo": "Frakto",
+          "altImagen": "Visual del set Frakto: líneas verticales de glitch en verde y violeta sobre fondo negro",
+          "imagen": "assets/img/portada-5.jpg",
+          "encuadre": "center"
+        },
+        {
           "numero": 5,
+          "categoria": "inmersivo",
+          "id": "proyecto-1",
+          "titulo": "Moluscos",
+          "altImagen": "Ilustración de un fondo marino: corales ramificados en tonos ocres, algas verdes y esponjas tubulares rosadas sobre un fondo violeta oscuro",
+          "imagen": "assets/img/portada-1.jpg",
+          "encuadre": "center"
+        },
+        {
+          "numero": 6,
+          "categoria": "marketing",
           "id": "proyecto-4",
           "titulo": "Conex",
           "altImagen": "Logo de Conex: la palabra CONEX en tipografía geométrica azul sobre un fondo verde lima",
           "imagen": "assets/img/portada-4.jpg",
           "encuadre": "center"
-        },
-        {
-          "numero": 6,
-          "id": "proyecto-6",
-          "titulo": "Quomos",
-          "altImagen": "Vista aérea en blanco y negro de gente cruzando la calle, con el patrón modular de Quomos —círculos encadenados— superpuesto en crema sobre la multitud",
-          "imagen": "assets/img/portada-6.jpg",
-          "encuadre": "center 80%"
         }
       ],
-      "_ayudaEncuadre": "ENCUADRE de esta portada en la grilla de la home. Las cajas son de dos tipos, \"corta\" (un poco más ancha que alta) y \"alta\" (un poco más alta que ancha), y cada foto se recorta para llenar la suya. \"encuadre\" decide qué parte se conserva. Por defecto es \"center\" (el centro). Si a alguna foto le corta algo importante, cambiá este valor por: \"top\" (conserva la parte de arriba), \"bottom\", \"left\", \"right\", o una combinación como \"center top\" o \"left bottom\". También acepta porcentajes, primero el horizontal y después el vertical, ej: \"60% center\" (0% = izquierda/arriba, 100% = derecha/abajo). Hoy Profundidad Metálica usa \"60% center\" para no perder el haz de luz y Quomos usa \"center 80%\" para conservar el patrón de círculos. OJO: la misma foto cae en caja alta en pantallas grandes y en caja corta en tablet, así que un encuadre muy extremo puede quedar bien en una y mal en otra. Solo afecta a la portada de la home, no a la imagen de la página del proyecto."
+      "_ayudaEncuadre": "ENCUADRE de esta portada en la grilla de la home. Las cajas son de dos tipos, \"corta\" (un poco más ancha que alta) y \"alta\" (un poco más alta que ancha), y cada foto se recorta para llenar la suya. \"encuadre\" decide qué parte se conserva. Por defecto es \"center\" (el centro). Si a alguna foto le corta algo importante, cambiá este valor por: \"top\" (conserva la parte de arriba), \"bottom\", \"left\", \"right\", o una combinación como \"center top\" o \"left bottom\". También acepta porcentajes, primero el horizontal y después el vertical, ej: \"60% center\" (0% = izquierda/arriba, 100% = derecha/abajo). Hoy Profundidad Metálica usa \"60% center\" para no perder el haz de luz y Quomos usa \"center 80%\" para conservar el patrón de círculos. OJO: la misma foto cae en caja alta en pantallas grandes y en caja corta en tablet, así que un encuadre muy extremo puede quedar bien en una y mal en otra. Solo afecta a la portada de la home, no a la imagen de la página del proyecto.",
+      "anio": "2026",
+      "_ayudaAnio": "AÑO que se ve arriba a la izquierda en la portada de la home. Cambialo acá y en la rama \"en\"."
     },
     "about": {
       "nombre": "Lola Valenzuela",
@@ -491,6 +516,9 @@
       "nombreCompleto": "Lola Valenzuela"
     },
     "nav": {
+      "proyectos": "Projects",
+      "sobreMi": "About",
+      "bajar": "Scroll to projects",
       "contacto": "contact",
       "cerrar": "close",
       "volver": "back to home",
@@ -510,17 +538,24 @@
     },
     "home": {
       "franja": "Audiovisual, sound and graphic design — Buenos Aires",
+      "categorias": [
+        {
+          "id": "grafico",
+          "titulo": "Graphic design"
+        },
+        {
+          "id": "inmersivo",
+          "titulo": "Immersive"
+        },
+        {
+          "id": "marketing",
+          "titulo": "Marketing"
+        }
+      ],
       "proyectos": [
         {
           "numero": 1,
-          "id": "proyecto-1",
-          "titulo": "Moluscos",
-          "altImagen": "Illustration of a seabed: branching corals in ochre tones, green algae and pink tube sponges against a deep purple background",
-          "imagen": "assets/img/portada-1.jpg",
-          "encuadre": "center"
-        },
-        {
-          "numero": 2,
+          "categoria": "grafico",
           "id": "proyecto-3",
           "titulo": "Out of Service",
           "altImagen": "A manhole cover seen from above in high-contrast bitmap halftone: a circle with a triangular arrow set into tiled pavement",
@@ -528,15 +563,17 @@
           "encuadre": "center"
         },
         {
-          "numero": 3,
-          "id": "proyecto-5",
-          "titulo": "Frakto",
-          "altImagen": "Frakto visual: vertical glitch lines in green and violet over a black background",
-          "imagen": "assets/img/portada-5.jpg",
-          "encuadre": "center"
+          "numero": 2,
+          "categoria": "grafico",
+          "id": "proyecto-6",
+          "titulo": "Quomos",
+          "altImagen": "Aerial black and white view of people crossing a street, with the Quomos modular pattern —chained circles— overlaid in cream across the crowd",
+          "imagen": "assets/img/portada-6.jpg",
+          "encuadre": "center 80%"
         },
         {
-          "numero": 4,
+          "numero": 3,
+          "categoria": "inmersivo",
           "id": "proyecto-2",
           "titulo": "Profundidad Metálica",
           "altImagen": "Black and white 3D industrial environment: wireframe towers cut through by a shaft of light",
@@ -544,22 +581,34 @@
           "encuadre": "60% center"
         },
         {
+          "numero": 4,
+          "categoria": "inmersivo",
+          "id": "proyecto-5",
+          "titulo": "Frakto",
+          "altImagen": "Frakto visual: vertical glitch lines in green and violet over a black background",
+          "imagen": "assets/img/portada-5.jpg",
+          "encuadre": "center"
+        },
+        {
           "numero": 5,
+          "categoria": "inmersivo",
+          "id": "proyecto-1",
+          "titulo": "Moluscos",
+          "altImagen": "Illustration of a seabed: branching corals in ochre tones, green algae and pink tube sponges against a deep purple background",
+          "imagen": "assets/img/portada-1.jpg",
+          "encuadre": "center"
+        },
+        {
+          "numero": 6,
+          "categoria": "marketing",
           "id": "proyecto-4",
           "titulo": "Conex",
           "altImagen": "Conex logo: the word CONEX in geometric blue type on a lime green background",
           "imagen": "assets/img/portada-4.jpg",
           "encuadre": "center"
-        },
-        {
-          "numero": 6,
-          "id": "proyecto-6",
-          "titulo": "Quomos",
-          "altImagen": "Aerial black and white view of people crossing a street, with the Quomos modular pattern —chained circles— overlaid in cream across the crowd",
-          "imagen": "assets/img/portada-6.jpg",
-          "encuadre": "center 80%"
         }
-      ]
+      ],
+      "anio": "2026"
     },
     "about": {
       "nombre": "Lola Valenzuela",

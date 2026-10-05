@@ -124,252 +124,200 @@
     background: var(--color-fondo);
   }
 
-  /* Compensa el alto del header fijo para que el contenido no quede tapado */
-  main {
+  /* Compensa el alto del header fijo para que el contenido no quede tapado.
+     La home queda afuera: no tiene header, su navegación va dentro de la
+     portada. */
+  body:not([data-pagina="home"]) main {
     padding-top: var(--alto-header);
   }
 }
 
 /* -----------------------------------------------------------
-   HOME — medidas propias
+   HOME — portada + proyectos, en una sola página
    -----------------------------------------------------------
-   Todas las perillas de espacio de la home están juntas acá y solo valen
-   en la home. Están en vw (porcentaje del ancho de la pantalla) con topes
-   de clamp(), así se mantienen proporcionales en cualquier pantalla. */
+   La home es un scroll continuo: primero la portada, que ocupa la pantalla
+   entera, y abajo la sección de proyectos agrupados por categoría.
+   Todas las perillas de la home están juntas acá y solo valen acá. */
 body[data-pagina="home"] {
-  /* LOGO GRANDE DE LA HOME. A 1440px da 183px de letra: "Lola" ocupa unos
-     330px de ancho, la misma proporción que en la referencia. */
-  --tam-logo: clamp(3.75rem, 12.7vw, 12.5rem);
-
-  /* Margen a los costados. El logo, la navegación y la grilla cuelgan del
-     mismo margen, así quedan alineados entre sí. 3,5vw = 50px a 1440px. */
-  --margen-home: clamp(1rem, 3.5vw, 4rem);
-
-  /* Separación horizontal entre columnas. 2vw = 29px a 1440px. */
-  --gap-home: clamp(0.75rem, 2vw, 2rem);
-
-  /* Separación vertical entre un proyecto y el de abajo: desde el pie de
-     una portada hasta el título de la siguiente. Es más grande que el
-     espacio entre un título y su propia portada, para que cada título se
-     lea pegado a su imagen y no a la de arriba. */
-  --espacio-filas-home: clamp(1.75rem, 3.2vw, 3.25rem);
-
-  /* Espacio entre el título y su portada: poco, para que se lea como la
-     etiqueta de esa imagen. */
-  --espacio-titulo-portada: clamp(0.3rem, 0.5vw, 0.6rem);
-
-  /* Aire arriba del logo y entre el logo y la grilla. */
-  --padding-header: clamp(0.75rem, 2vw, 2rem);
-  --espacio-logo-grilla: clamp(1rem, 2.5vw, 2.5rem);
-
-  /* Tamaño del nombre del proyecto en los títulos. */
-  --tam-titulo-portada: clamp(1rem, 0.4rem + 1.5vw, 1.75rem);
-
-  /* Se vuelve a calcular acá a propósito: una variable que usa otras se
-     resuelve donde se declara. Si no se repite, la home seguiría usando el
-     alto del header de las páginas internas y, en mobile, el header fijo
-     taparía el principio de la grilla. */
-  --alto-header: calc(var(--tam-logo) * var(--alto-logo) + var(--padding-header) * 2);
+  /* Margen a los costados de toda la home. */
+  --margen-home: clamp(1.25rem, 5vw, 5rem);
+  /* Tamaño del nombre en la portada. Está en vw para que ocupe siempre la
+     misma proporción del ancho, como en la maqueta. */
+  --tam-nombre-portada: clamp(4.5rem, 27vw, 28rem);
+  /* Sangría de las tarjetas respecto del título de su categoría. */
+  --sangria-categoria: clamp(0rem, 5vw, 5rem);
 }
 
-/* El header usa el mismo margen que la grilla, así el logo queda alineado
-   con su borde izquierdo y "contacto / es/en" con el derecho. En pantallas
-   más anchas que --ancho-maximo la grilla deja de crecer y se centra: el
-   max() suma la mitad de ese sobrante para que el header la acompañe. */
-body[data-pagina="home"] .header {
-  padding-inline: max(
-    var(--margen-home),
-    calc((100% - var(--ancho-maximo)) / 2 + var(--margen-home))
-  );
+/* -- PORTADA -----------------------------------------------------------
+   Tres filas: arriba el año y la navegación, al medio el nombre, abajo la
+   flecha. El nombre se centra en vertical y arranca pegado al margen
+   izquierdo. */
+.portada {
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr auto;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  padding: var(--margen-home);
 }
 
-/* -----------------------------------------------------------
-   GRILLA DE PROYECTOS — home
-   -----------------------------------------------------------
-   Cada proyecto es un bloque con su título arriba y su portada abajo. Hay
-   DOS tipos de portada, todas del mismo ancho:
-     - corta: un poco más ancha que alta
-     - alta:  un poco más alta que ancha
-
-   EL ORDEN lo decide "numero" en contenido.json, y en el HTML los bloques
-   quedan en ese orden: 01, 02, 03... Eso importa porque es el orden en que
-   se recorren con el teclado y en que los lee un lector de pantalla, y
-   tiene que coincidir con la numeración que se ve.
-
-   DÓNDE CAE CADA UNO lo resuelve este CSS con una grilla (grid): por
-   posición, no por proyecto, así que si reordenás en el JSON el patrón de
-   cajas se mantiene.
-     - desde 900px, 3 columnas:   01 corta · 02 alta  · 03 corta
-                                  04 alta  · 05 corta · 06 alta
-     - de 640 a 899px, 2 columnas: 01 corta · 02 corta
-                                   03 alta  · 04 corta
-                                   05 corta · 06 alta
-     - menos de 640px, 1 columna, alternando corta y alta.
-
-   CÓMO CIERRA EL RECTÁNGULO: la grilla tiene filas de dos medidas, el alto
-   de un bloque corto y "lo que le falta a un bloque corto para ser alto".
-   Un bloque alto ocupa dos filas; uno corto, una. Como cada columna suma
-   lo mismo, todas terminan a la misma altura. Esos altos se calculan acá
-   abajo a partir del ancho de la columna, así que escalan solos con la
-   pantalla: no hay ninguna altura fija en píxeles. */
-body[data-pagina="home"] {
-  /* Proporción ancho / alto de cada tipo de caja. Subir el número de la
-     corta la hace más apaisada; bajar el de la alta la hace más vertical. */
-  --proporcion-caja-corta: 1.2;
-  --proporcion-caja-alta: 0.88;
-  /* Alto reservado para cada título. Es fijo (sale del tamaño de letra)
-     para que todos los bloques midan lo mismo y el cálculo de las filas
-     sea exacto. */
-  --alto-titulo-portada: calc(var(--tam-titulo-portada) * 1.3);
+.portada__anio {
+  grid-column: 1;
+  grid-row: 1;
+  color: var(--color-acento);
+  font-size: var(--tam-nav);
+  letter-spacing: 0.06em;
 }
 
-/* El <main> de la home es el punto de referencia para medir el ancho
-   disponible (las unidades "cqw" de más abajo son porcentajes de su
-   ancho). */
-body[data-pagina="home"] main {
-  container-type: inline-size;
-}
-
-/* MOBILE PRIMERO: una columna, los seis en orden. Acá cada portada toma su
-   alto de la proporción de su caja. */
-.grilla-proyectos {
+.portada__nav {
+  grid-column: 2;
+  grid-row: 1;
   display: flex;
   flex-direction: column;
-  gap: var(--espacio-filas-home);
+  align-items: flex-end;
+  gap: 0.35em;
+  text-align: right;
+}
+
+.portada__link {
+  color: var(--color-acento);
+  font-size: var(--tam-nav);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  /* Área táctil cómoda en celular sin que se note en escritorio. */
+  padding: 0.25em 0;
+  min-height: 1.5em;
+  transition: opacity var(--dur-rapida) ease;
+}
+
+.portada__link:hover,
+.portada__link:focus-visible {
+  opacity: 0.6;
+}
+
+/* En pantallas táctiles los links crecen hasta el mínimo cómodo para el
+   dedo (44px). En escritorio se quedan juntos, como en la maqueta. */
+@media (pointer: coarse) {
+  .portada__link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 44px;
+  }
+}
+
+.portada__nav .toggle-idioma {
+  margin-top: 0.4em;
+  font-size: var(--tam-nav);
+}
+
+/* El nombre. La tipografía sale de --fuente-logo (ver base.css). */
+.portada__nombre {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  align-self: center;
+  margin: 0;
+  font-family: var(--fuente-logo);
+  font-size: var(--tam-nombre-portada);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--color-acento);
+  /* Deja aire para el trazo final, que se pasa del ancho de la letra. */
+  padding-right: 0.1em;
+  /* Sigue siendo el elemento que se transforma al ir a "Sobre mí". */
+  view-transition-name: nombre;
+}
+
+/* Flecha de bajar. */
+.portada__baja {
+  grid-column: 2;
+  grid-row: 3;
+  justify-self: end;
+  align-self: end;
+  display: block;
+  width: clamp(0.6rem, 1vw, 0.85rem);
+  color: var(--color-acento);
+}
+
+.portada__baja svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* -- PROYECTOS ---------------------------------------------------------
+   Un bloque por categoría: el título en rojo y, debajo y con una sangría,
+   sus tarjetas en una grilla de hasta tres columnas. Las categorías que
+   tienen menos proyectos dejan las celdas libres a la derecha, como en la
+   maqueta. */
+.proyectos {
   max-width: var(--ancho-maximo);
   margin: 0 auto;
-  padding: var(--espacio-logo-grilla) var(--margen-home) clamp(2.5rem, 1rem + 5vw, 6rem);
+  padding: 0 var(--margen-home) clamp(3rem, 8vw, 7rem);
+  /* Para que al bajar desde "PROYECTOS" el título no quede pegado arriba. */
+  scroll-margin-top: clamp(1.5rem, 5vw, 4rem);
 }
 
-/* El bloque entero (título + portada) es un solo link. */
-.bloque-proyecto {
-  display: flex;
-  flex-direction: column;
-  gap: var(--espacio-titulo-portada);
-  min-width: 0;
+.categoria + .categoria {
+  margin-top: clamp(2.5rem, 7vw, 6rem);
+}
+
+.categoria__titulo {
+  margin-bottom: clamp(1rem, 2.5vw, 2rem);
+  color: var(--color-acento);
+  font-size: clamp(0.9rem, 0.75rem + 0.5vw, 1.25rem);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.categoria__grilla {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.25rem, 3vw, 3rem);
+  margin-left: var(--sangria-categoria);
+}
+
+/* -- Tarjeta: título arriba, portada cuadrada abajo -------------------- */
+.tarjeta {
+  display: grid;
+  gap: clamp(0.4rem, 0.8vw, 0.7rem);
   color: var(--color-texto);
 }
 
-.grilla-proyectos .bloque-proyecto:nth-child(odd) .bloque-proyecto__caja {
-  aspect-ratio: var(--proporcion-caja-corta);
-}
-
-.grilla-proyectos .bloque-proyecto:nth-child(even) .bloque-proyecto__caja {
-  aspect-ratio: var(--proporcion-caja-alta);
-}
-
-/* TABLET Y DESKTOP: grilla con filas calculadas. Acá la portada ya no usa
-   su proporción: ocupa exactamente el alto de las filas que le tocan, que
-   ya están calculadas con esa misma proporción. Así los pies de las
-   columnas coinciden al píxel. */
-@media (min-width: 640px) {
-  .grilla-proyectos {
-    --columnas-home: 2;
-    /* Ancho de una columna: el ancho disponible, menos los márgenes y los
-       espacios entre columnas, dividido por la cantidad de columnas. */
-    --ancho-columna: calc(
-      (min(100cqw, var(--ancho-maximo)) - var(--margen-home) * 2 -
-        var(--gap-home) * (var(--columnas-home) - 1)) / var(--columnas-home)
-    );
-    --alto-bloque-corto: calc(
-      var(--alto-titulo-portada) + var(--espacio-titulo-portada) +
-        var(--ancho-columna) / var(--proporcion-caja-corta)
-    );
-    --alto-bloque-alto: calc(
-      var(--alto-titulo-portada) + var(--espacio-titulo-portada) +
-        var(--ancho-columna) / var(--proporcion-caja-alta)
-    );
-    /* Lo que le falta a un bloque corto para llegar a alto. */
-    --fila-intermedia: calc(
-      var(--alto-bloque-alto) - var(--alto-bloque-corto) - var(--espacio-filas-home)
-    );
-
-    display: grid;
-    grid-template-columns: repeat(var(--columnas-home), minmax(0, 1fr));
-    column-gap: var(--gap-home);
-    row-gap: var(--espacio-filas-home);
-    grid-template-rows:
-      var(--alto-bloque-corto) var(--alto-bloque-corto)
-      var(--fila-intermedia) var(--alto-bloque-corto);
-  }
-
-  .grilla-proyectos .bloque-proyecto .bloque-proyecto__caja {
-    aspect-ratio: auto;
-    flex: 1 1 0;
-    min-height: 0;
-  }
-
-  /* Dos columnas: 01 · 02 / 03 · 04 / 05 · 06 */
-  .grilla-proyectos .bloque-proyecto:nth-child(1) { grid-column: 1; grid-row: 1; }
-  .grilla-proyectos .bloque-proyecto:nth-child(2) { grid-column: 2; grid-row: 1; }
-  .grilla-proyectos .bloque-proyecto:nth-child(3) { grid-column: 1; grid-row: 2 / span 2; }
-  .grilla-proyectos .bloque-proyecto:nth-child(4) { grid-column: 2; grid-row: 2; }
-  .grilla-proyectos .bloque-proyecto:nth-child(5) { grid-column: 1; grid-row: 4; }
-  .grilla-proyectos .bloque-proyecto:nth-child(6) { grid-column: 2; grid-row: 3 / span 2; }
-}
-
-@media (min-width: 900px) {
-  .grilla-proyectos {
-    --columnas-home: 3;
-    grid-template-rows:
-      var(--alto-bloque-corto) var(--fila-intermedia) var(--alto-bloque-corto);
-  }
-
-  /* Tres columnas: 01 · 02 · 03 / 04 · 05 · 06 */
-  .grilla-proyectos .bloque-proyecto:nth-child(1) { grid-column: 1; grid-row: 1; }
-  .grilla-proyectos .bloque-proyecto:nth-child(2) { grid-column: 2; grid-row: 1 / span 2; }
-  .grilla-proyectos .bloque-proyecto:nth-child(3) { grid-column: 3; grid-row: 1; }
-  .grilla-proyectos .bloque-proyecto:nth-child(4) { grid-column: 1; grid-row: 2 / span 2; }
-  .grilla-proyectos .bloque-proyecto:nth-child(5) { grid-column: 2; grid-row: 3; }
-  .grilla-proyectos .bloque-proyecto:nth-child(6) { grid-column: 3; grid-row: 2 / span 2; }
-}
-
-/* -- Título: "(01) Moluscos" --
-   Número y nombre sobre la misma línea de base. Nunca parte en dos
-   renglones: si partiera, esa columna quedaría más alta que las otras y el
-   rectángulo no cerraría. El tamaño está calibrado para que el título más
-   largo ("(04) Profundidad Metálica") entre en la columna más angosta. */
-.bloque-proyecto__titulo {
+.tarjeta__titulo {
   display: flex;
-  align-items: baseline;
-  gap: 0.3em;
-  height: var(--alto-titulo-portada);
-  font-size: var(--tam-titulo-portada);
-  line-height: 1.15;
-  white-space: nowrap;
+  gap: 0.4em;
+  font-size: clamp(0.75rem, 0.65rem + 0.3vw, 1rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
-/* El número, en la misma cursiva del logo. Es PROVISORIO igual que el
-   logo: hoy se ve en Pinyon Script, y el día que se cargue Altesse Std
-   (ver arriba de todo en base.css) cambia solo, porque usa la misma
-   variable --fuente-logo. Va un poco más grande que el nombre porque una
-   cursiva caligráfica dibuja más chico que una sans al mismo tamaño. */
-.bloque-proyecto__numero {
-  font-family: var(--fuente-logo);
-  font-size: 1.3em;
-  font-weight: 400;
-  line-height: 1;
-}
-
-/* El nombre, en la sans del sitio y fino. */
-.bloque-proyecto__nombre {
-  font-weight: 300;
-}
-
-/* La caja de la portada: tiene la proporción, el recorte y el gris que se
-   ve mientras carga la imagen. */
-.bloque-proyecto__caja {
-  position: relative;
+.tarjeta__marco {
   display: block;
+  aspect-ratio: 1;
   overflow: hidden;
   background: var(--color-placeholder);
 }
 
-.bloque-proyecto__imagen {
+.tarjeta__imagen {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Desde 560px, dos columnas; desde 900px, las tres de la maqueta. */
+@media (min-width: 560px) {
+  .categoria__grilla {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .categoria__grilla {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 /* -----------------------------------------------------------

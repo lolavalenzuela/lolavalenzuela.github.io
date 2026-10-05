@@ -11,72 +11,86 @@
 // AL PUBLICAR UN CAMBIO DE CSS O JS hay que subir ese número (la fecha del
 // día, AAAAMMDD) en los imports de acá arriba y en los ocho HTML.
 
-import { cargarContenido, resolverRuta } from "./contenido.js?v=20260928b";
-import { obtenerIdioma, aplicarTextosEstaticos, inicializarToggleIdioma } from "./idioma.js?v=20260928b";
-import { inicializarContacto } from "./contacto.js?v=20260928b";
-import { inicializarTransiciones } from "./transiciones.js?v=20260928b";
-import * as gestorAudio from "./audio.js?v=20260928b";
-import * as movimiento from "./movimiento.js?v=20260928b";
+import { cargarContenido, resolverRuta } from "./contenido.js?v=20261005";
+import { obtenerIdioma, aplicarTextosEstaticos, inicializarToggleIdioma } from "./idioma.js?v=20261005";
+import { inicializarContacto } from "./contacto.js?v=20261005";
+import { inicializarTransiciones } from "./transiciones.js?v=20261005";
+import * as gestorAudio from "./audio.js?v=20261005";
+import * as movimiento from "./movimiento.js?v=20261005";
 
 // "3" -> "03". El número va siempre con dos dígitos.
 function numeroConDosDigitos(numero) {
   return String(numero).padStart(2, "0");
 }
 
-// Cada proyecto de la home es UN solo link que contiene su título arriba y
-// su portada abajo: clickear cualquiera de los dos lleva al proyecto, y el
-// foco del teclado rodea el bloque entero.
-function crearBloqueProyecto(proyecto) {
+// Cada proyecto de la home es UNA tarjeta: el título arriba y la portada
+// abajo, todo dentro del mismo link. Clickear cualquiera de los dos abre el
+// proyecto, y el foco del teclado rodea la tarjeta entera.
+function crearTarjetaProyecto(proyecto) {
   const nombreTransicion = `imagen-${proyecto.id}`;
   const numero = numeroConDosDigitos(proyecto.numero);
 
   const enlace = document.createElement("a");
-  enlace.className = "bloque-proyecto";
+  enlace.className = "tarjeta";
   enlace.dataset.proyectoId = proyecto.id;
   enlace.dataset.transicion = nombreTransicion;
-  // El link sale del id y no de la posición: por más que se reordene la
-  // grilla, cada portada abre siempre su propia página.
+  // El link sale del id, no del número ni de la posición: se puede
+  // reordenar o recategorizar sin que ninguna portada abra otra página.
   enlace.href = `proyectos/${proyecto.id}.html`;
 
-  // Lo que anuncia un lector de pantalla al llegar al bloque: "01,
-  // Moluscos". Se fija explícito porque, si no, leería también los
-  // paréntesis y toda la descripción de la portada.
+  // Lo que anuncia un lector de pantalla: "01, Fuera de Servicio". Si no se
+  // fijara, leería los paréntesis y encima toda la descripción de la foto.
   enlace.setAttribute("aria-label", `${numero}, ${proyecto.titulo}`);
 
-  // Título visible: "(01) Moluscos".
   const titulo = document.createElement("span");
-  titulo.className = "bloque-proyecto__titulo";
+  titulo.className = "tarjeta__titulo";
 
   const numeroVisible = document.createElement("span");
-  numeroVisible.className = "bloque-proyecto__numero";
+  numeroVisible.className = "tarjeta__numero";
   numeroVisible.textContent = `(${numero})`;
 
   const nombre = document.createElement("span");
-  nombre.className = "bloque-proyecto__nombre";
+  nombre.className = "tarjeta__nombre";
   nombre.textContent = proyecto.titulo;
 
   titulo.append(numeroVisible, nombre);
 
-  // Caja de la portada: es la que tiene la proporción (corta o alta) y la
-  // que se atenúa al apuntar otro proyecto. El título queda afuera, así
-  // siempre se lee.
-  const caja = document.createElement("span");
-  caja.className = "bloque-proyecto__caja";
+  // El marco es el cuadrado: recorta la portada y es lo que se mueve en el
+  // hover. El título queda afuera para que se lea siempre.
+  const marco = document.createElement("span");
+  marco.className = "tarjeta__marco";
 
   const imagen = document.createElement("img");
-  imagen.className = "bloque-proyecto__imagen";
+  imagen.className = "tarjeta__imagen";
   imagen.dataset.elementoTransicion = nombreTransicion;
   imagen.loading = "lazy";
   imagen.decoding = "async";
   imagen.src = resolverRuta(proyecto.imagen);
   imagen.alt = proyecto.altImagen;
-  // Encuadre configurable por proyecto desde contenido.json (ver la nota
-  // "_ayudaEncuadre" ahí). Sin valor, manda el "center" del CSS.
+  // Encuadre por proyecto desde contenido.json (ver "_ayudaEncuadre" ahí).
   if (proyecto.encuadre) imagen.style.objectPosition = proyecto.encuadre;
 
-  caja.appendChild(imagen);
-  enlace.append(titulo, caja);
+  marco.appendChild(imagen);
+  enlace.append(titulo, marco);
   return enlace;
+}
+
+// Un bloque por categoría: el título rojo y, debajo, sus tarjetas.
+function crearCategoria(categoria, proyectos) {
+  const seccion = document.createElement("section");
+  seccion.className = "categoria";
+  seccion.dataset.categoria = categoria.id;
+
+  const titulo = document.createElement("h2");
+  titulo.className = "categoria__titulo";
+  titulo.textContent = categoria.titulo;
+
+  const grilla = document.createElement("div");
+  grilla.className = "categoria__grilla";
+  proyectos.forEach((proyecto) => grilla.appendChild(crearTarjetaProyecto(proyecto)));
+
+  seccion.append(titulo, grilla);
+  return seccion;
 }
 
 // Franja de texto en loop que cierra la home. El texto se edita en
@@ -86,43 +100,51 @@ function montarFranjaDeLaHome(contenido, idioma) {
 }
 
 function renderHome(contenido, idioma) {
-  const grilla = document.querySelector("[data-grilla-proyectos]");
-  if (!grilla) return;
+  const contenedor = document.querySelector("[data-grilla-proyectos]");
+  if (!contenedor) return;
 
-  // El orden lo decide "numero" en el JSON, no el orden en que están
-  // escritos en la lista.
-  const proyectos = [...contenido[idioma].home.proyectos].sort(
-    (a, b) => a.numero - b.numero
-  );
+  const home = contenido[idioma].home;
+  // El orden lo decide "numero", no el orden en que están escritos.
+  const proyectos = [...home.proyectos].sort((a, b) => a.numero - b.numero);
+  const categorias = home.categorias || [];
 
-  if (!grilla.dataset.construida) {
-    // Primer render: crea los seis bloques una sola vez, en el orden de
-    // "numero". Dónde cae cada uno (columna, caja corta o alta) lo resuelve
-    // el CSS de la grilla en layout.css, así el orden del HTML es siempre el
-    // orden de lectura: el que se recorre con el teclado y el que lee un
-    // lector de pantalla.
-    grilla.replaceChildren(...proyectos.map((proyecto) => crearBloqueProyecto(proyecto)));
-    grilla.dataset.construida = "true";
-    // La entrada de los bloques la maneja js/movimiento.js, junto con el
-    // resto del movimiento del sitio.
+  if (!contenedor.dataset.construida) {
+    // Primer render: una sección por categoría, con sus proyectos adentro.
+    // Las categorías que quedaran sin proyectos no se dibujan.
+    contenedor.replaceChildren(
+      ...categorias
+        .map((categoria) => ({
+          categoria,
+          suyos: proyectos.filter((p) => p.categoria === categoria.id),
+        }))
+        .filter(({ suyos }) => suyos.length)
+        .map(({ categoria, suyos }) => crearCategoria(categoria, suyos))
+    );
+    contenedor.dataset.construida = "true";
     montarFranjaDeLaHome(contenido, idioma);
     return;
   }
 
   montarFranjaDeLaHome(contenido, idioma);
 
-  // Idioma cambiado: solo actualiza textos e imágenes, no reconstruye el DOM
-  // (así no se repite la animación de entrada ni se pierde el estado de hover).
+  // Idioma cambiado: solo se actualizan los textos y las imágenes, no se
+  // rearma el DOM (así no se repite la animación de entrada).
+  categorias.forEach((categoria) => {
+    const seccion = contenedor.querySelector(`[data-categoria="${categoria.id}"]`);
+    const titulo = seccion?.querySelector(".categoria__titulo");
+    if (titulo) titulo.textContent = categoria.titulo;
+  });
+
   proyectos.forEach((proyecto) => {
-    const bloque = grilla.querySelector(`[data-proyecto-id="${proyecto.id}"]`);
-    if (!bloque) return;
+    const tarjeta = contenedor.querySelector(`[data-proyecto-id="${proyecto.id}"]`);
+    if (!tarjeta) return;
     // Solo cambia el nombre: el número no se traduce.
-    bloque.querySelector(".bloque-proyecto__nombre").textContent = proyecto.titulo;
-    bloque.setAttribute(
+    tarjeta.querySelector(".tarjeta__nombre").textContent = proyecto.titulo;
+    tarjeta.setAttribute(
       "aria-label",
       `${numeroConDosDigitos(proyecto.numero)}, ${proyecto.titulo}`
     );
-    const img = bloque.querySelector(".bloque-proyecto__imagen");
+    const img = tarjeta.querySelector(".tarjeta__imagen");
     img.alt = proyecto.altImagen;
     img.src = resolverRuta(proyecto.imagen);
     if (proyecto.encuadre) img.style.objectPosition = proyecto.encuadre;

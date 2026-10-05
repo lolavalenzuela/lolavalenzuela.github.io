@@ -63,9 +63,15 @@ function gruposDeLaPagina() {
 
   if (pagina === "home") {
     return [
-      uno(".header__nombre"),
-      uno(".header__nav"),
-      todos(".bloque-proyecto"),
+      uno(".portada__anio"),
+      uno(".portada__nav"),
+      uno(".portada__nombre"),
+      uno(".portada__baja"),
+      // Cada categoría entra con su título y sus tarjetas escalonadas.
+      ...Array.from(document.querySelectorAll(".categoria")).map((seccion) => [
+        seccion.querySelector(".categoria__titulo"),
+        ...seccion.querySelectorAll(".tarjeta"),
+      ]),
       uno(".franja-movil"),
     ];
   }
