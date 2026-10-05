@@ -1,0 +1,471 @@
+/* =========================================================
+   PROTOTIPO — "Señal"
+   =========================================================
+   Esto NO es el sitio: es una maqueta suelta para ver el tono.
+   Negro absoluto, rojo como señal, secuencia vertical de proyectos.
+
+   PARA SUBIR O BAJAR TODO EL MOVIMIENTO DE UNA: --movimiento
+     1   = como está
+     0.5 = la mitad
+     0   = quieto
+   ========================================================= */
+
+:root {
+  --negro: #000000;
+  --rojo: #ff0000;
+  --blanco: #ffffff;
+  --gris: #8a8a8a;
+
+  --fuente: "Helvetica Neue", "Inter", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  --fuente-script: "Pinyon Script", cursive;
+
+  /* La perilla general. */
+  --movimiento: 1;
+
+  /* Tiempos y curvas: una sola familia para todo el sitio. */
+  --dur-rapida: 220ms;
+  --dur-media: 600ms;
+  --dur-lenta: 900ms;
+  --ease-suave: cubic-bezier(0.22, 1, 0.36, 1);
+  /* El barrido entra con otra curva, más seca: es un gesto de máquina. */
+  --ease-barrido: cubic-bezier(0.76, 0, 0.24, 1);
+
+  /* Cuánto sube el contenido al entrar. */
+  --reveal-distancia: 22px;
+  /* Separación entre un elemento y el siguiente de su grupo. */
+  --paso: 90ms;
+  /* Cuánto se desfasan texto e imagen al scrollear (px en todo el recorrido). */
+  --desfase: 60px;
+  /* Segundos que tarda la tira en dar una vuelta. Más = más lenta. */
+  --tira-velocidad: 48s;
+
+  --borde: clamp(1.25rem, 4vw, 4.5rem);
+}
+
+@font-face {
+  font-family: "Pinyon Script";
+  src: url("../assets/fonts/pinyon-script-latin.woff2") format("woff2");
+  font-display: block;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--negro);
+  color: var(--blanco);
+  font-family: var(--fuente);
+  overflow-x: hidden;
+  /* El cursor normal se esconde solo cuando la cruz está activa. */
+}
+
+body.con-cruz,
+body.con-cruz a {
+  cursor: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* -- Cartel de prototipo, para no confundirlo con el sitio -------------- */
+.aviso {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 60;
+  padding: 0.5rem 0.75rem;
+  background: var(--rojo);
+  color: var(--negro);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+}
+
+/* -- Cursor en cruz ----------------------------------------------------
+   Dos líneas finas. Sobre un link se abre y se pone rojo. No es un
+   círculo a propósito: el círculo con etiqueta es el gesto de una de las
+   referencias y no lo quiero repetir. */
+.cruz {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-rapida) ease, transform var(--dur-rapida) var(--ease-suave);
+}
+
+body.con-cruz .cruz {
+  opacity: 1;
+}
+
+.cruz span {
+  position: absolute;
+  background: var(--blanco);
+  transition: background var(--dur-rapida) ease;
+}
+
+.cruz span:first-child {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+}
+
+.cruz span:last-child {
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 100%;
+}
+
+.cruz.sobre-link {
+  transform: scale(1.9);
+}
+
+.cruz.sobre-link span {
+  background: var(--rojo);
+}
+
+/* -- Cabecera ---------------------------------------------------------- */
+.cabecera {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--borde);
+  mix-blend-mode: difference; /* se lee sobre imagen o sobre negro */
+}
+
+.cabecera__marca {
+  font-family: var(--fuente-script);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1;
+  color: var(--rojo);
+  /* Entra recién después de la portada: lo maneja el JS. */
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity var(--dur-media) var(--ease-suave),
+    transform var(--dur-media) var(--ease-suave);
+}
+
+.cabecera.compacta .cabecera__marca {
+  opacity: 1;
+  transform: none;
+}
+
+.cabecera__nav {
+  display: flex;
+  gap: clamp(1rem, 2vw, 2rem);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.cabecera__nav a:hover {
+  color: var(--rojo);
+}
+
+.idioma b {
+  color: var(--rojo);
+  font-weight: 400;
+}
+
+/* -- Portada ----------------------------------------------------------- */
+.portada {
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  padding: calc(var(--borde) * 3) var(--borde) var(--borde);
+}
+
+.nombre {
+  display: grid;
+  gap: 0.2em;
+  font-weight: 400;
+}
+
+/* El recorte es lo que hace el "revelado por máscara": el script sube
+   desde abajo y lo que asoma de más queda tapado. */
+.nombre__recorte {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+
+.nombre__script {
+  display: block;
+  font-family: var(--fuente-script);
+  font-size: clamp(5rem, 20vw, 20rem);
+  line-height: 0.95;
+  color: var(--rojo);
+  transform: translateY(calc(110% * var(--movimiento)));
+  transition: transform var(--dur-lenta) var(--ease-suave);
+}
+
+.js-entrada .nombre__script {
+  transform: none;
+}
+
+.nombre__apellido {
+  display: block;
+  font-size: clamp(0.9rem, 2.2vw, 1.75rem);
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(calc(12px * var(--movimiento)));
+  transition: opacity var(--dur-media) var(--ease-suave) 350ms,
+    transform var(--dur-media) var(--ease-suave) 350ms;
+}
+
+.js-entrada .nombre__apellido {
+  opacity: 1;
+  transform: none;
+}
+
+/* -- Tira que corre ---------------------------------------------------- */
+.tira {
+  overflow: hidden;
+  margin-top: clamp(2rem, 6vw, 5rem);
+  padding-block: 0.7rem;
+  border-block: 1px solid var(--rojo);
+  opacity: 0;
+  transition: opacity var(--dur-media) ease 600ms;
+}
+
+.js-entrada .tira {
+  opacity: 1;
+}
+
+.tira__pista {
+  display: flex;
+  width: max-content;
+  animation: tira-correr var(--tira-velocidad) linear infinite;
+}
+
+/* Se frena al pasar el mouse: deja leer la frase. */
+.tira:hover .tira__pista {
+  animation-play-state: paused;
+}
+
+.tira__texto {
+  color: var(--rojo);
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@keyframes tira-correr {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.baja {
+  margin-top: clamp(1.5rem, 4vw, 3rem);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gris);
+  opacity: 0;
+  transition: opacity var(--dur-media) ease 800ms;
+}
+
+.js-entrada .baja {
+  opacity: 1;
+}
+
+/* -- Secuencia de proyectos -------------------------------------------- */
+.secuencia {
+  padding: clamp(4rem, 12vw, 12rem) var(--borde) 0;
+}
+
+.proyecto {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  padding-block: clamp(3rem, 9vw, 9rem);
+  align-items: center;
+}
+
+/* Foco: al apuntar un proyecto, los demás se apagan hacia el negro. */
+@media (hover: hover) and (pointer: fine) {
+  .secuencia:has(.proyecto:hover) .proyecto:not(:hover) {
+    opacity: 0.3;
+  }
+
+  .proyecto {
+    transition: opacity var(--dur-media) var(--ease-suave);
+  }
+
+  /* La imagen respira dentro de su marco, el marco no se mueve. */
+  .proyecto:hover .proyecto__imagen {
+    --zoom: 1.1;
+  }
+
+  .proyecto:hover .proyecto__ver {
+    color: var(--rojo);
+  }
+}
+
+.proyecto__texto {
+  display: grid;
+  gap: 0.35rem;
+  align-content: center;
+}
+
+.proyecto__numero {
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  line-height: 1;
+  color: var(--rojo);
+  font-weight: 300;
+}
+
+.proyecto__titulo {
+  font-size: clamp(1.75rem, 4.5vw, 3.75rem);
+  line-height: 1.05;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.proyecto__meta {
+  color: var(--gris);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.proyecto__ver {
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: color var(--dur-rapida) ease;
+}
+
+.proyecto__marco {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.proyecto__imagen {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* El desplazamiento del desfasaje y el zoom del hover van en propiedades
+     SEPARADAS (translate y scale, no transform): si compartieran transform,
+     una pisaría a la otra. Así el desfasaje se actualiza cuadro a cuadro sin
+     transición, y el zoom sí tiene la suya. El zoom de base deja margen para
+     que el desplazamiento no descubra el borde del marco. */
+  --zoom: 1.06;
+  translate: 0 var(--desfase-y, 0px);
+  scale: var(--zoom);
+  transition: scale var(--dur-lenta) var(--ease-suave);
+}
+
+/* El barrido: una cortina roja que tapa la imagen y se corre al entrar.
+   Es EL gesto del sitio. */
+.proyecto__barrido {
+  position: absolute;
+  inset: 0;
+  background: var(--rojo);
+  transform: translate3d(0, 0, 0);
+  transition: transform var(--dur-lenta) var(--ease-barrido);
+}
+
+.visible .proyecto__barrido,
+.proyecto__marco.visible .proyecto__barrido {
+  transform: translate3d(101%, 0, 0);
+}
+
+/* -- Entrada de los textos --------------------------------------------- */
+.mov {
+  opacity: 0;
+  transform: translateY(calc(var(--reveal-distancia) * var(--movimiento)));
+}
+
+.mov.visible {
+  opacity: 1;
+  transform: none;
+  transition: opacity var(--dur-media) var(--ease-suave) var(--retraso, 0ms),
+    transform var(--dur-media) var(--ease-suave) var(--retraso, 0ms);
+}
+
+/* El marco no se desplaza: lo que entra es el barrido. */
+.proyecto__marco.mov {
+  opacity: 1;
+  transform: none;
+}
+
+/* -- Pie --------------------------------------------------------------- */
+.pie {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(4rem, 10vw, 10rem) var(--borde) clamp(3rem, 6vw, 5rem);
+  color: var(--gris);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* -- Desde tablet: dos columnas y alternancia -------------------------- */
+@media (min-width: 760px) {
+  .proyecto {
+    grid-template-columns: 1fr 1.15fr;
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+
+  .proyecto[data-lado="der"] .proyecto__texto {
+    order: 2;
+    text-align: right;
+    justify-items: end;
+  }
+
+  .proyecto__marco {
+    aspect-ratio: 5 / 4;
+  }
+}
+
+/* -- Menos movimiento: todo quieto, sin cortinas ni cruz ---------------- */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --movimiento: 0;
+    --dur-media: 1ms;
+    --dur-lenta: 1ms;
+  }
+
+  .tira__pista {
+    animation-play-state: paused;
+  }
+
+  /* La cortina roja no barre: directamente no tapa. */
+  .proyecto__barrido {
+    display: none;
+  }
+
+  .cruz {
+    display: none;
+  }
+
+  body.con-cruz,
+  body.con-cruz a {
+    cursor: auto;
+  }
+}
